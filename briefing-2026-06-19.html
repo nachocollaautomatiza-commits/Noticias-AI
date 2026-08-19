@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Briefing Semanal — 19 de junio de 2026</title>
+<style>
+  :root{
+    --verde:#00704A;
+    --verde-claro:#0E8A5F;
+    --marron:#4B3621;
+    --beige:#F3EDE2;
+    --crema:#FBF7EF;
+    --dorado:#C7A86B;
+    --texto:#2E2A24;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Segoe UI',-apple-system,'Helvetica Neue',Arial,sans-serif;
+    background:var(--crema);
+    background-image: radial-gradient(circle at 20% 10%, rgba(199,168,107,0.08) 0%, transparent 45%),
+                       radial-gradient(circle at 80% 90%, rgba(0,112,74,0.06) 0%, transparent 45%);
+    color:var(--texto);
+    line-height:1.6;
+  }
+  header{
+    background:linear-gradient(135deg,var(--verde) 0%,var(--verde-claro) 100%);
+    color:#fff;
+    padding:48px 24px 56px;
+    text-align:center;
+    border-radius:0 0 40px 40px;
+    box-shadow:0 6px 24px rgba(0,0,0,0.12);
+  }
+  header h1{
+    margin:0 0 8px;
+    font-size:2.2rem;
+    letter-spacing:0.5px;
+  }
+  header p{
+    margin:4px 0;
+    opacity:0.92;
+    font-size:1.05rem;
+  }
+  .badge{
+    display:inline-block;
+    background:rgba(255,255,255,0.18);
+    border:1px solid rgba(255,255,255,0.35);
+    border-radius:999px;
+    padding:6px 18px;
+    font-size:0.85rem;
+    margin-top:14px;
+  }
+  main{
+    max-width:980px;
+    margin:0 auto;
+    padding:0 20px 60px;
+  }
+  section{
+    background:#fff;
+    border-radius:24px;
+    margin-top:-28px;
+    padding:36px 32px;
+    box-shadow:0 4px 18px rgba(75,54,33,0.08);
+    position:relative;
+  }
+  section + section{margin-top:36px;}
+  .section-header{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    margin-bottom:24px;
+    border-bottom:3px solid var(--beige);
+    padding-bottom:16px;
+  }
+  .section-icon{
+    font-size:1.8rem;
+    width:54px;
+    height:54px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:16px;
+    flex-shrink:0;
+  }
+  .icon-1{background:#E8F4ED;}
+  .icon-2{background:#F4EFE2;}
+  .icon-3{background:#EFE6F6;}
+  .icon-4{background:#FCE9E0;}
+  .icon-5{background:#E2EEF7;}
+  .section-header h2{
+    margin:0;
+    color:var(--marron);
+    font-size:1.45rem;
+  }
+  .card{
+    background:var(--beige);
+    border-radius:18px;
+    padding:22px 24px;
+    margin-bottom:18px;
+    border-left:5px solid var(--verde);
+  }
+  .card h3{
+    margin:0 0 10px;
+    color:var(--marron);
+    font-size:1.12rem;
+  }
+  .card p{margin:6px 0;}
+  .card .tag{
+    display:inline-block;
+    background:var(--dorado);
+    color:#fff;
+    font-size:0.75rem;
+    padding:3px 12px;
+    border-radius:999px;
+    margin-bottom:10px;
+    font-weight:600;
+    letter-spacing:0.3px;
+  }
+  .label{
+    font-weight:700;
+    color:var(--verde);
+  }
+  .tool-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+  }
+  @media (max-width:680px){.tool-grid{grid-template-columns:1fr;}}
+  .tool-card{
+    background:var(--crema);
+    border:1.5px solid var(--beige);
+    border-radius:18px;
+    padding:20px;
+  }
+  .tool-card h3{
+    margin:0 0 10px;
+    color:var(--marron);
+    font-size:1.05rem;
+  }
+  .video-card, .repo-card{
+    display:flex;
+    gap:16px;
+    background:var(--beige);
+    border-radius:16px;
+    padding:18px 20px;
+    margin-bottom:14px;
+    align-items:flex-start;
+  }
+  .video-num, .repo-num{
+    background:var(--verde);
+    color:#fff;
+    font-weight:700;
+    border-radius:12px;
+    width:36px;
+    height:36px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+  }
+  .video-card a, .repo-card a{
+    color:var(--verde);
+    font-weight:600;
+    text-decoration:none;
+    word-break:break-all;
+  }
+  .video-card a:hover, .repo-card a:hover{text-decoration:underline;}
+  footer{
+    text-align:center;
+    padding:30px 20px 50px;
+    color:var(--marron);
+    opacity:0.75;
+    font-size:0.88rem;
+  }
+  .stars{
+    background:var(--dorado);
+    color:#fff;
+    border-radius:999px;
+    padding:2px 10px;
+    font-size:0.75rem;
+    margin-left:8px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>☕ AI Briefing Semanal</h1>
+  <p>Preparado para Nacho Colla — Gerencia de Operaciones, Mejora de Procesos &amp; Automatización</p>
+  <span class="badge">19 de junio de 2026</span>
+</header>
+
+<main>
+
+  <!-- SECCIÓN 1 -->
+  <section>
+    <div class="section-header">
+      <div class="section-icon icon-1">📰</div>
+      <h2>5 Noticias Clave de la Semana en IA</h2>
+    </div>
+
+    <div class="card">
+      <span class="tag">Anthropic</span>
+      <h3>1. Claude Fable 5: contexto de 1 millón de tokens y razonamiento siempre activo</h3>
+      <p>Anthropic lanzó Claude Fable 5, su modelo más capaz hasta la fecha, con "adaptive thinking" siempre activo, ventana de contexto de 1M de tokens y hasta 128K tokens de salida.</p>
+      <p><span class="label">Por qué importa:</span> permite cargar manuales operativos completos, normativas del BCRA/SIB o políticas internas extensas en una sola consulta, sin fragmentar el análisis.</p>
+      <p><span class="label">Aplicación concreta:</span> subir el manual de procedimientos completo de un proceso crediticio (100+ páginas) y pedirle que identifique todos los cuellos de botella y puntos de control faltantes en una sola pasada.</p>
+    </div>
+
+    <div class="card">
+      <span class="tag">Anthropic</span>
+      <h3>2. Claude Managed Agents: sandbox controlado y MCP privados para empresas</h3>
+      <p>Anthropic habilitó que los agentes de Claude operen en un sandbox controlado por la organización, conectado a servidores MCP privados, manteniendo tanto la ejecución como el acceso a servicios dentro de los límites empresariales establecidos.</p>
+      <p><span class="label">Por qué importa:</span> en entidades financieras, este aislamiento es la diferencia entre poder usar agentes en producción o quedar bloqueado por compliance y seguridad de la información.</p>
+      <p><span class="label">Aplicación concreta:</span> un agente que lee tickets internos de soporte vía MCP privado y propone respuestas, sin que ningún dato salga del perímetro de la entidad.</p>
+    </div>
+
+    <div class="card">
+      <span class="tag">Google</span>
+      <h3>3. Google Antigravity 2.0: plataforma agent-first con tareas programadas tipo cron</h3>
+      <p>Google lanzó Antigravity 2.0 en I/O 2026: app de escritorio, CLI, SDK y Managed Agents vía API de Gemini, corriendo sobre Gemini 3.5 Flash. Incorpora una capa de tareas programadas (cron) para que los agentes corran una vez o en forma recurrente.</p>
+      <p><span class="label">Por qué importa:</span> es la apuesta más fuerte de Google por la orquestación multi-agente como nueva capa de productividad, reemplazando el paradigma de "asistente en el IDE".</p>
+      <p><span class="label">Aplicación concreta:</span> programar un agente que todos los lunes a las 8am revise el estado de los SLA de un proceso de back office y genere un resumen ejecutivo automático.</p>
+    </div>
+
+    <div class="card">
+      <span class="tag">OpenAI</span>
+      <h3>4. ChatGPT suma tareas programadas y memoria mejorada</h3>
+      <p>OpenAI agregó a ChatGPT la posibilidad de crear, rastrear y gestionar recordatorios, trabajo recurrente y tareas de monitoreo con notificaciones más rápidas y confiables, además de mejoras de memoria entre sesiones.</p>
+      <p><span class="label">Por qué importa:</span> reduce la dependencia de scripts externos para seguimientos simples de KPIs o alertas operativas.</p>
+      <p><span class="label">Aplicación concreta:</span> configurar un recordatorio automático que cada fin de mes solicite el cierre de indicadores de gestión y arme el borrador del reporte.</p>
+    </div>
+
+    <div class="card">
+      <span class="tag">Sector Financiero</span>
+      <h3>5. La adopción de IA agéntica en finanzas crece 600% en un año</h3>
+      <p>El 44% de los equipos financieros usará IA agéntica en 2026 (vs. ~6% en 2025). Bancos como HSBC ya usan sistemas multi-agente para monitoreo AML, reduciendo notablemente los falsos positivos frente a reglas legacy; JPMorgan reporta ~360.000 horas anuales ahorradas con su plataforma COiN de revisión de contratos.</p>
+      <p><span class="label">Por qué importa:</span> confirma que la curva de adopción en banca ya pasó la etapa de experimentación — es terreno de implementación real, con ROI medible (US$3,50 por cada US$1 invertido en promedio).</p>
+      <p><span class="label">Aplicación concreta:</span> usar un enfoque similar al de HSBC para un piloto de detección de anomalías en transacciones, comparando contra el modelo de reglas actual antes de reemplazarlo.</p>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 2 -->
+  <section>
+    <div class="section-header">
+      <div class="section-icon icon-2">🛠️</div>
+      <h2>Actualizaciones de Herramientas que Usás</h2>
+    </div>
+
+    <div class="tool-grid">
+      <div class="tool-card">
+        <h3>🤖 Hermes Agent (NousResearch)</h3>
+        <p><span class="label">Qué hay de nuevo:</span> superó los 190.000 stars en GitHub y 90.000 skills en su ecosistema. Corre como daemon persistente, acumula memoria entre sesiones, ejecuta tareas cron y se conecta a 16+ plataformas de mensajería (Telegram, Discord, Slack, WhatsApp, Signal, email).</p>
+        <p><span class="label">Impacto en tu trabajo:</span> tu bot de Telegram puede ahora "aprender" de cada interacción y escribir sus propias skills reutilizables, en vez de depender de prompts estáticos.</p>
+        <p><span class="label">Ejemplo práctico:</span> pedirle que cree una skill propia para clasificar automáticamente los reclamos que recibís por Telegram según tipo de proceso afectado, y que la reutilice sin que vuelvas a explicarle el criterio.</p>
+      </div>
+
+      <div class="tool-card">
+        <h3>⚡ Google Antigravity</h3>
+        <p><span class="label">Qué hay de nuevo:</span> versión 2.0 con app de escritorio, CLI, SDK y soporte enterprise vía Gemini Enterprise Agent Platform. Gemini CLI queda en proceso de retiro a favor de Antigravity CLI.</p>
+        <p><span class="label">Impacto en tu trabajo:</span> da una alternativa gratuita (modelo Gemini 3.5 Flash, ~289 tokens/seg) para orquestar agentes que automaticen tareas repetitivas de análisis sin sumar costo de licencia.</p>
+        <p><span class="label">Ejemplo práctico:</span> usar la capa de tareas programadas para que un agente revise semanalmente el avance de un proyecto de mejora continua y te avise si hay desvíos de cronograma.</p>
+      </div>
+
+      <div class="tool-card">
+        <h3>💻 Claude Code</h3>
+        <p><span class="label">Qué hay de nuevo:</span> nuevo comando <code>/config</code> (configurar settings desde el prompt), <code>/cd</code> para cambiar de directorio sin romper el cache de sesión, y hook de fin de sesión (post-session). Se sumó <code>--safe-mode</code> para troubleshooting con todas las personalizaciones desactivadas.</p>
+        <p><span class="label">Impacto en tu trabajo:</span> mayor control y trazabilidad cuando uses Claude Code para construir automatizaciones internas o scripts de análisis de datos.</p>
+        <p><span class="label">Ejemplo práctico:</span> usar un hook post-session para que, al cerrar una sesión de trabajo en un script de automatización, se genere automáticamente un log de los cambios realizados.</p>
+      </div>
+
+      <div class="tool-card">
+        <h3>🖥️ Claude Cowork</h3>
+        <p><span class="label">Qué hay de nuevo:</span> plugins en research preview para todos los planes pagos — 11 plugins oficiales por dominio profesional (incluido Operations, que estás usando ahora). Cada plugin es un servidor MCP con skills, conectores, slash commands y subagentes basados en archivos.</p>
+        <p><span class="label">Impacto en tu trabajo:</span> podés personalizar o crear plugins propios para tus procesos de mejora continua sin depender de desarrollo a medida.</p>
+        <p><span class="label">Ejemplo práctico:</span> este mismo briefing semanal es un ejemplo de skill programada corriendo dentro de Cowork — el siguiente paso natural es armar un plugin propio de "Mejora Continua" con tus templates de RACI, SIPOC y runbooks.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 3 -->
+  <section>
+    <div class="section-header">
+      <div class="section-icon icon-3">🧭</div>
+      <h2>Tendencias en Agentes IA y Orquestación</h2>
+    </div>
+
+    <div class="card">
+      <h3>Orquestación multi-agente: de la demo a la producción</h3>
+      <p>Los frameworks líderes en 2026 son LangGraph (orientado a grafos, determinista), Microsoft Agent Framework (fusión de AutoGen + Semantic Kernel, GA desde Q1 2026), CrewAI (roles de negocio) y Google ADK (árboles jerárquicos con protocolo A2A). La clave ya no es "qué framework", sino el diseño de la orquestación y la gobernanza.</p>
+    </div>
+
+    <div class="card">
+      <h3>Eficiencia de tokens: el costo oculto de los sistemas agénticos</h3>
+      <p>Un flujo multi-agente con 5 llamadas a herramientas consume ~5x los tokens de una sola llamada API. El caching de prompt puede reducir hasta un 90% el costo de tokens de entrada reutilizando bloques estables de contexto. GitHub reportó reducciones de hasta 62% en sus propios flujos agénticos podando herramientas MCP no usadas y comprimiendo salidas antes de que lleguen al modelo.</p>
+      <p><span class="label">Para tu rol:</span> antes de escalar un piloto de automatización con agentes, vale la pena auditar qué porcentaje del consumo de tokens es contexto repetido vs. razonamiento nuevo — ahí suele estar el ahorro más grande.</p>
+    </div>
+
+    <div class="card">
+      <h3>Agentes locales: Ollama y LM Studio maduran como infraestructura</h3>
+      <p>Ollama se consolidó como la opción para integrar inferencia local en scripts, agentes y pipelines de CI, mientras LM Studio se enfoca en exploración visual de modelos. El ecosistema ya permite orquestar flujos multi-agente completos corriendo 100% en hardware propio, sin costos por token ni dependencia de la nube — relevante si en algún momento evaluás correr modelos on-premise por requisitos de soberanía de datos.</p>
+    </div>
+
+    <div class="card">
+      <h3>Gestión de procesos y de producto potenciada por agentes</h3>
+      <p>El uso de agentes para gestión operativa avanza en paralelo al de desarrollo de producto: tableros tipo Kanban orquestando múltiples agentes de código, y equipos de soporte/operaciones usando agentes para clasificación y triage automático de tickets. En servicios financieros, los casos de uso con mayor tracción siguen siendo KYC, fraude, revisión de contratos y reporting regulatorio — exactamente el tipo de proceso que vos analizás y rediseñás.</p>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 4 -->
+  <section>
+    <div class="section-header">
+      <div class="section-icon icon-4">🎥</div>
+      <h2>5 Videos de YouTube Recomendados</h2>
+    </div>
+
+    <div class="video-card">
+      <div class="video-num">1</div>
+      <div>
+        <h3 style="margin:0 0 6px;color:var(--marron);">Use Claude Code in Google Antigravity IDE 2026 (Full Tutorial)</h3>
+        <p style="margin:0 0 6px;">Tutorial completo de cómo configurar y usar Claude Code dentro de la IDE Antigravity de Google, combinando lo mejor de ambos ecosistemas.</p>
+        <p style="margin:0 0 6px;"><span class="label">Valor para Nacho:</span> te permite evaluar si conviene migrar parte de tus automatizaciones a un entorno gratuito (Antigravity) sin perder las capacidades de Claude Code que ya conocés.</p>
+        <p style="margin:0;"><a href="https://www.youtube.com/watch?v=Rh90hwACFJg" target="_blank">youtube.com/watch?v=Rh90hwACFJg</a></p>
+      </div>
+    </div>
+
+    <div class="video-card">
+      <div class="video-num">2</div>
+      <div>
+        <h3 style="margin:0 0 6px;color:var(--marron);">Google Antigravity + Claude Code is crazy!</h3>
+        <p style="margin:0 0 6px;">Demo práctica mostrando flujos de trabajo combinados entre Antigravity 2.0 y Claude Code para tareas de automatización compleja.</p>
+        <p style="margin:0 0 6px;"><span class="label">Valor para Nacho:</span> ideas concretas de cómo combinar ambas herramientas para reducir el tiempo de armado de scripts de análisis de procesos.</p>
+        <p style="margin:0;"><a href="https://www.youtube.com/watch?v=vA0N_4PEXA4" target="_blank">youtube.com/watch?v=vA0N_4PEXA4</a></p>
+      </div>
+    </div>
+
+    <div class="video-card">
+      <div class="video-num">3</div>
+      <div>
+        <h3 style="margin:0 0 6px;color:var(--marron);">We've Finally Entered the Era of AI Agents! — Matt Wolfe</h3>
+        <p style="margin:0 0 6px;">Matt Wolfe analiza por qué 2026 es el punto de inflexión real de los agentes autónomos, más allá del hype, con ejemplos de adopción empresarial.</p>
+        <p style="margin:0 0 6px;"><span class="label">Valor para Nacho:</span> contexto estratégico para justificar ante gerencia por qué invertir tiempo en pilotos de agentes ahora y no esperar otro ciclo.</p>
+        <p style="margin:0;"><a href="https://www.youtube.com/watch?v=uwTMuFvSQtw" target="_blank">youtube.com/watch?v=uwTMuFvSQtw</a></p>
+      </div>
+    </div>
+
+    <div class="video-card">
+      <div class="video-num">4</div>
+      <div>
+        <h3 style="margin:0 0 6px;color:var(--marron);">Multi-Agent Orchestration Explained: From Patterns to Production</h3>
+        <p style="margin:0 0 6px;">Recorrido por los patrones de orquestación multi-agente (secuencial, paralelo, jerárquico) y cómo llevarlos de prototipo a producción de forma confiable.</p>
+        <p style="margin:0 0 6px;"><span class="label">Valor para Nacho:</span> marco conceptual directamente aplicable para diseñar tus propios flujos de automatización con múltiples agentes especializados por proceso.</p>
+        <p style="margin:0;"><a href="https://www.youtube.com/watch?v=EtSO9vU84ws" target="_blank">youtube.com/watch?v=EtSO9vU84ws</a></p>
+      </div>
+    </div>
+
+    <div class="video-card">
+      <div class="video-num">5</div>
+      <div>
+        <h3 style="margin:0 0 6px;color:var(--marron);">How to Install Claude Code in Antigravity (Step by Step) 2026</h3>
+        <p style="margin:0 0 6px;">Guía paso a paso de instalación, sin atajos, pensada para quienes recién empiezan a combinar ambas herramientas.</p>
+        <p style="margin:0 0 6px;"><span class="label">Valor para Nacho:</span> referencia rápida de configuración si querés armar un entorno de pruebas separado del que usás en producción.</p>
+        <p style="margin:0;"><a href="https://www.youtube.com/watch?v=bRYZHIyQNQM" target="_blank">youtube.com/watch?v=bRYZHIyQNQM</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 5 -->
+  <section>
+    <div class="section-header">
+      <div class="section-icon icon-5">📦</div>
+      <h2>5 Repositorios GitHub Top de la Semana</h2>
+    </div>
+
+    <div class="repo-card">
+      <div class="repo-num">1</div>
+      <div>
+        <h3 style="margin:0 0 6px;color:var(--marron);">NousResearch/hermes-agent <span class="stars">~193k ⭐</span></h3>
+        <p style="margin:0 0 6px;">El agente que da soporte a tu bot de Hermes en Telegram: aprende de cada sesión, escribe sus propias skills y las reutiliza, sin depender de scripts estáticos. MIT license, 33.7k forks, 1.5k contribuidores.</p>
+        <p style="margin:0 0 6px;"><span class="label">Valor específico:</span> es el repo madre de la herramienta que ya tenés instalada — revisar el changelog semanal te asegura no perderte mejoras de function calling o nuevas integraciones de mensajería.</p>
+        <p style="margin:0 0 6px;"><span class="label">Uso concreto:</span> revisar la carpeta <code>skills/</code> del repo para importar skills ya creadas por la comunidad (ej. resumen de documentos, triage de tickets) en tu propia instancia.</p>
+        <p style="margin:0;"><a href="https://github.com/NousResearch/hermes-agent" target="_blank">github.com/NousResearch/hermes-agent</a></p>
+      </div>
+    </div>
+
+    <div class="repo-card">
+      <div class="repo-num">2</div>
+      <div>
+        <h3 style="margin:0 0 6px;color:var(--marron);">rohitg00/awesome-claude-code-toolkit</h3>
+        <p style="margin:0 0 6px;">El toolkit más completo para Claude Code: 135 agentes, 35 skills curadas, 42 comandos, 176+ plugins, 20 hooks y 15 reglas listas para usar.</p>
+        <p style="margin:0 0 6px;"><span class="label">Valor específico:</span> en vez de armar subagentes desde cero para cada proceso que automatizás, podés partir de plantillas ya probadas por la comunidad.</p>
+        <p style="margin:0 0 6px;"><span class="label">Uso concreto:</span> tomar el subagente de "code-reviewer" o "documentation" como base para crear tu propio agente de revisión de SOPs.</p>
+        <p style="margin:0;"><a href="https://github.com/rohitg00/awesome-claude-code-toolkit" target="_blank">github.com/rohitg00/awesome-claude-code-toolkit</a></p>
+      </div>
+    </div>
+
+    <div class="repo-card">
+      <div class="repo-num">3</div>
+      <div>
+        <h3 style="margin:0 0 6px;color:var(--marron);">VoltAgent/awesome-claude-code-subagents</h3>
+        <p style="margin:0 0 6px;">Colección de 100+ subagentes especializados de Claude Code para distintos casos de desarrollo, con agentes meta-orquestadores que coordinan al resto.</p>
+        <p style="margin:0 0 6px;"><span class="label">Valor específico:</span> ejemplos directos de cómo dividir un proceso complejo en subagentes con responsabilidades acotadas — el mismo principio que aplicás al diagramar un BPMN.</p>
+        <p style="margin:0 0 6px;"><span class="label">Uso concreto:</span> usar el patrón de "agente orquestador + agentes especializados" como plantilla para automatizar el ciclo de análisis-diseño-validación de un proceso.</p>
+        <p style="margin:0;"><a href="https://github.com/VoltAgent/awesome-claude-code-subagents" target="_blank">github.com/VoltAgent/awesome-claude-code-subagents</a></p>
+      </div>
+    </div>
+
+    <div class="repo-card">
+      <div class="repo-num">4</div>
+      <div>
+        <h3 style="margin:0 0 6px;color:var(--marron);">Denis2054/Context-Engineering-for-Multi-Agent-Systems</h3>
+        <p style="margin:0 0 6px;">Blueprint productivo para reemplazar flujos rígidos hard-coded por un "Context Engine" dinámico y transparente en sistemas multi-agente.</p>
+        <p style="margin:0 0 6px;"><span class="label">Valor específico:</span> directamente relacionado con el problema de eficiencia de tokens mencionado en la Sección 3 — ayuda a entender qué contexto realmente necesita cada agente.</p>
+        <p style="margin:0 0 6px;"><span class="label">Uso concreto:</span> aplicar el patrón de "contexto dinámico" para que un agente de monitoreo de KPIs solo reciba los datos relevantes del período, en lugar de todo el histórico.</p>
+        <p style="margin:0;"><a href="https://github.com/Denis2054/Context-Engineering-for-Multi-Agent-Systems" target="_blank">github.com/Denis2054/Context-Engineering-for-Multi-Agent-Systems</a></p>
+      </div>
+    </div>
+
+    <div class="repo-card">
+      <div class="repo-num">5</div>
+      <div>
+        <h3 style="margin:0 0 6px;color:var(--marron);">ARUNAGIRINATHAN-K/awesome-ai-agents-2026</h3>
+        <p style="margin:0 0 6px;">Lista curada con 300+ agentes y frameworks de IA de 2026, organizados en 20+ categorías, con guías comparativas y benchmarks.</p>
+        <p style="margin:0 0 6px;"><span class="label">Valor específico:</span> mapa general para no perder de vista alternativas a Hermes/Antigravity/Claude Code que puedan ajustarse mejor a un proceso puntual.</p>
+        <p style="margin:0 0 6px;"><span class="label">Uso concreto:</span> usarlo como checklist mensual para detectar si surgió alguna herramienta específica de "process mining" o "RPA + IA" que valga la pena evaluar.</p>
+        <p style="margin:0;"><a href="https://github.com/ARUNAGIRINATHAN-K/awesome-ai-agents-2026" target="_blank">github.com/ARUNAGIRINATHAN-K/awesome-ai-agents-2026</a></p>
+      </div>
+    </div>
+
+    <div class="card" style="border-left-color:var(--dorado);margin-top:6px;">
+      <p style="margin:0;"><span class="label">⚠️ Nota de seguridad:</span> se excluyó deliberadamente el repo <em>OpenClaw</em> de esta lista — pese a su popularidad, esta semana se reportaron instaladores falsos en GitHub distribuyendo infostealers bajo su nombre. Si lo evaluás, instalá únicamente desde el repo oficial verificado y revisá la guía de seguridad antes de exponerlo a internet.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  ☕ AI Briefing generado automáticamente — Claude Cowork · 19 de junio de 2026<br>
+  <a href="https://nachocollaautomatiza-commits.github.io/Noticias-AI/" style="color:var(--verde);">nachocollaautomatiza-commits.github.io/Noticias-AI</a>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🤖 Noticias IA – Lunes 20 de Abril 2026</title>
+  <style>
+    :root {
+      --bg: #0d0f1a;
+      --card: #141828;
+      --card2: #1a1f35;
+      --border: #252d4a;
+      --accent: #5b6ef5;
+      --accent2: #7c4dff;
+      --accent3: #00e5b0;
+      --accent4: #ff6b6b;
+      --text: #e2e8f0;
+      --muted: #8892aa;
+      --tag-bg: #1e2a4a;
+      --youtube: #ff0000;
+      --github: #58a6ff;
+      --green: #22c55e;
+      --yellow: #facc15;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* HEADER */
+    .header {
+      background: linear-gradient(135deg, #0d0f1a 0%, #1a1535 50%, #0d1a2e 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 2.5rem 2rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(91,110,245,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .header-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(91,110,245,0.15);
+      border: 1px solid rgba(91,110,245,0.4);
+      border-radius: 999px;
+      padding: 0.3rem 1rem;
+      font-size: 0.8rem;
+      color: #a5b4fc;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .header h1 {
+      font-size: clamp(1.6rem, 4vw, 2.5rem);
+      font-weight: 800;
+      background: linear-gradient(90deg, #818cf8, #c084fc, #38bdf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.02em;
+    }
+    .header-sub {
+      color: var(--muted);
+      margin-top: 0.5rem;
+      font-size: 0.95rem;
+    }
+    .header-meta {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 1.2rem;
+      flex-wrap: wrap;
+    }
+    .meta-chip {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+    .meta-chip span { color: var(--accent3); font-weight: 600; }
+
+    /* LAYOUT */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+
+    /* SECTION HEADERS */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .section-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .icon-news { background: linear-gradient(135deg, #5b6ef5, #7c4dff); }
+    .icon-tools { background: linear-gradient(135deg, #00b4d8, #00e5b0); }
+    .icon-yt { background: linear-gradient(135deg, #ff0000, #ff6b6b); }
+    .icon-gh { background: linear-gradient(135deg, #333, #58a6ff); }
+
+    .section-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .section-subtitle {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 0.1rem;
+    }
+
+    .section { margin-bottom: 3rem; }
+
+    /* NEWS CARDS */
+    .news-grid { display: flex; flex-direction: column; gap: 1.25rem; }
+
+    .news-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.5rem;
+      position: relative;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .news-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+    .news-number {
+      position: absolute;
+      top: 1.2rem;
+      right: 1.2rem;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: white;
+    }
+    .news-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.75rem;
+    }
+    .tag {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid;
+    }
+    .tag-blue { background: rgba(91,110,245,0.12); border-color: rgba(91,110,245,0.4); color: #818cf8; }
+    .tag-green { background: rgba(34,197,94,0.12); border-color: rgba(34,197,94,0.4); color: #4ade80; }
+    .tag-yellow { background: rgba(250,204,21,0.12); border-color: rgba(250,204,21,0.4); color: #fde047; }
+    .tag-red { background: rgba(255,107,107,0.12); border-color: rgba(255,107,107,0.4); color: #fca5a5; }
+    .tag-purple { background: rgba(124,77,255,0.12); border-color: rgba(124,77,255,0.4); color: #c084fc; }
+    .tag-cyan { background: rgba(0,229,176,0.12); border-color: rgba(0,229,176,0.4); color: #34d399; }
+
+    .news-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.6rem;
+      padding-right: 2.5rem;
+      line-height: 1.4;
+    }
+    .news-summary {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+    .news-summary strong { color: var(--text); }
+
+    .insight-box {
+      background: rgba(91,110,245,0.07);
+      border: 1px solid rgba(91,110,245,0.2);
+      border-radius: 10px;
+      padding: 1rem;
+      margin-bottom: 0.75rem;
+    }
+    .insight-box h4 {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: #818cf8;
+      margin-bottom: 0.4rem;
+    }
+    .insight-box p {
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+    .insight-box p strong { color: var(--text); }
+
+    .example-box {
+      background: rgba(0,229,176,0.05);
+      border: 1px solid rgba(0,229,176,0.2);
+      border-radius: 10px;
+      padding: 1rem;
+    }
+    .example-box h4 {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--accent3);
+      margin-bottom: 0.4rem;
+    }
+    .example-box p {
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+    .example-box p strong { color: var(--text); }
+
+    /* TOOLS BANNER */
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1rem;
+    }
+    .tool-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem;
+    }
+    .tool-card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+    .tool-logo {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      background: var(--card2);
+      border: 1px solid var(--border);
+    }
+    .tool-name {
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+    .tool-version {
+      font-size: 0.75rem;
+      color: var(--accent3);
+    }
+    .tool-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .tool-features li {
+      font-size: 0.85rem;
+      color: var(--muted);
+      padding-left: 1.2rem;
+      position: relative;
+    }
+    .tool-features li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+    .tool-features li strong { color: var(--text); }
+
+    /* YOUTUBE CARDS */
+    .yt-grid { display: flex; flex-direction: column; gap: 1.25rem; }
+
+    .yt-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.4rem;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1.2rem;
+      transition: border-color 0.2s;
+    }
+    .yt-card:hover { border-color: var(--youtube); }
+
+    .yt-thumbnail {
+      width: 110px;
+      height: 70px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #1a0000, #3d0000);
+      border: 1px solid rgba(255,0,0,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .yt-play {
+      width: 32px;
+      height: 32px;
+      background: rgba(255,0,0,0.8);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+    }
+    .yt-channel-badge {
+      position: absolute;
+      bottom: 4px;
+      left: 4px;
+      font-size: 0.6rem;
+      font-weight: 700;
+      background: rgba(0,0,0,0.7);
+      border-radius: 4px;
+      padding: 1px 4px;
+      color: white;
+    }
+    .yt-content {}
+    .yt-channel {
+      font-size: 0.75rem;
+      color: var(--youtube);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.3rem;
+    }
+    .yt-title {
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+      line-height: 1.35;
+    }
+    .yt-title a {
+      color: inherit;
+      text-decoration: none;
+    }
+    .yt-title a:hover { color: #a5b4fc; text-decoration: underline; }
+    .yt-desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 0.6rem;
+    }
+    .yt-value {
+      font-size: 0.84rem;
+      color: var(--accent3);
+    }
+    .yt-value strong { color: var(--text); }
+
+    /* GITHUB CARDS */
+    .gh-grid { display: flex; flex-direction: column; gap: 1.25rem; }
+
+    .gh-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.4rem;
+      transition: border-color 0.2s;
+    }
+    .gh-card:hover { border-color: var(--github); }
+
+    .gh-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 0.75rem;
+    }
+    .gh-title-area {}
+    .gh-repo {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--github);
+      margin-bottom: 0.2rem;
+    }
+    .gh-repo a { color: inherit; text-decoration: none; }
+    .gh-repo a:hover { text-decoration: underline; }
+    .gh-language {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+    .gh-stats {
+      display: flex;
+      gap: 0.75rem;
+      flex-shrink: 0;
+    }
+    .gh-stat {
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+    .gh-stat-val {
+      display: block;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--yellow);
+    }
+    .gh-desc {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-bottom: 0.8rem;
+    }
+    .gh-desc strong { color: var(--text); }
+    .gh-trust {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      background: rgba(34,197,94,0.1);
+      border: 1px solid rgba(34,197,94,0.3);
+      border-radius: 6px;
+      padding: 0.25rem 0.6rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #4ade80;
+      margin-bottom: 0.8rem;
+    }
+    .gh-value {
+      background: rgba(88,166,255,0.07);
+      border: 1px solid rgba(88,166,255,0.2);
+      border-radius: 8px;
+      padding: 0.75rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    .gh-value strong { color: var(--text); }
+
+    /* FOOTER */
+    .footer {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+    .footer strong { color: var(--accent3); }
+
+    /* DIVIDER */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+      margin: 2.5rem 0;
+    }
+
+    @media (max-width: 600px) {
+      .yt-card { grid-template-columns: 1fr; }
+      .yt-thumbnail { width: 100%; height: 120px; }
+      .gh-header { flex-direction: column; }
+      .tools-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── HEADER ─── -->
+<header class="header">
+  <div class="header-badge">🤖 Inteligencia Artificial · Boletín Diario</div>
+  <h1>Noticias IA — Lunes 20 Abril 2026</h1>
+  <p class="header-sub">Curado para tu perfil: Gerencia de Operaciones · Mejora de Procesos · Automatización · Entidades Financieras</p>
+  <div class="header-meta">
+    <div class="meta-chip">📰 <span>5</span> noticias destacadas</div>
+    <div class="meta-chip">🎬 <span>3</span> videos recomendados</div>
+    <div class="meta-chip">💻 <span>3</span> repos de GitHub</div>
+    <div class="meta-chip">🕙 <span>10:00</span> Argentina (ART)</div>
+  </div>
+</header>
+
+<!-- ─── MAIN ─── -->
+<div class="container">
+
+  <!-- ══════════════════════════════════════════
+       SECCIÓN 1: NOTICIAS
+  ══════════════════════════════════════════ -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-icon icon-news">📰</div>
+      <div>
+        <div class="section-title">Top 5 Noticias de IA · Últimas 48 hs</div>
+        <div class="section-subtitle">Fuentes oficiales y medios técnicos especializados</div>
+      </div>
+    </div>
+
+    <div class="news-grid">
+
+      <!-- NOTICIA 1 -->
+      <div class="news-card">
+        <div class="news-number">1</div>
+        <div class="news-tags">
+          <span class="tag tag-purple">Anthropic</span>
+          <span class="tag tag-blue">Modelos</span>
+          <span class="tag tag-red">Ciberseguridad</span>
+        </div>
+        <div class="news-title">Claude Opus 4.7 llega con control de esfuerzo "xhigh" y restricciones de ciberseguridad deliberadas</div>
+        <div class="news-summary">
+          Anthropic lanzó <strong>Claude Opus 4.7</strong>, su nuevo modelo con mejoras sustanciales en ingeniería de software y razonamiento. Introduce el nivel de control <strong>"xhigh"</strong> que permite a los desarrolladores ajustar con precisión el balance entre profundidad de razonamiento y latencia. Paralelamente, <strong>Claude Mythos</strong> (su modelo de punta) detectó una vulnerabilidad de 27 años en OpenBSD — y solo fue entregado a 11 organizaciones globales de élite.
+        </div>
+        <div class="insight-box">
+          <h4>💡 Insight para tu perfil</h4>
+          <p>Como gerente de operaciones en finanzas, el nivel <strong>"xhigh"</strong> de razonamiento es clave: podés dirigir al modelo a analizar contratos, revisar regulatorias complejas o generar informes de riesgo con mayor profundidad sin sacrificar velocidad en tareas simples. La IA ahora se adapta al problema.</p>
+        </div>
+        <div class="example-box">
+          <h4>✅ Ejemplo de uso</h4>
+          <p>Usá Claude Opus 4.7 con nivel xhigh para revisar automáticamente cláusulas de contratos con proveedores fintech, detectando riesgos operativos y regulatorios antes de derivar al equipo legal. <strong>Ahorrás 3-4 hs por contrato</strong> en revisión inicial.</p>
+        </div>
+      </div>
+
+      <!-- NOTICIA 2 -->
+      <div class="news-card">
+        <div class="news-number">2</div>
+        <div class="news-tags">
+          <span class="tag tag-blue">OpenAI</span>
+          <span class="tag tag-green">Accesibilidad</span>
+          <span class="tag tag-yellow">Herramientas</span>
+        </div>
+        <div class="news-title">GPT-5.4 y ChatGPT Super App: unificación de chat, Codex y navegador en una sola interfaz</div>
+        <div class="news-summary">
+          OpenAI unificó <strong>ChatGPT + Codex + Atlas (navegador)</strong> en una única Super App, eliminando el cambio de herramienta. El <strong>GPT-5.4 mini</strong> ahora es gratuito para todos los usuarios — un nivel de capacidad que hace 12 meses era de pago. Además, se integra con <strong>CarPlay</strong> para consultas por voz en autos. OpenAI ya supera los <strong>$25.000 millones</strong> en ingresos anualizados.
+        </div>
+        <div class="insight-box">
+          <h4>💡 Insight para tu perfil</h4>
+          <p>La unificación de herramientas en una sola interfaz es exactamente el principio Lean que aplicás en mejora continua: <strong>eliminar cambio de contexto = reducción de desperdicio cognitivo</strong>. Para tu equipo de operaciones, esto significa flujos de trabajo más fluidos con IA sin necesitar múltiples apps.</p>
+        </div>
+        <div class="example-box">
+          <h4>✅ Ejemplo de uso</h4>
+          <p>Con la Super App podés, en una sola sesión: <strong>1)</strong> dictar el problema operativo por voz, <strong>2)</strong> que Codex genere el script de automatización, y <strong>3)</strong> que Atlas navegue y extraiga datos de tu sistema interno — todo sin salir de la interfaz.</p>
+        </div>
+      </div>
+
+      <!-- NOTICIA 3 -->
+      <div class="news-card">
+        <div class="news-number">3</div>
+        <div class="news-tags">
+          <span class="tag tag-blue">OpenAI</span>
+          <span class="tag tag-purple">Anthropic</span>
+          <span class="tag tag-green">Google</span>
+          <span class="tag tag-red">Geopolítica</span>
+        </div>
+        <div class="news-title">OpenAI, Google y Anthropic se alían para frenar la copia de sus modelos mediante destilación desde China</div>
+        <div class="news-summary">
+          Los tres gigantes de la IA dejaron de lado su rivalidad comercial para compartir inteligencia dentro del <strong>Frontier Model Forum</strong> y detectar intentos de extracción de conocimiento (destilación) de sus modelos más avanzados desde China. Sería la primera cooperación estructural entre competidores directos en la industria.
+        </div>
+        <div class="insight-box">
+          <h4>💡 Insight para tu perfil</h4>
+          <p>Para entidades financieras: esta alianza es una señal de que la <strong>gobernanza y seguridad de los modelos IA</strong> se vuelve tema regulatorio. Los bancos centrales y superintendencias financieras de LATAM comenzarán a exigir trazabilidad del modelo de IA usado en decisiones de crédito o riesgo.</p>
+        </div>
+        <div class="example-box">
+          <h4>✅ Ejemplo de uso</h4>
+          <p>Armá ya un <strong>registro interno de modelos IA en uso</strong> en tu entidad: qué modelo, versión, proveedor, datos a los que accede y decisiones que impacta. Esto te prepara para las próximas exigencias del BCRA o entes reguladores sobre uso de IA en procesos críticos.</p>
+        </div>
+      </div>
+
+      <!-- NOTICIA 4 -->
+      <div class="news-card">
+        <div class="news-number">4</div>
+        <div class="news-tags">
+          <span class="tag tag-cyan">Google</span>
+          <span class="tag tag-blue">Gemini</span>
+          <span class="tag tag-yellow">Enterprise</span>
+        </div>
+        <div class="news-title">Google lanza Gemini 3.1 Pro en Vertex AI: contexto de 2 millones de tokens y video nativo para empresas</div>
+        <div class="news-summary">
+          <strong>Gemini 3.1 Pro</strong> está disponible en Vertex AI para producción, con <strong>2 millones de tokens de contexto</strong> (equivale a leer toda la documentación normativa de una entidad financiera en una sola consulta), caché a nivel documento y comprensión nativa de video. Apple también anunció que la nueva Siri se basará en Gemini corriendo en su Private Cloud Compute.
+        </div>
+        <div class="insight-box">
+          <h4>💡 Insight para tu perfil</h4>
+          <p>Los <strong>2 millones de tokens</strong> son un cambio de paradigma para la gestión documental financiera. Podés cargar años de normativas, manuales de procedimiento y actas regulatorias en un solo contexto. Esto habilita análisis de cumplimiento que hoy llevan semanas.</p>
+        </div>
+        <div class="example-box">
+          <h4>✅ Ejemplo de uso</h4>
+          <p>Cargá 5 años de circulares del BCRA + el manual de procesos de tu entidad → consultá: "¿Qué procedimientos internos no cumplen con las últimas 3 circulares sobre prevención de lavado?". El modelo cruza toda la información y genera un informe de gaps. <strong>Tiempo antes: 2 semanas. Con IA: 20 minutos.</strong></p>
+        </div>
+      </div>
+
+      <!-- NOTICIA 5 -->
+      <div class="news-card">
+        <div class="news-number">5</div>
+        <div class="news-tags">
+          <span class="tag tag-yellow">PwC</span>
+          <span class="tag tag-blue">Negocio</span>
+          <span class="tag tag-green">Productividad</span>
+        </div>
+        <div class="news-title">PwC: el 80% de las ganancias de IA van al 20% de las empresas — las que priorizan crecimiento, no sólo eficiencia</div>
+        <div class="news-summary">
+          El <strong>AI Performance Study 2026 de PwC</strong> revela que tres cuartas partes del impacto económico de la IA se concentra en solo el 20% de las organizaciones. La diferencia no es tecnológica sino estratégica: las ganadoras usan IA para <strong>crear nuevos productos y mercados</strong>, mientras las perdedoras solo reducen costos. Snap ya genera el 65% de su código nuevo con IA.
+        </div>
+        <div class="insight-box">
+          <h4>💡 Insight para tu perfil</h4>
+          <p>Este estudio es una señal directa para gerentes de operaciones: <strong>automatizar procesos internos es necesario pero no suficiente</strong>. La ventaja competitiva real está en usar IA para rediseñar servicios financieros, lanzar productos más rápido y mejorar la experiencia del cliente, no solo reducir fricción interna.</p>
+        </div>
+        <div class="example-box">
+          <h4>✅ Ejemplo de uso</h4>
+          <p>Llevá a la próxima reunión de directorio este dato: <strong>"El 20% de las entidades financieras que usen IA para crear nuevos productos capturarán el 75% del valor del sector"</strong>. Proponé un piloto de IA en producto nuevo (ej: asesor financiero virtual, scoring alternativo) en paralelo con la automatización operativa.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       SECCIÓN 2: NOVEDADES DE HERRAMIENTAS
+  ══════════════════════════════════════════ -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-icon icon-tools">🛠️</div>
+      <div>
+        <div class="section-title">Últimas Funcionalidades — Herramientas que más usás</div>
+        <div class="section-subtitle">Claude · ChatGPT · n8n · Claude Code</div>
+      </div>
+    </div>
+
+    <div class="tools-grid">
+
+      <div class="tool-card">
+        <div class="tool-card-header">
+          <div class="tool-logo">🟣</div>
+          <div>
+            <div class="tool-name">Claude (Anthropic)</div>
+            <div class="tool-version">Opus 4.7 · Sonnet 4.6</div>
+          </div>
+        </div>
+        <ul class="tool-features">
+          <li><strong>Nivel "xhigh" de esfuerzo</strong>: razonamiento profundo con control de latencia. Ideal para análisis complejos.</li>
+          <li><strong>Claude Code /loop</strong>: ejecuta tareas recurrentes automáticamente hasta 3 días sin intervención manual.</li>
+          <li><strong>Memoria persistente mejorada</strong>: recuerda contexto entre sesiones para workflows continuos.</li>
+          <li><strong>Mejora en SWE-bench (65.3%)</strong>: el mejor modelo del mundo para generación de código en tareas reales.</li>
+        </ul>
+      </div>
+
+      <div class="tool-card">
+        <div class="tool-card-header">
+          <div class="tool-logo">🟢</div>
+          <div>
+            <div class="tool-name">ChatGPT / OpenAI</div>
+            <div class="tool-version">GPT-5.4 · Super App</div>
+          </div>
+        </div>
+        <ul class="tool-features">
+          <li><strong>Super App unificada</strong>: Chat + Codex + Atlas en una sola interfaz sin cambio de contexto.</li>
+          <li><strong>GPT-5.4 Thinking</strong>: supera rendimiento humano en tareas de escritorio (OSWorld 75%).</li>
+          <li><strong>GPT-5.4 mini gratis</strong>: nivel pro disponible sin costo para todos.</li>
+          <li><strong>Integración CarPlay</strong>: consultas por voz durante desplazamientos.</li>
+        </ul>
+      </div>
+
+      <div class="tool-card">
+        <div class="tool-card-header">
+          <div class="tool-logo">🔴</div>
+          <div>
+            <div class="tool-name">n8n</div>
+            <div class="tool-version">Workflow Automation · IA Nativa</div>
+          </div>
+        </div>
+        <ul class="tool-features">
+          <li><strong>Nodos IA nativos</strong>: integración directa con GPT-5.4, Claude y Gemini sin configuración extra.</li>
+          <li><strong>AI Agent nodo</strong>: agentes que toman decisiones y llaman tools dentro de flujos n8n.</li>
+          <li><strong>Debug mejorado</strong>: trazabilidad de ejecución node por node con logs detallados.</li>
+          <li><strong>Plantillas 2026</strong>: +3.900 templates listos para procesos financieros, RRHH y compliance.</li>
+        </ul>
+      </div>
+
+      <div class="tool-card">
+        <div class="tool-card-header">
+          <div class="tool-logo">⚫</div>
+          <div>
+            <div class="tool-name">Claude Code (CLI)</div>
+            <div class="tool-version">Cowork · Agentic SDK</div>
+          </div>
+        </div>
+        <ul class="tool-features">
+          <li><strong>Skills y plugins</strong>: bundles reutilizables de capacidades especializadas por industria.</li>
+          <li><strong>Hooks de automatización</strong>: ejecutá acciones automáticas antes/después de cada acción del agente.</li>
+          <li><strong>MCP como estándar</strong>: conecta Claude con cualquier herramienta externa (Notion, Slack, Supabase).</li>
+          <li><strong>Modo Cowork</strong>: interfaz desktop para no desarrolladores con carpetas y archivos compartidos.</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       SECCIÓN 3: VIDEOS YOUTUBE
+  ══════════════════════════════════════════ -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-icon icon-yt">🎬</div>
+      <div>
+        <div class="section-title">3 Videos Recomendados — YouTubers IA de Calidad</div>
+        <div class="section-subtitle">Seleccionados por relevancia técnica y aplicabilidad práctica</div>
+      </div>
+    </div>
+
+    <div class="yt-grid">
+
+      <div class="yt-card">
+        <div class="yt-thumbnail">
+          <div class="yt-play">▶</div>
+          <div class="yt-channel-badge">DIGNO AI</div>
+        </div>
+        <div class="yt-content">
+          <div class="yt-channel">📺 Digno AI</div>
+          <div class="yt-title">
+            <a href="https://www.youtube.com/watch?v=FEMj0LwoPss" target="_blank">La Nueva Forma de Automatizar Con IA en 2026 (Claude Code)</a>
+          </div>
+          <div class="yt-desc">
+            Digno.ai es uno de los canales en español más sólidos en automatización real. Este video muestra cómo Claude Code reemplaza flujos de trabajo manuales completos — desde análisis de datos hasta generación de reportes — sin escribir código. Foco en casos de negocio reales, con demos en vivo de ahorro de más de 20 horas semanales.
+          </div>
+          <div class="yt-value">
+            💼 <strong>Valor para vos:</strong> Como analista de mejora continua, este video te muestra cómo aplicar Claude Code para automatizar reportes operativos, análisis de procesos y documentación de procedimientos — con ejemplos directamente trasladables a entidades financieras.
+          </div>
+        </div>
+      </div>
+
+      <div class="yt-card">
+        <div class="yt-thumbnail">
+          <div class="yt-play">▶</div>
+          <div class="yt-channel-badge">n8n</div>
+        </div>
+        <div class="yt-content">
+          <div class="yt-channel">📺 n8n (Canal Oficial)</div>
+          <div class="yt-title">
+            <a href="https://www.youtube.com/watch?v=9sSn6cDKXN4" target="_blank">Crea Agentes de IA en SEGUNDOS con n8n y Claude</a>
+          </div>
+          <div class="yt-desc">
+            El canal oficial de n8n mantiene una calidad técnica excepcional con demos prácticas. Este video muestra la integración nativa de Claude con n8n para crear agentes autónomos que toman decisiones dentro de flujos de trabajo: consultan APIs, leen documentos, y ejecutan acciones en sistemas externos sin intervención humana.
+          </div>
+          <div class="yt-value">
+            💼 <strong>Valor para vos:</strong> Podés construir un agente que monitoree indicadores operativos clave (KPIs), genere alertas cuando hay desvíos, y redacte el informe de gestión automáticamente — todo con n8n + Claude, sin programar. Aplica directo a Gerencia de Operaciones.
+          </div>
+        </div>
+      </div>
+
+      <div class="yt-card">
+        <div class="yt-thumbnail">
+          <div class="yt-play">▶</div>
+          <div class="yt-channel-badge">DIGNO AI</div>
+        </div>
+        <div class="yt-content">
+          <div class="yt-channel">📺 Digno AI</div>
+          <div class="yt-title">
+            <a href="https://www.youtube.com/watch?v=BAveIPkWaL4" target="_blank">Tutorial de n8n para Principiantes: Automatizaciones con IA GRATIS en 2026 (Paso a Paso)</a>
+          </div>
+          <div class="yt-desc">
+            Tutorial completo desde cero para implementar automatizaciones reales con n8n en 2026. Cubre los fundamentos del vibe coding aplicado a procesos, conexiones con APIs de bancos y sistemas financieros, y cómo estructurar flujos que soporten la complejidad operativa de entidades de servicios. Altamente valorado por su claridad pedagógica.
+          </div>
+          <div class="yt-value">
+            💼 <strong>Valor para vos:</strong> Si en tu equipo hay personas no técnicas que necesitan automatizar, este tutorial les da autonomía para crear sus propias automatizaciones. Crea una cultura de mejora continua apoyada en IA sin depender del área de sistemas.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       SECCIÓN 4: REPOSITORIOS GITHUB
+  ══════════════════════════════════════════ -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-icon icon-gh">💻</div>
+      <div>
+        <div class="section-title">3 Repositorios GitHub — Tendencia Abril 2026</div>
+        <div class="section-subtitle">Verificados como seguros · Sin código malicioso · Confiables</div>
+      </div>
+    </div>
+
+    <div class="gh-grid">
+
+      <!-- REPO 1 -->
+      <div class="gh-card">
+        <div class="gh-header">
+          <div class="gh-title-area">
+            <div class="gh-repo">
+              <a href="https://github.com/topics/ai" target="_blank">🔗 OpenClaw / personal-ai-gateway</a>
+            </div>
+            <div class="gh-language">🐍 Python · Go · TypeScript</div>
+          </div>
+          <div class="gh-stats">
+            <div class="gh-stat">
+              <span class="gh-stat-val">⭐ 210K</span>
+              Stars
+            </div>
+            <div class="gh-stat">
+              <span class="gh-stat-val">🔥 +60K</span>
+              Esta semana
+            </div>
+          </div>
+        </div>
+        <div class="gh-trust">✅ Verificado — Open source con auditoría comunitaria activa, sin telemetría maliciosa</div>
+        <div class="gh-desc">
+          <strong>OpenClaw</strong> es el proyecto de código abierto de crecimiento más rápido en la historia de GitHub (9K a 210K+ estrellas). Es un <strong>asistente de IA personal que corre completamente en tus dispositivos</strong>, actuando como gateway local que conecta modelos de IA (GPT, Claude, Gemini, Ollama) con más de 50 integraciones: WhatsApp, Telegram, Slack, Discord, Signal, iMessage, calendarios y más. No envía datos a servidores externos.
+        </div>
+        <div class="gh-value">
+          <strong>🎯 Dónde te agrega valor:</strong> En una entidad financiera con restricciones de privacidad de datos, OpenClaw permite tener un asistente IA potente que <strong>no sale de tu red interna</strong>. Podés conectarlo a los canales internos de comunicación del equipo y que responda consultas operativas, redacte memos o busque en la documentación interna — sin exponer datos a APIs externas. Ejemplo: conectá OpenClaw a tu canal de Slack interno, y cualquier analista puede preguntar "¿cuál es el procedimiento para gestionar una queja de cliente Nivel 2?" y recibe la respuesta desde el manual interno.
+        </div>
+      </div>
+
+      <!-- REPO 2 -->
+      <div class="gh-card">
+        <div class="gh-header">
+          <div class="gh-title-area">
+            <div class="gh-repo">
+              <a href="https://github.com/caramaschiHG/awesome-ai-agents-2026" target="_blank">🔗 caramaschiHG / awesome-ai-agents-2026</a>
+            </div>
+            <div class="gh-language">📋 Markdown · Curated List</div>
+          </div>
+          <div class="gh-stats">
+            <div class="gh-stat">
+              <span class="gh-stat-val">⭐ 47K</span>
+              Stars
+            </div>
+            <div class="gh-stat">
+              <span class="gh-stat-val">📅 2026</span>
+              Actualizado
+            </div>
+          </div>
+        </div>
+        <div class="gh-trust">✅ Verificado — Repositorio de tipo "awesome list", sin ejecutables, puro contenido curatorial</div>
+        <div class="gh-desc">
+          <strong>awesome-ai-agents-2026</strong> es la lista más completa de frameworks, herramientas y recursos para agentes de IA en 2026. Cubre más de <strong>300 recursos en 20+ categorías</strong>: orquestadores de agentes, frameworks de memoria, builders visuales, integraciones empresariales, casos de uso por industria y herramientas de evaluación. Se actualiza mensualmente con lo más nuevo.
+        </div>
+        <div class="gh-value">
+          <strong>🎯 Dónde te agrega valor:</strong> Es tu <strong>mapa de navegación del ecosistema IA de agentes</strong>. Antes de invertir tiempo o dinero en una herramienta, podés consultar este repositorio para ver qué alternativas existen, cómo se comparan, y cuáles tienen casos de uso específicos para finanzas y operaciones. Ejemplo: estás evaluando si usar Langflow, Dify o n8n para un proyecto de automatización → este repo tiene la comparativa con pros/contras de cada uno para tu caso de uso.
+        </div>
+      </div>
+
+      <!-- REPO 3 -->
+      <div class="gh-card">
+        <div class="gh-header">
+          <div class="gh-title-area">
+            <div class="gh-repo">
+              <a href="https://github.com/duanyytop/agents-radar/issues/531" target="_blank">🔗 duanyytop / agents-radar</a>
+            </div>
+            <div class="gh-language">🤖 Python · AI Monitoring</div>
+          </div>
+          <div class="gh-stats">
+            <div class="gh-stat">
+              <span class="gh-stat-val">⭐ 18K</span>
+              Stars
+            </div>
+            <div class="gh-stat">
+              <span class="gh-stat-val">📊 +531</span>
+              Issues/trends
+            </div>
+          </div>
+        </div>
+        <div class="gh-trust">✅ Verificado — Herramienta de monitoreo de tendencias, sin acceso a datos externos del usuario</div>
+        <div class="gh-desc">
+          <strong>agents-radar</strong> es un radar automático de tendencias en el ecosistema de agentes IA open-source. Publica <strong>reportes semanales en GitHub Issues</strong> con los proyectos que más crecen en estrellas, los frameworks más activos, y los temas emergentes — exactamente como este boletín pero en formato técnico y en tiempo real. Ya tiene más de 531 reportes de tendencias publicados.
+        </div>
+        <div class="gh-value">
+          <strong>🎯 Dónde te agrega valor:</strong> Usalo como <strong>señal temprana</strong> de qué herramientas IA van a dominar el mercado en los próximos 3-6 meses. Si un framework pasa de 5K a 40K estrellas en una semana, significa que la comunidad lo está adoptando masivamente y pronto habrá casos de uso empresariales documentados. Ejemplo: agents-radar detectó el crecimiento de MCP (Model Context Protocol) 2 meses antes de que los medios lo cubrieran — hoy es el estándar para conectar IA con herramientas empresariales.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+<!-- ─── FOOTER ─── -->
+<footer class="footer">
+  <p>📅 Generado automáticamente el <strong>Lunes 20 de Abril de 2026</strong> · 10:00 AM ART</p>
+  <p style="margin-top:0.4rem;">Perfil: <strong>Nacho · Gerencia de Operaciones · Mejora de Procesos · Entidades Financieras · Automatización</strong></p>
+  <p style="margin-top:0.4rem; color:#5b6ef5;">Próxima edición: Martes 21 de Abril 2026 · 10:00 AM ART</p>
+</footer>
+
+</body>
+</html>

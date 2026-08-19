@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Briefing – 21 de Mayo, 2026</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Playfair+Display:wght@400;700&display=swap');
+
+    :root {
+      --verde: #00704A;
+      --verde-dark: #1E3932;
+      --verde-light: #D4E9E2;
+      --cafe: #4A2C2A;
+      --latte: #F2EBD9;
+      --beige: #FAF7F0;
+      --dorado: #CBA258;
+      --marron: #7B4A3A;
+      --text-dark: #1E3932;
+      --text-mid: #4A2C2A;
+      --text-light: #7B6E5C;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      background-color: var(--beige);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Ccircle cx='10' cy='10' r='1.5' fill='%23CBA258' fill-opacity='0.12'/%3E%3Ccircle cx='50' cy='30' r='1' fill='%2300704A' fill-opacity='0.08'/%3E%3Ccircle cx='70' cy='65' r='1.5' fill='%234A2C2A' fill-opacity='0.07'/%3E%3C/svg%3E");
+      color: var(--text-dark);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* ── Header ── */
+    .header {
+      background: linear-gradient(135deg, var(--verde-dark) 0%, var(--verde) 60%, #00A664 100%);
+      padding: 48px 24px 56px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .header::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 20% 80%, rgba(203,162,88,0.18) 0%, transparent 55%),
+                  radial-gradient(ellipse at 80% 20%, rgba(255,255,255,0.06) 0%, transparent 50%);
+    }
+    .header-inner { position: relative; max-width: 860px; margin: 0 auto; }
+    .logo-circle {
+      width: 72px; height: 72px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.3);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 32px;
+    }
+    .header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 5vw, 44px);
+      color: #fff;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+    }
+    .header .subtitle {
+      color: rgba(255,255,255,0.78);
+      font-size: 15px;
+      font-weight: 300;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+    .date-badge {
+      display: inline-block;
+      margin-top: 18px;
+      background: rgba(203,162,88,0.28);
+      border: 1px solid rgba(203,162,88,0.5);
+      color: #F5E6C5;
+      font-size: 13px;
+      padding: 6px 18px;
+      border-radius: 20px;
+      letter-spacing: 0.8px;
+    }
+
+    /* ── Nav Pills ── */
+    .nav-pills {
+      background: var(--verde-dark);
+      padding: 0 16px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0;
+      position: sticky; top: 0; z-index: 99;
+      box-shadow: 0 2px 12px rgba(30,57,50,0.3);
+    }
+    .nav-pills a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      padding: 14px 16px;
+      transition: all 0.2s;
+      border-bottom: 3px solid transparent;
+      white-space: nowrap;
+    }
+    .nav-pills a:hover {
+      color: #fff;
+      border-bottom-color: var(--dorado);
+    }
+
+    /* ── Container ── */
+    .container { max-width: 1040px; margin: 0 auto; padding: 40px 20px 80px; }
+
+    /* ── Section ── */
+    .section { margin-bottom: 56px; }
+    .section-header {
+      display: flex; align-items: center; gap: 14px;
+      margin-bottom: 28px;
+      padding-bottom: 14px;
+      border-bottom: 2px solid var(--verde-light);
+    }
+    .section-icon {
+      width: 44px; height: 44px;
+      background: var(--verde);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(0,112,74,0.25);
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      color: var(--verde-dark);
+    }
+    .section-count {
+      margin-left: auto;
+      background: var(--verde-light);
+      color: var(--verde);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+    }
+
+    /* ── Cards ── */
+    .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+    .card {
+      background: #fff;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 2px 16px rgba(74,44,42,0.08);
+      transition: transform 0.2s, box-shadow 0.2s;
+      border: 1px solid rgba(203,162,88,0.12);
+    }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 8px 28px rgba(74,44,42,0.14); }
+    .card-accent {
+      height: 5px;
+      background: linear-gradient(90deg, var(--verde), var(--dorado));
+    }
+    .card-body { padding: 20px 22px; }
+    .card-tag {
+      display: inline-block;
+      background: var(--verde-light);
+      color: var(--verde);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.7px;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+    }
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px;
+      color: var(--verde-dark);
+      margin-bottom: 10px;
+      line-height: 1.35;
+    }
+    .card-text { font-size: 14px; color: var(--text-light); line-height: 1.65; }
+    .card-insight {
+      margin-top: 14px;
+      background: var(--latte);
+      border-left: 3px solid var(--verde);
+      border-radius: 0 8px 8px 0;
+      padding: 10px 14px;
+    }
+    .card-insight .insight-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--verde);
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+      margin-bottom: 4px;
+    }
+    .card-insight p { font-size: 13px; color: var(--text-mid); }
+    .card-link {
+      display: inline-flex; align-items: center; gap: 5px;
+      margin-top: 14px;
+      color: var(--verde);
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .card-link:hover { color: var(--marron); }
+
+    /* ── Stars badge ── */
+    .stars-badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      background: #FFF8EC;
+      border: 1px solid var(--dorado);
+      color: var(--cafe);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+    }
+
+    /* ── YouTube Card ── */
+    .yt-card {
+      background: #fff;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 2px 16px rgba(74,44,42,0.08);
+      border: 1px solid rgba(203,162,88,0.12);
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex; flex-direction: column;
+    }
+    .yt-card:hover { transform: translateY(-4px); box-shadow: 0 8px 28px rgba(74,44,42,0.14); }
+    .yt-thumb {
+      background: linear-gradient(135deg, var(--verde-dark), var(--verde));
+      height: 90px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 36px;
+      position: relative;
+    }
+    .yt-play {
+      position: absolute; right: 14px; bottom: 12px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 50%;
+      width: 32px; height: 32px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px;
+    }
+    .yt-body { padding: 18px 20px; flex: 1; display: flex; flex-direction: column; }
+    .yt-channel { font-size: 12px; font-weight: 700; color: var(--verde); text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 6px; }
+    .yt-title { font-family: 'Playfair Display', serif; font-size: 16px; color: var(--verde-dark); margin-bottom: 10px; line-height: 1.35; }
+    .yt-text { font-size: 13px; color: var(--text-light); line-height: 1.6; flex: 1; }
+    .yt-value {
+      margin-top: 12px;
+      background: var(--latte);
+      border-radius: 8px;
+      padding: 10px 13px;
+      font-size: 13px;
+      color: var(--text-mid);
+    }
+    .yt-value strong { color: var(--verde); }
+    .yt-link {
+      display: inline-flex; align-items: center; gap: 5px;
+      margin-top: 14px;
+      background: var(--verde);
+      color: #fff;
+      font-size: 12px; font-weight: 700;
+      padding: 7px 16px;
+      border-radius: 20px;
+      text-decoration: none;
+      width: fit-content;
+      transition: background 0.2s;
+    }
+    .yt-link:hover { background: var(--verde-dark); }
+
+    /* ── Trends Block ── */
+    .trends-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 18px; }
+    .trend-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 20px;
+      border: 1px solid var(--verde-light);
+      box-shadow: 0 2px 10px rgba(0,112,74,0.07);
+    }
+    .trend-num {
+      font-size: 36px; font-weight: 900; color: var(--verde-light);
+      line-height: 1; margin-bottom: 8px;
+    }
+    .trend-title { font-weight: 700; color: var(--verde-dark); font-size: 15px; margin-bottom: 8px; }
+    .trend-text { font-size: 13px; color: var(--text-light); line-height: 1.65; }
+
+    /* ── Stats Bar ── */
+    .stats-bar {
+      background: linear-gradient(135deg, var(--verde-dark), var(--verde));
+      border-radius: 18px;
+      padding: 28px 32px;
+      display: flex; flex-wrap: wrap; gap: 24px; justify-content: space-around;
+      margin-bottom: 40px;
+    }
+    .stat-item { text-align: center; }
+    .stat-num { font-size: 32px; font-weight: 900; color: #fff; line-height: 1; }
+    .stat-label { font-size: 12px; color: rgba(255,255,255,0.7); margin-top: 4px; letter-spacing: 0.5px; }
+
+    /* ── Tools Section ── */
+    .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
+    .tool-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 20px;
+      border: 1px solid rgba(203,162,88,0.18);
+      box-shadow: 0 2px 10px rgba(74,44,42,0.07);
+    }
+    .tool-logo { font-size: 28px; margin-bottom: 10px; }
+    .tool-name { font-weight: 700; color: var(--verde-dark); font-size: 16px; margin-bottom: 6px; }
+    .tool-feature { font-size: 13px; color: var(--text-mid); margin-bottom: 6px; }
+    .tool-feature span { color: var(--verde); font-weight: 700; }
+    .tool-tip {
+      margin-top: 10px;
+      font-size: 12px;
+      background: var(--latte);
+      border-radius: 8px;
+      padding: 8px 12px;
+      color: var(--text-light);
+    }
+
+    /* ── Footer ── */
+    .footer {
+      background: var(--verde-dark);
+      padding: 36px 24px;
+      text-align: center;
+      color: rgba(255,255,255,0.6);
+      font-size: 13px;
+    }
+    .footer strong { color: var(--dorado); }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .nav-pills a { padding: 12px 10px; font-size: 11px; }
+      .stats-bar { padding: 20px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <div class="logo-circle">☕</div>
+    <h1>AI Intelligence Briefing</h1>
+    <p class="subtitle">Semana del 19 – 21 de Mayo, 2026</p>
+    <span class="date-badge">📅 Jueves 21 de Mayo · Edición Semanal · Para: Nacho Colla</span>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav class="nav-pills">
+  <a href="#noticias">🗞 Noticias</a>
+  <a href="#herramientas">🛠 Herramientas</a>
+  <a href="#trends">📈 Tendencias PM</a>
+  <a href="#videos">▶️ YouTube</a>
+  <a href="#repos">⭐ GitHub</a>
+</nav>
+
+<!-- MAIN -->
+<div class="container">
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="stat-item">
+      <div class="stat-num">17.8%</div>
+      <div class="stat-label">Población mundial usa IA</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">94%</div>
+      <div class="stat-label">PMs usan IA frecuentemente</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">3.5x</div>
+      <div class="stat-label">Más inteligencia en firmas líderes</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">115K</div>
+      <div class="stat-label">Estrellas Claude Code en GitHub</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">1B+</div>
+      <div class="stat-label">Usuarios mensuales AI Mode Google</div>
+    </div>
+  </div>
+
+  <!-- NOTICIAS -->
+  <section class="section" id="noticias">
+    <div class="section-header">
+      <div class="section-icon">🗞</div>
+      <h2 class="section-title">5 Noticias Clave de la Semana</h2>
+      <span class="section-count">Semana del 19-21 May 2026</span>
+    </div>
+    <div class="cards-grid">
+
+      <!-- Noticia 1 -->
+      <div class="card">
+        <div class="card-accent"></div>
+        <div class="card-body">
+          <span class="card-tag">Google I/O 2026</span>
+          <h3 class="card-title">Google lanza Gemini 3.5 Flash y el agente "Spark" 24/7</h3>
+          <p class="card-text">En Google I/O (19-21 Mayo), Google presentó Gemini 3.5 Flash — el primer modelo que combina inteligencia de frontera con acción — superando a Gemini 3.1 Pro en benchmarks de coding y agentic. También lanzó <strong>Gemini Spark</strong>, un agente personal que trabaja en background incluso cuando cerrás el teléfono.</p>
+          <div class="card-insight">
+            <div class="insight-label">💡 Valor para tu perfil</div>
+            <p>Gemini Spark puede monitorear procesos operativos, enviar alertas y completar tareas de gestión rutinarias mientras vos te enfocás en decisiones estratégicas en el banco.</p>
+          </div>
+          <a href="https://blog.google/innovation-and-ai/technology/developers-tools/google-io-2026-developer-highlights/" target="_blank" class="card-link">Ver anuncio oficial →</a>
+        </div>
+      </div>
+
+      <!-- Noticia 2 -->
+      <div class="card">
+        <div class="card-accent"></div>
+        <div class="card-body">
+          <span class="card-tag">Anthropic</span>
+          <h3 class="card-title">Claude Opus 4.7 disponible + límites duplicados en Claude Code</h3>
+          <p class="card-text">Anthropic lanzó <strong>Claude Opus 4.7</strong> con mejoras significativas en ingeniería de software avanzada y visión de mayor resolución. Además, gracias a un acuerdo con SpaceX para aumentar capacidad de cómputo, <strong>duplicaron los límites de Claude Code</strong> y eliminaron las restricciones en horas pico para planes Pro y Max.</p>
+          <div class="card-insight">
+            <div class="insight-label">💡 Valor para tu perfil</div>
+            <p>Con más límites en Claude Code podés ejecutar workflows de automatización más largos y complejos sin interrupciones — ideal para automatizar análisis de procesos financieros.</p>
+          </div>
+          <a href="https://www.anthropic.com/news/claude-opus-4-7" target="_blank" class="card-link">Ver anuncio oficial →</a>
+        </div>
+      </div>
+
+      <!-- Noticia 3 -->
+      <div class="card">
+        <div class="card-accent"></div>
+        <div class="card-body">
+          <span class="card-tag">OpenAI</span>
+          <h3 class="card-title">ChatGPT integra finanzas personales y se une a Dell para empresas</h3>
+          <p class="card-text">OpenAI introdujo una <strong>experiencia de finanzas personales</strong> dentro de ChatGPT (Mayo 18) y anunció alianza con Dell Technologies para llevar <strong>Codex a entornos empresariales on-premises e híbridos</strong>. También avanzó en proveniencia de contenido para ecosistema de IA más seguro.</p>
+          <div class="card-insight">
+            <div class="insight-label">💡 Valor para tu perfil</div>
+            <p>La integración de Codex en entornos empresariales es clave: tu institución financiera podría desplegar agentes de coding en infraestructura privada, cumpliendo regulaciones de datos.</p>
+          </div>
+          <a href="https://openai.com/news/" target="_blank" class="card-link">Ver noticias OpenAI →</a>
+        </div>
+      </div>
+
+      <!-- Noticia 4 -->
+      <div class="card">
+        <div class="card-accent"></div>
+        <div class="card-body">
+          <span class="card-tag">Apple / iOS 27</span>
+          <h3 class="card-title">iOS 27 permitirá elegir Claude o Gemini en vez de ChatGPT</h3>
+          <p class="card-text">Apple confirmó que <strong>iOS 27, iPadOS 27 y macOS 27</strong> permitirán a usuarios elegir Claude, Gemini u otro servicio de IA como alternativa predeterminada para Apple Intelligence. Apple firmó con Google y usará un modelo basado en Gemini para Siri, pero los usuarios podrán elegir su preferido.</p>
+          <div class="card-insight">
+            <div class="insight-label">💡 Valor para tu perfil</div>
+            <p>Podrás integrar Claude directamente en tus flujos de trabajo de iPhone — desde Writing Tools hasta Image Playground — sin cambiar de app. Perfecto para redactar reportes operativos en movilidad.</p>
+          </div>
+          <a href="https://www.macrumors.com/2026/05/05/ios-27-third-party-chatbots-apple-intelligence/" target="_blank" class="card-link">Ver detalles →</a>
+        </div>
+      </div>
+
+      <!-- Noticia 5 -->
+      <div class="card">
+        <div class="card-accent"></div>
+        <div class="card-body">
+          <span class="card-tag">Microsoft Research</span>
+          <h3 class="card-title">El 17.8% de la población mundial activa usa IA — firmas líderes van 3.5x más rápido</h3>
+          <p class="card-text">El reporte de Microsoft <em>"State of Global AI Diffusion 2026"</em> revela que el uso de IA creció de 16.3% a <strong>17.8%</strong> de la población activa mundial en Q1 2026. Las firmas en el percentil 95 de uso ahora usan <strong>3.5x más inteligencia por trabajador</strong> que las empresas promedio — vs 2x hace un año.</p>
+          <div class="card-insight">
+            <div class="insight-label">💡 Valor para tu perfil</div>
+            <p>La brecha entre empresas financieras que adoptan IA y las que no se está acelerando. Tu rol como analista de mejora continua tiene una ventana de tiempo para institucionalizar IA en procesos antes de que sea obligatorio.</p>
+          </div>
+          <a href="https://blogs.microsoft.com/on-the-issues/2026/05/07/the-state-of-global-ai-diffusion-in-2026/" target="_blank" class="card-link">Ver reporte →</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- HERRAMIENTAS -->
+  <section class="section" id="herramientas">
+    <div class="section-header">
+      <div class="section-icon">🛠</div>
+      <h2 class="section-title">Últimas Funcionalidades de Herramientas que Usás</h2>
+      <span class="section-count">Mayo 2026</span>
+    </div>
+    <div class="tools-grid">
+
+      <div class="tool-card">
+        <div class="tool-logo">🧠</div>
+        <div class="tool-name">Claude (Anthropic)</div>
+        <div class="tool-feature">✦ <span>Opus 4.7</span> — mejor visión y software engineering avanzado. Mismos precios: $5/$25 por millón de tokens</div>
+        <div class="tool-feature">✦ <span>Claude Code</span> — límites duplicados, sin reducción en horas pico</div>
+        <div class="tool-feature">✦ <span>Claude for Small Business</span> — paquete de conectores y workflows listos para usar</div>
+        <div class="tool-tip">🎯 Ejemplo: Podés usar Claude Code para auditar automáticamente procesos de cumplimiento y generar informes regulatorios sin intervención manual.</div>
+      </div>
+
+      <div class="tool-card">
+        <div class="tool-logo">✨</div>
+        <div class="tool-name">Gemini (Google)</div>
+        <div class="tool-feature">✦ <span>Gemini 3.5 Flash</span> — 4x más rápido que modelos frontier, mejor en coding</div>
+        <div class="tool-feature">✦ <span>Gemini Spark</span> — agente personal 24/7 que trabaja en background</div>
+        <div class="tool-feature">✦ <span>Daily Brief</span> — resumen personalizado de inbox, calendar y tareas al inicio del día</div>
+        <div class="tool-tip">🎯 Ejemplo: Configurá Daily Brief para recibir cada mañana un resumen de los incidentes operativos abiertos, reuniones del día y KPIs críticos.</div>
+      </div>
+
+      <div class="tool-card">
+        <div class="tool-logo">💬</div>
+        <div class="tool-name">ChatGPT (OpenAI)</div>
+        <div class="tool-feature">✦ <span>Finanzas personales</span> — nueva experiencia integrada para gestión financiera</div>
+        <div class="tool-feature">✦ <span>Shopping integrado</span> — carros de compra, imágenes, precios y reseñas</div>
+        <div class="tool-feature">✦ <span>Codex Enterprise</span> — disponible on-premises con Dell Technologies</div>
+        <div class="tool-tip">🎯 Ejemplo: Usá la integración de finanzas para crear dashboards de seguimiento de costos operativos directamente en el chat.</div>
+      </div>
+
+      <div class="tool-card">
+        <div class="tool-logo">🔍</div>
+        <div class="tool-name">Google Search + Antigravity</div>
+        <div class="tool-feature">✦ <span>Search Box reimaginado</span> — mayor upgrade en 25 años con IA nativa</div>
+        <div class="tool-feature">✦ <span>Antigravity 2.0</span> — desktop app para orquestar agentes, ahora con plan Ultra $100/mes</div>
+        <div class="tool-feature">✦ <span>Information Agents</span> — agentes en background 24/7 para búsquedas continuas</div>
+        <div class="tool-tip">🎯 Ejemplo: Configurá un Information Agent que monitoree cambios regulatorios del BCRA/CNV y te notifique automáticamente con resúmenes.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- TENDENCIAS PM -->
+  <section class="section" id="trends">
+    <div class="section-header">
+      <div class="section-icon">📈</div>
+      <h2 class="section-title">Tendencias en Process & Product Management</h2>
+      <span class="section-count">2026</span>
+    </div>
+    <div class="trends-grid">
+
+      <div class="trend-card">
+        <div class="trend-num">01</div>
+        <div class="trend-title">De Roadmaps Tradicionales a Sistemas de Aprendizaje IA</div>
+        <div class="trend-text">Los equipos de producto de 2026 priorizan <strong>sistemas de aprendizaje continuo</strong>, prototipado rápido y decisiones potenciadas por IA. Tu trabajo ya no es mantener un roadmap: es construir una máquina de aprendizaje alrededor de clientes, datos y agentes.
+        <br><br>🎯 <em>Aplicación financiera:</em> Implementá ciclos de mejora continua ágiles de 2 semanas, donde los análisis de proceso se generan automáticamente con IA y se incorporan al backlog en tiempo real.</div>
+      </div>
+
+      <div class="trend-card">
+        <div class="trend-num">02</div>
+        <div class="trend-title">PMs Gestionan 3-5 Líneas de Producto (gracias a la IA)</div>
+        <div class="trend-text">La IA comprimió el trabajo de ejecución en un <strong>15-25%</strong>. Los PMs en 2026 manejan de 3 a 5 líneas de producto, trabajan con 2-3 squads, y prototipen sus propias features. La mayoría de la semana la pasan en <strong>juicios estratégicos</strong>, no en documentación.
+        <br><br>🎯 <em>Aplicación:</em> Usá Claude para generar primeros borradores de PRDs, análisis de feedback de usuarios e informes regulatorios, liberando tu tiempo para análisis estratégico de valor.</div>
+      </div>
+
+      <div class="trend-card">
+        <div class="trend-num">03</div>
+        <div class="trend-title">IA para Análisis de Feedback Multicanal en Tiempo Real</div>
+        <div class="trend-text">La IA analiza feedback de reseñas, encuestas, soporte y uso del producto para identificar tendencias en tiempo real. El 94% de los PMs profesionales ya integran IA en sus workflows diarios, con ganancias de <strong>1-2 horas al día</strong>.
+        <br><br>🎯 <em>Aplicación financiera:</em> Implementá un pipeline que agregue reclamos de clientes, NPS y tickets de soporte, y genere automáticamente insights sobre puntos de fricción en procesos como onboarding o resolución de reclamos.</div>
+      </div>
+
+      <div class="trend-card">
+        <div class="trend-num">04</div>
+        <div class="trend-title">Estrategia de Portfolio IA como Driver Central del Negocio</div>
+        <div class="trend-text">Los equipos ganadores de 2026 tratan a la IA como un <strong>driver estratégico del negocio</strong>, no como proyectos aislados. Según HBR (Febrero 2026), construir skills de Product Management en el equipo es clave para impulsar la adopción de IA.
+        <br><br>🎯 <em>Aplicación:</em> Mapeá todos los procesos de tu área y creá un portfolio de iniciativas IA priorizadas por impacto/esfuerzo usando frameworks como RICE o MoSCoW.</div>
+      </div>
+
+      <div class="trend-card">
+        <div class="trend-num">05</div>
+        <div class="trend-title">Orquestación Multi-Agente para Operaciones de Servicios</div>
+        <div class="trend-text">La orquestación de múltiples agentes IA coordinados está emergiendo como el <strong>nuevo modelo operativo</strong> en servicios financieros. Permite automatizar workflows completos: investigación → análisis → decisión → acción → reporte.
+        <br><br>🎯 <em>Aplicación:</em> Diseñá un workflow donde un agente monitorea KPIs operativos, otro analiza causas raíz y un tercero genera planes de acción — todo sin intervención humana en el ciclo de análisis.</div>
+      </div>
+
+      <div class="trend-card">
+        <div class="trend-num">06</div>
+        <div class="trend-title">Compliance y Regulación IA en Servicios Financieros</div>
+        <div class="trend-text">La adopción de IA en entidades financieras enfrenta el desafío del <strong>cumplimiento regulatorio</strong>. Los líderes de operaciones deben construir frameworks de gobernanza que permitan innovar dentro de los límites regulatorios (BCRA, CNV, FATF).
+        <br><br>🎯 <em>Aplicación:</em> Implementá IA en procesos de bajo riesgo regulatorio primero (análisis interno, reporting, optimización de procesos), construyendo casos de negocio para fases posteriores.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- YOUTUBE -->
+  <section class="section" id="videos">
+    <div class="section-header">
+      <div class="section-icon">▶️</div>
+      <h2 class="section-title">5 Videos de YouTube Recomendados</h2>
+      <span class="section-count">Mejor valorados · Mayo 2026</span>
+    </div>
+    <div class="cards-grid">
+
+      <!-- Video 1 -->
+      <div class="yt-card">
+        <div class="yt-thumb" style="background: linear-gradient(135deg, #1a1a2e, #16213e);">
+          🤖
+          <div class="yt-play">▶</div>
+        </div>
+        <div class="yt-body">
+          <div class="yt-channel">Matt Wolfe · @mreflow</div>
+          <div class="yt-title">I Built A Second Brain With Codex in 15 Minutes</div>
+          <div class="yt-text">Matt Wolfe muestra cómo construir un sistema de "segundo cerebro" personal usando OpenAI Codex en menos de 15 minutos. Cubre cómo conectar notas, documentos y datos para crear una base de conocimiento consultable con IA.</div>
+          <div class="yt-value"><strong>💼 Valor para tu rol:</strong> Aprendé a crear tu propio sistema de conocimiento operativo — conectando procedimientos internos, regulaciones y mejores prácticas para consultar con IA durante tu trabajo diario.</div>
+          <a href="https://www.youtube.com/watch?v=z_oAi9xdDQs" target="_blank" class="yt-link">▶ Ver en YouTube</a>
+        </div>
+      </div>
+
+      <!-- Video 2 -->
+      <div class="yt-card">
+        <div class="yt-thumb" style="background: linear-gradient(135deg, #2d1b69, #6b21a8);">
+          🍄
+          <div class="yt-play">▶</div>
+        </div>
+        <div class="yt-body">
+          <div class="yt-channel">Sabrina Ramonov · @sabrina_ramonov</div>
+          <div class="yt-title">Build Your First AI Automation (Serie completa n8n)</div>
+          <div class="yt-text">Serie de 3 partes que enseña a construir automatizaciones IA completas con n8n: investigación de temas, creación de carruseles/videos, publicación en redes sociales y repurposing de contenido. 1.4M+ seguidores.</div>
+          <div class="yt-value"><strong>💼 Valor para tu rol:</strong> Las técnicas de automatización con n8n son directamente aplicables a workflows operativos — automatizar reportes, alertas y distribución de información en tu equipo.</div>
+          <a href="https://www.youtube.com/@sabrina_ramonov" target="_blank" class="yt-link">▶ Ver Canal</a>
+        </div>
+      </div>
+
+      <!-- Video 3 -->
+      <div class="yt-card">
+        <div class="yt-thumb" style="background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);">
+          📄
+          <div class="yt-play">▶</div>
+        </div>
+        <div class="yt-body">
+          <div class="yt-channel">Two Minute Papers · Károly Zsolnai-Fehér</div>
+          <div class="yt-title">Latest AI Research — Agentes y Razonamiento 2026</div>
+          <div class="yt-text">Canal de referencia para seguir los papers de investigación de IA más relevantes, explicados en 2-5 minutos con visualizaciones claras. Cubre desde modelos de lenguaje hasta sistemas multi-agente y razonamiento. Cornerstone para profesionales que quieren estar al día sin leer papers completos.</div>
+          <div class="yt-value"><strong>💼 Valor para tu rol:</strong> Entendé las capacidades reales de la IA antes de proponer proyectos de mejora de procesos — distinguí entre lo que ya es posible y lo que aún es investigación.</div>
+          <a href="https://www.youtube.com/@TwoMinutePapers" target="_blank" class="yt-link">▶ Ver Canal</a>
+        </div>
+      </div>
+
+      <!-- Video 4 -->
+      <div class="yt-card">
+        <div class="yt-thumb" style="background: linear-gradient(135deg, #134e5e, #71b280);">
+          🔬
+          <div class="yt-play">▶</div>
+        </div>
+        <div class="yt-body">
+          <div class="yt-channel">All About AI · David Shapiro</div>
+          <div class="yt-title">Claude vs ChatGPT vs Gemini — Comparativa Práctica</div>
+          <div class="yt-text">Canal especializado en comparaciones directas entre modelos de IA (Claude, ChatGPT, Gemini) ante los mismos prompts. Explica por qué un output es más fácil de refinar que otro, con estilo accesible para no-coders. Ideal para elegir la herramienta correcta para cada tarea.</div>
+          <div class="yt-value"><strong>💼 Valor para tu rol:</strong> Tomá decisiones informadas sobre qué modelo usar para cada tipo de análisis operativo — no todas las herramientas son iguales para análisis de procesos vs. generación de documentación.</div>
+          <a href="https://www.youtube.com/@AllAboutAI" target="_blank" class="yt-link">▶ Ver Canal</a>
+        </div>
+      </div>
+
+      <!-- Video 5 -->
+      <div class="yt-card">
+        <div class="yt-thumb" style="background: linear-gradient(135deg, #1e3c72, #2a5298);">
+          🏦
+          <div class="yt-play">▶</div>
+        </div>
+        <div class="yt-body">
+          <div class="yt-channel">Krish Naik · 1.3M+ suscriptores</div>
+          <div class="yt-title">Agentic AI Systems — Diseño y Orquestación</div>
+          <div class="yt-text">Uno de los canales más completos de YouTube para IA aplicada. Cubre NLP, machine learning, deep learning y agentes IA con más de 1.3M suscriptores. Sus videos sobre sistemas multi-agente son especialmente relevantes para operaciones empresariales.</div>
+          <div class="yt-value"><strong>💼 Valor para tu rol:</strong> Aprendé a diseñar sistemas agenticos que puedan orquestar procesos de negocio completos — desde la detección de anomalías hasta la propuesta de acciones correctivas en procesos financieros.</div>
+          <a href="https://www.youtube.com/@krishnaik06" target="_blank" class="yt-link">▶ Ver Canal</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- GITHUB REPOS -->
+  <section class="section" id="repos">
+    <div class="section-header">
+      <div class="section-icon">⭐</div>
+      <h2 class="section-title">5 Repositorios GitHub — Orquestación Agentica & Token Efficiency</h2>
+      <span class="section-count">Top Estrellas · Mayo 2026</span>
+    </div>
+    <div class="cards-grid">
+
+      <!-- Repo 1 -->
+      <div class="card">
+        <div class="card-accent" style="background: linear-gradient(90deg, #24292e, var(--dorado))"></div>
+        <div class="card-body">
+          <div class="stars-badge">⭐ 44.2K estrellas</div>
+          <span class="card-tag">Claude Code</span>
+          <h3 class="card-title">hesreallyhim/awesome-claude-code</h3>
+          <p class="card-text">El directorio canónico de recursos para Claude Code: skills, hooks, slash-commands, agent frameworks, apps y plugins. Curado manualmente con los recursos de mayor calidad — considerado el punto de partida oficial para aprovechar Claude Code.</p>
+          <div class="card-insight">
+            <div class="insight-label">💡 Valor para tu stack</div>
+            <p>Encontrá skills preconfiguradas para análisis de procesos, generación de documentación y automatización que podés instalar directamente en Claude Code. Ahorra decenas de horas de configuración.</p>
+          </div>
+          <a href="https://github.com/hesreallyhim/awesome-claude-code" target="_blank" class="card-link">Ver en GitHub →</a>
+        </div>
+      </div>
+
+      <!-- Repo 2 -->
+      <div class="card">
+        <div class="card-accent" style="background: linear-gradient(90deg, #24292e, var(--dorado))"></div>
+        <div class="card-body">
+          <div class="stars-badge">⭐ 100K+ estrellas · 🏆 Hackathon Winner</div>
+          <span class="card-tag">Orquestación Agentica</span>
+          <h3 class="card-title">everything-claude-code (ECC)</h3>
+          <p class="card-text">El "sistema operativo completo" para Claude Code: 135 agentes, escaneo de seguridad, optimización de memoria, aprendizaje continuo y configuraciones listas para producción. Ganador del Anthropic Hackathon. Pasó del puesto 14 al 4 en tendencias GitHub en Mayo 2026.</p>
+          <div class="card-insight">
+            <div class="insight-label">💡 Valor para tu stack</div>
+            <p>Agentes especializados para tareas específicas de operaciones y gestión de procesos — podés orquestar análisis de flujos completos (recolección de datos → análisis → propuesta de mejora → documentación) en una sola ejecución.</p>
+          </div>
+          <a href="https://github.com/topics/everything-claude-code" target="_blank" class="card-link">Ver en GitHub →</a>
+        </div>
+      </div>
+
+      <!-- Repo 3 -->
+      <div class="card">
+        <div class="card-accent" style="background: linear-gradient(90deg, #24292e, var(--dorado))"></div>
+        <div class="card-body">
+          <div class="stars-badge">⭐ wshobson/agents</div>
+          <span class="card-tag">Multi-Agente Claude Code</span>
+          <h3 class="card-title">wshobson/agents — Orquestación Inteligente</h3>
+          <p class="card-text">Framework de automatización inteligente y orquestación multi-agente específicamente diseñado para Claude Code. Permite crear pipelines de agentes que se coordinan entre sí para resolver tareas complejas, con patterns probados para workflows empresariales.</p>
+          <div class="card-insight">
+            <div class="insight-label">💡 Valor para tu stack</div>
+            <p>Implementá workflows donde un agente audita procesos, otro genera el análisis de causas raíz y un tercero propone mejoras con métricas — todo coordinado automáticamente. Ideal para mejora continua en servicios financieros.</p>
+          </div>
+          <a href="https://github.com/wshobson/agents" target="_blank" class="card-link">Ver en GitHub →</a>
+        </div>
+      </div>
+
+      <!-- Repo 4 -->
+      <div class="card">
+        <div class="card-accent" style="background: linear-gradient(90deg, #24292e, var(--dorado))"></div>
+        <div class="card-body">
+          <div class="stars-badge">⭐ 6x menos tokens · lsdefine</div>
+          <span class="card-tag">Token Efficiency</span>
+          <h3 class="card-title">lsdefine/GenericAgent — 6x Less Token Consumption</h3>
+          <p class="card-text">Agente auto-evolutivo que crece un árbol de habilidades desde una semilla de 3.3K líneas, logrando control total del sistema con <strong>6x menos consumo de tokens</strong>. Demuestra principios de diseño eficiente en tokens aplicables a cualquier sistema agentico.</p>
+          <div class="card-insight">
+            <div class="insight-label">💡 Valor para tu stack</div>
+            <p>Reducir el consumo de tokens en 6x significa reducir costos de API en la misma proporción. Para workflows de análisis masivo de datos operativos o regulatorios, esto es significativo económicamente.</p>
+          </div>
+          <a href="https://github.com/lsdefine/GenericAgent" target="_blank" class="card-link">Ver en GitHub →</a>
+        </div>
+      </div>
+
+      <!-- Repo 5 -->
+      <div class="card">
+        <div class="card-accent" style="background: linear-gradient(90deg, #24292e, var(--dorado))"></div>
+        <div class="card-body">
+          <div class="stars-badge">⭐ 300+ agentes · ARUNAGIRINATHAN-K</div>
+          <span class="card-tag">AI Agents 2026</span>
+          <h3 class="card-title">awesome-ai-agents-2026 — 300+ Frameworks</h3>
+          <p class="card-text">La lista curada más completa de agentes IA para 2026: 300+ agentes, frameworks y herramientas organizados por categorías — coding, creative, voice, research y enterprise. Con guías de comparación, benchmarks y análisis profundos. Actualizado mensualmente.</p>
+          <div class="card-insight">
+            <div class="insight-label">💡 Valor para tu stack</div>
+            <p>El directorio perfecto para identificar agentes enterprise ya probados para casos de uso específicos de servicios financieros — desde análisis de riesgo hasta automatización de compliance y atención al cliente.</p>
+          </div>
+          <a href="https://github.com/ARUNAGIRINATHAN-K/awesome-ai-agents-2026" target="_blank" class="card-link">Ver en GitHub →</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Nota de seguridad -->
+    <div style="margin-top: 24px; background: #fff; border-radius: 14px; padding: 18px 22px; border: 1px solid var(--verde-light); display: flex; gap: 12px; align-items: flex-start;">
+      <span style="font-size: 22px;">🔒</span>
+      <div>
+        <strong style="color: var(--verde-dark); font-size: 14px;">Nota de Seguridad:</strong>
+        <p style="font-size: 13px; color: var(--text-light); margin-top: 4px; line-height: 1.6;">Todos los repositorios listados provienen de cuentas verificadas, tienen actividad reciente y comunidades activas. Se recomienda siempre revisar el código antes de ejecutarlo en entornos productivos, especialmente en entidades financieras. Evitá instalar dependencias de repos con pocas estrellas o sin historial de commits recientes.</p>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p>Generado automáticamente por <strong>Claude AI Briefing Bot</strong> · 21 de Mayo, 2026</p>
+  <p style="margin-top: 8px; font-size: 12px; opacity: 0.6;">Para: Nacho Colla · Analista de Mejora de Procesos & Operaciones Financieras · nachocolla.automatiza@gmail.com</p>
+  <p style="margin-top: 14px; font-size: 11px; opacity: 0.4;">☕ Hecho con amor, código y mucho café · noticias-ai-briefing.netlify.app</p>
+</footer>
+
+</body>
+</html>

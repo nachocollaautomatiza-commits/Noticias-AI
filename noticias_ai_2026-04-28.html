@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🌿 AI Briefing – 28 Abril 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Playfair+Display:wght@400;600;700&display=swap');
+
+  :root {
+    --verde: #00704A;
+    --verde-oscuro: #1E3932;
+    --verde-claro: #D4E9E2;
+    --crema: #F2EFE8;
+    --cafe: #6B4226;
+    --latte: #C8A882;
+    --dorado: #CBA258;
+    --beige: #EDE0D0;
+    --texto: #2C2C2C;
+    --sombra: rgba(30, 57, 50, 0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Lato', sans-serif;
+    background-color: var(--crema);
+    color: var(--texto);
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C8A882' fill-opacity='0.07'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, var(--verde-oscuro) 0%, var(--verde) 60%, #00A862 100%);
+    padding: 48px 40px 36px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -40px; left: -40px;
+    width: 200px; height: 200px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 50%;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; right: -20px;
+    width: 280px; height: 280px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 50%;
+  }
+  .header-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+  }
+  .header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 10px;
+    line-height: 1.15;
+  }
+  .header h1 span { color: var(--dorado); }
+  .header-sub {
+    color: rgba(255,255,255,0.8);
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+  }
+  .header-date {
+    margin-top: 18px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 20px;
+    padding: 8px 20px;
+    color: rgba(255,255,255,0.9);
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  /* NAV PILLS */
+  .nav-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    padding: 24px 20px;
+    background: var(--verde-oscuro);
+    border-bottom: 3px solid var(--dorado);
+  }
+  .nav-pills a {
+    text-decoration: none;
+    background: rgba(255,255,255,0.08);
+    color: rgba(255,255,255,0.85);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 8px 18px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.12);
+    transition: all 0.2s;
+  }
+  .nav-pills a:hover { background: var(--verde); color: #fff; border-color: var(--verde); }
+
+  /* MAIN CONTAINER */
+  .container { max-width: 1100px; margin: 0 auto; padding: 40px 24px 60px; }
+
+  /* SECTION HEADER */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 28px;
+    padding-bottom: 14px;
+    border-bottom: 2px solid var(--latte);
+  }
+  .section-icon {
+    width: 48px; height: 48px;
+    background: var(--verde);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(0,112,74,0.3);
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--verde-oscuro);
+  }
+  .section-title span {
+    font-family: 'Lato', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--cafe);
+    display: block;
+    margin-top: 2px;
+  }
+
+  /* CARD */
+  .card {
+    background: #fff;
+    border-radius: 18px;
+    padding: 28px 32px;
+    margin-bottom: 22px;
+    box-shadow: 0 2px 16px var(--sombra);
+    border: 1px solid rgba(200,168,130,0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px var(--sombra);
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 5px; height: 100%;
+    background: linear-gradient(180deg, var(--verde), var(--dorado));
+    border-radius: 5px 0 0 5px;
+  }
+  .card-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: var(--verde-claro);
+    color: var(--verde-oscuro);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+  }
+  .card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: var(--verde-oscuro);
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+  .card p {
+    font-size: 14.5px;
+    line-height: 1.75;
+    color: #444;
+    margin-bottom: 12px;
+  }
+
+  /* INSIGHT BOX */
+  .insight-box {
+    background: linear-gradient(135deg, #F8F3EC, #EDE8DE);
+    border-left: 4px solid var(--dorado);
+    border-radius: 0 12px 12px 0;
+    padding: 14px 18px;
+    margin: 14px 0;
+  }
+  .insight-box .label {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    color: var(--cafe);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .insight-box p {
+    font-size: 13.5px;
+    color: var(--cafe);
+    margin-bottom: 0;
+    line-height: 1.6;
+  }
+
+  /* EXAMPLE BOX */
+  .example-box {
+    background: var(--verde-claro);
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin-top: 10px;
+  }
+  .example-box .label {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    color: var(--verde-oscuro);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .example-box p {
+    font-size: 13.5px;
+    color: var(--verde-oscuro);
+    margin-bottom: 0;
+    line-height: 1.6;
+  }
+
+  /* GRID 2 COL */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+  @media(max-width: 700px) { .grid-2 { grid-template-columns: 1fr; } }
+
+  /* YOUTUBE CARD */
+  .yt-card {
+    background: #fff;
+    border-radius: 18px;
+    padding: 24px 28px;
+    box-shadow: 0 2px 16px var(--sombra);
+    border: 1px solid rgba(200,168,130,0.2);
+    position: relative;
+    overflow: hidden;
+  }
+  .yt-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #FF0000, #FF6B6B);
+  }
+  .yt-number {
+    position: absolute;
+    top: 20px; right: 22px;
+    background: #FF0000;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 900;
+    width: 28px; height: 28px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .yt-channel {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: #FF4444;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .yt-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    color: var(--verde-oscuro);
+    margin-bottom: 10px;
+    line-height: 1.3;
+    padding-right: 36px;
+  }
+
+  /* GITHUB CARD */
+  .gh-card {
+    background: #fff;
+    border-radius: 18px;
+    padding: 24px 28px;
+    box-shadow: 0 2px 16px var(--sombra);
+    border: 1px solid rgba(200,168,130,0.2);
+    position: relative;
+    overflow: hidden;
+  }
+  .gh-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #24292E, #586069);
+  }
+  .gh-stars {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: #FFF3CD;
+    color: #856404;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+  .gh-card h3 {
+    font-family: 'Lato', sans-serif;
+    font-size: 16px;
+    font-weight: 900;
+    color: #24292E;
+    margin-bottom: 8px;
+    font-family: 'Courier New', monospace;
+  }
+  .security-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: #D4EDDA;
+    color: #155724;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 10px;
+    margin-left: 8px;
+  }
+
+  /* TREND BADGE */
+  .trend-card {
+    background: linear-gradient(135deg, var(--verde-oscuro), #2D5A4A);
+    border-radius: 18px;
+    padding: 26px 30px;
+    color: #fff;
+    margin-bottom: 20px;
+  }
+  .trend-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 19px;
+    color: var(--dorado);
+    margin-bottom: 10px;
+  }
+  .trend-card p { font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.88); margin-bottom: 0; }
+  .trend-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px; height: 32px;
+    background: var(--dorado);
+    color: var(--verde-oscuro);
+    font-size: 14px;
+    font-weight: 900;
+    border-radius: 10px;
+    margin-right: 10px;
+    float: left;
+    margin-top: 2px;
+  }
+
+  /* SECTION DIVIDER */
+  .section-wrap { margin-bottom: 56px; }
+
+  /* FEATURES PILL */
+  .feature-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--verde-claro);
+    border: 1px solid var(--verde);
+    color: var(--verde-oscuro);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: 12px;
+    margin: 4px;
+  }
+
+  /* FOOTER */
+  .footer {
+    background: var(--verde-oscuro);
+    text-align: center;
+    padding: 30px;
+    color: rgba(255,255,255,0.6);
+    font-size: 12px;
+    margin-top: 40px;
+  }
+  .footer strong { color: var(--dorado); }
+
+  /* KICKER LINE */
+  .kicker {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--latte);
+    margin-bottom: 4px;
+  }
+
+  a { color: var(--verde); text-decoration: none; font-weight: 700; }
+  a:hover { text-decoration: underline; }
+
+  /* BOTONES DE ENLACE VISIBLES */
+  .btn-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 800;
+    text-decoration: none !important;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 14px;
+    border: 2px solid transparent;
+  }
+  .btn-link:hover { transform: translateY(-2px); text-decoration: none !important; }
+
+  .btn-yt {
+    background: #FF0000;
+    color: #fff !important;
+    border-color: #CC0000;
+  }
+  .btn-yt:hover { background: #CC0000; }
+
+  .btn-yt-secondary {
+    background: #fff;
+    color: #FF0000 !important;
+    border-color: #FF0000;
+    margin-left: 8px;
+  }
+  .btn-yt-secondary:hover { background: #FFF0F0; }
+
+  .btn-gh {
+    background: #24292E;
+    color: #fff !important;
+    border-color: #000;
+  }
+  .btn-gh:hover { background: #000; }
+
+  .btn-link-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+  }
+
+  /* SUMMARY BAR */
+  .summary-bar {
+    background: linear-gradient(90deg, var(--verde-oscuro), #2B6E58);
+    border-radius: 16px;
+    padding: 20px 28px;
+    margin-bottom: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+  }
+  .summary-bar .item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255,255,255,0.9);
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .summary-bar .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--dorado); flex-shrink: 0; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-badge">☕ Edición Semanal</div>
+  <h1>AI <span>Briefing</span><br>para tu Trabajo</h1>
+  <p class="header-sub">Noticias, herramientas y tendencias curadas para Analistas de Procesos y Automatización</p>
+  <div class="header-date">
+    📅 Martes, 28 de Abril de 2026
+  </div>
+</div>
+
+<!-- NAV -->
+<div class="nav-pills">
+  <a href="#noticias">📰 Noticias IA</a>
+  <a href="#herramientas">🛠️ Herramientas</a>
+  <a href="#tendencias">📈 Tendencias</a>
+  <a href="#youtube">▶️ YouTube</a>
+  <a href="#github">⚡ GitHub</a>
+</div>
+
+<div class="container">
+
+  <!-- SUMMARY BAR -->
+  <div class="summary-bar">
+    <div class="item"><div class="dot"></div> 5 Noticias clave de las últimas 48hs</div>
+    <div class="item"><div class="dot"></div> Novedades de Claude, n8n y más</div>
+    <div class="item"><div class="dot"></div> 3 Videos recomendados de calidad</div>
+    <div class="item"><div class="dot"></div> 5 Repositorios GitHub verificados</div>
+    <div class="item"><div class="dot"></div> Tendencias en Process & Product Management</div>
+  </div>
+
+  <!-- ====== SECCIÓN 1: NOTICIAS ====== -->
+  <div class="section-wrap" id="noticias">
+    <div class="section-header">
+      <div class="section-icon">📰</div>
+      <div class="section-title">
+        Top 5 Noticias de IA
+        <span>Últimas 48 horas · Fuentes oficiales y especializadas</span>
+      </div>
+    </div>
+
+    <!-- NOTICIA 1 -->
+    <div class="card">
+      <div class="card-tag">🔥 Inversión histórica</div>
+      <h3>Google invierte hasta $40.000 millones en Anthropic a valoración de $350.000 millones</h3>
+      <p>Google anunció el 24 de abril una inversión de hasta USD 40.000 millones en Anthropic, comenzando con USD 10.000 millones. El acuerdo incluye 5 gigawatts de capacidad computacional en Google Cloud y posiciona a Anthropic —creador de Claude— como el actor de mayor crecimiento del sector, con ingresos anualizados de USD 30.000 millones, superando a OpenAI (USD 24.000 millones). Se especula además con una posible IPO de Anthropic para octubre de 2026.</p>
+      <div class="insight-box">
+        <div class="label">💡 ¿Por qué te importa?</div>
+        <p>Esta alianza garantiza que Claude seguirá siendo la herramienta más potente y accesible del mercado. Como usuario intensivo de Claude en tus automatizaciones y análisis de procesos, esta inversión se traduce en modelos más capaces, mayor disponibilidad de API y mejores capacidades de procesamiento de documentos para flujos de trabajo complejos.</p>
+      </div>
+      <div class="example-box">
+        <div class="label">🎯 Ejemplo de aplicación</div>
+        <p>Con mayor capacidad de contexto (hasta 300k tokens ya habilitados en la API), podés procesar manuales de procedimientos financieros completos o registros de auditoría en una sola llamada para extraer hallazgos y KPIs automáticamente.</p>
+      </div>
+      <p><small>🔗 Fuentes: <a href="https://techcrunch.com/2026/04/24/google-to-invest-up-to-40b-in-anthropic-in-cash-and-compute/" target="_blank">TechCrunch</a> · <a href="https://www.cnbc.com/2026/04/24/google-to-invest-up-to-40-billion-in-anthropic-as-search-giant-spreads-its-ai-bets" target="_blank">CNBC</a></small></p>
+    </div>
+
+    <!-- NOTICIA 2 -->
+    <div class="card">
+      <div class="card-tag">🚀 Nuevo Producto</div>
+      <h3>Anthropic lanza Claude Design: creación de visuales con IA directamente desde Claude</h3>
+      <p>El 17 de abril, Anthropic lanzó <strong>Claude Design</strong>, un producto experimental que permite crear prototipos, slides, one-pagers e infografías a partir de lenguaje natural. Impulsado por Claude Opus 4.7, está disponible en preview para suscriptores Pro, Max, Team y Enterprise. Simultáneamente, Claude ya puede generar gráficos y diagramas inline en sus respuestas.</p>
+      <div class="insight-box">
+        <div class="label">💡 ¿Por qué te importa?</div>
+        <p>Para un analista de procesos, esto abre la posibilidad de generar diagramas de flujo (pre-BPMN), presentaciones ejecutivas de resultados de mejora continua y visualizaciones de KPIs directamente en Claude sin necesidad de herramientas separadas como Canva o PowerPoint para la primera iteración.</p>
+      </div>
+      <div class="example-box">
+        <div class="label">🎯 Ejemplo de aplicación</div>
+        <p>"Diseñá un one-pager ejecutivo mostrando el impacto del proyecto de automatización de originación de créditos: reducción de tiempo de ciclo de 5 días a 2 días, NPS de 87 y ahorro anual de $120.000." → Claude Design genera el visual listo para presentar.</p>
+      </div>
+      <p><small>🔗 Fuente: <a href="https://techcrunch.com/2026/04/17/anthropic-launches-claude-design-a-new-product-for-creating-quick-visuals/" target="_blank">TechCrunch</a></small></p>
+    </div>
+
+    <!-- NOTICIA 3 -->
+    <div class="card">
+      <div class="card-tag">🤖 Agentes IA</div>
+      <h3>Google lanza suite de herramientas para agentes IA empresariales en Google Cloud Next</h3>
+      <p>El 22 de abril en Las Vegas, Google Cloud presentó un conjunto de herramientas para crear, desplegar y monitorear agentes de IA dentro de organizaciones. Incluye un "inbox" dedicado para que los agentes publiquen reportes de progreso y un sistema de seguimiento de tareas autónomas, directamente integrado con Workspace y Google Cloud.</p>
+      <div class="insight-box">
+        <div class="label">💡 ¿Por qué te importa?</div>
+        <p>En operaciones financieras, esto significa poder orquestar múltiples agentes: uno que revise reportes de compliance, otro que genere resúmenes de KPIs para gerencia y otro que detecte cuellos de botella en procesos, trabajando en simultáneo y reportando en un dashboard centralizado.</p>
+      </div>
+      <div class="example-box">
+        <div class="label">🎯 Ejemplo de aplicación</div>
+        <p>Un agente monitorea el tiempo de procesamiento de solicitudes de préstamos. Cuando detecta que el SLA supera las 48hs, dispara automáticamente una alerta al equipo responsable y genera un análisis de causa raíz con datos del CRM y el core bancario.</p>
+      </div>
+      <p><small>🔗 Fuente: <a href="https://www.bloomberg.com/news/articles/2026-04-22/google-releases-new-ai-agents-to-challenge-openai-and-anthropic" target="_blank">Bloomberg</a></small></p>
+    </div>
+
+    <!-- NOTICIA 4 -->
+    <div class="card">
+      <div class="card-tag">⚖️ Industria</div>
+      <h3>IA impulsa ola de despidos masivos: +90.000 salidas tech en el primer trimestre 2026</h3>
+      <p>Según datos consolidados, entre enero y abril de 2026 se registraron más de 90.000 salidas en empresas tecnológicas globales (Amazon, Meta, Microsoft, Oracle). Meta anunció 8.000 despidos; Microsoft, un programa de retiro anticipado para ~8.800 empleados. El AI Index Report 2026 de Stanford advierte un desajuste estructural entre la capacidad tecnológica de la IA y los sistemas regulatorios y de talento humano.</p>
+      <div class="insight-box">
+        <div class="label">💡 ¿Por qué te importa?</div>
+        <p>Como analista de procesos y mejora continua en entidades financieras, estás en el centro de esta transformación. La presión para automatizar procesos back-office crece, y quien domine la reingeniería asistida por IA tendrá una ventaja competitiva crítica. El rol del analista evoluciona hacia orquestador de agentes de IA.</p>
+      </div>
+      <div class="example-box">
+        <div class="label">🎯 Ejemplo de aplicación</div>
+        <p>Documentá los procesos que hoy hacen analistas juniors usando BPMN + IA, identificá cuáles son automatizables y proponé un plan de reskilling para el equipo. Esto te posiciona como habilitador de la transformación, no como víctima de ella.</p>
+      </div>
+      <p><small>🔗 Fuentes: <a href="https://www.cooperativa.cl/noticias/tecnologia/industria/ia/inteligencia-artificial-impulsa-ola-de-despidos-a-nivel-mundial-en-2026/2026-04-25/172242.html" target="_blank">Cooperativa.cl</a></small></p>
+    </div>
+
+    <!-- NOTICIA 5 -->
+    <div class="card">
+      <div class="card-tag">🧠 Nuevo Modelo</div>
+      <h3>Claude Opus 4.7 disponible + preview de Claude Mythos con capacidades "step-change"</h3>
+      <p>Anthropic lanzó Claude Opus 4.7 con mejoras significativas en ingeniería de software avanzada, mayor resolución visual y capacidades creativas más refinadas. Paralelamente, Anthropic habilitó el acceso preview de <strong>Claude Mythos</strong> a 11 organizaciones seleccionadas para tareas de ciberseguridad, describiéndolo como un salto cualitativo en capacidades respecto a generaciones anteriores. La ventana de contexto en Message Batches API sube a 300k tokens.</p>
+      <div class="insight-box">
+        <div class="label">💡 ¿Por qué te importa?</div>
+        <p>El límite de 300k tokens en batch significa que podés enviar documentos regulatorios enteros (como circulares del BCRA), bases de datos de procesos completas o logs de sistemas para análisis masivos sin fragmentar la información, preservando la coherencia contextual del análisis.</p>
+      </div>
+      <div class="example-box">
+        <div class="label">🎯 Ejemplo de aplicación</div>
+        <p>Enviá el manual de procedimientos de créditos completo (400 páginas) a Claude Opus 4.7 para que identifique todos los puntos de control que podrían automatizarse con RPA o agentes de IA, priorizados por impacto y complejidad de implementación.</p>
+      </div>
+      <p><small>🔗 Fuentes: <a href="https://www.anthropic.com/news" target="_blank">Anthropic News</a> · <a href="https://releasebot.io/updates/anthropic/claude" target="_blank">Releasebot</a></small></p>
+    </div>
+  </div>
+
+  <!-- ====== SECCIÓN 2: HERRAMIENTAS ====== -->
+  <div class="section-wrap" id="herramientas">
+    <div class="section-header">
+      <div class="section-icon">🛠️</div>
+      <div class="section-title">
+        Novedades en tus Herramientas
+        <span>Claude · n8n · Notion · Herramientas de PM y Procesos</span>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-tag">🤖 Claude / Anthropic</div>
+        <h3>Claude Managed Agents en beta pública</h3>
+        <p>Anthropic lanzó Claude Managed Agents: un entorno completamente gestionado para ejecutar Claude como agente autónomo con sandboxing seguro, herramientas integradas y streaming de eventos. Ahora podés crear agentes, configurar contenedores y ejecutar sesiones programáticamente via API.</p>
+        <div class="feature-pill">✅ Memoria persistente en beta</div>
+        <div class="feature-pill">✅ Sandboxing seguro</div>
+        <div class="feature-pill">✅ CLI "ant" para API</div>
+        <div class="insight-box" style="margin-top:12px">
+          <div class="label">💡 Uso práctico</div>
+          <p>Creá un agente que monitoree el pipeline de aprobaciones de créditos cada hora, genere un reporte de SLA y lo envíe por Slack cuando detecte desvíos.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">⚙️ n8n</div>
+        <h3>n8n 2026: Agentes nativos y 400+ integraciones con IA</h3>
+        <p>n8n consolidó su posición como la plataforma open-source más robusta para automatización con IA. Sus novedades incluyen nodos de agentes con memoria, integración nativa con modelos de Anthropic, OpenAI y Gemini, y capacidad de self-hosting con fair-code license.</p>
+        <div class="feature-pill">✅ Agentes con memoria</div>
+        <div class="feature-pill">✅ Visual + código</div>
+        <div class="feature-pill">✅ 400+ integraciones</div>
+        <div class="insight-box" style="margin-top:12px">
+          <div class="label">💡 Uso práctico</div>
+          <p>Automatizá el proceso de ingesta de reclamos: n8n recibe el formulario → Claude clasifica y analiza → n8n actualiza el CRM → genera respuesta al cliente → notifica al equipo.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">📊 Product Management</div>
+        <h3>Linear, PostHog y Granola: las 3 mejores herramientas PM 2026</h3>
+        <p><strong>Linear</strong> incorpora auto-triage con IA para priorización de backlog. <strong>PostHog</strong> unifica analytics, feature flags y session replay. <strong>Granola</strong> genera notas de reuniones con IA sin necesidad de bots en la llamada.</p>
+        <div class="insight-box">
+          <div class="label">💡 Uso práctico</div>
+          <p>Granola es ideal para tus reuniones de relevamiento de procesos: escucha activa sin distracciones y genera automáticamente el acta con decisiones, pendientes y oportunidades de mejora identificadas.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">🔄 Process Automation</div>
+        <h3>Hyperautomation: la convergencia de IA + RPA + Process Mining</h3>
+        <p>Gartner confirma que en 2026, el 30% de las empresas habrán automatizado más del 50% de sus actividades de red. Las plataformas líderes (ServiceNow, Blue Prism) ahora integran process mining con IA generativa para identificar automáticamente qué automatizar.</p>
+        <div class="insight-box">
+          <div class="label">💡 Uso práctico</div>
+          <p>Usá una herramienta de process mining para analizar los event logs del core bancario, identificá los cuellos de botella en originación y proponé automatizaciones específicas con evidencia cuantitativa.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== SECCIÓN 3: TENDENCIAS ====== -->
+  <div class="section-wrap" id="tendencias">
+    <div class="section-header">
+      <div class="section-icon">📈</div>
+      <div class="section-title">
+        Tendencias en Process & Product Management
+        <span>Lo que está definiendo la gestión operacional y de producto en 2026</span>
+      </div>
+    </div>
+
+    <div class="trend-card">
+      <span class="trend-number">1</span>
+      <h3>Agentic AI: de la automatización de tareas a la orquestación de procesos</h3>
+      <p>El paradigma cambió: ya no se automatizan tareas aisladas, se orquestan procesos end-to-end con agentes autónomos que planifican, razonan y ejecutan. En operaciones financieras, esto implica agentes que manejan desde la recepción de una solicitud hasta su resolución final con supervisión mínima humana. Las organizaciones que conecten personas, sistemas e IA en flujos continuos serán las ganadoras del ciclo 2026-2027.</p>
+    </div>
+
+    <div class="trend-card">
+      <span class="trend-number">2</span>
+      <h3>Process Intelligence: IA que analiza y rediseña procesos en tiempo real</h3>
+      <p>La integración de IA con herramientas de process mining genera un ciclo continuo: los event logs alimentan modelos que detectan ineficiencias, proponen mejoras y miden el impacto post-implementación automáticamente. Esto transforma el rol del analista de procesos: de documentador a estratega de mejora continua data-driven con ciclos de mejora mucho más cortos.</p>
+    </div>
+
+    <div class="trend-card">
+      <span class="trend-number">3</span>
+      <h3>Democratización Low-Code/No-Code + IA: el analista como desarrollador de soluciones</h3>
+      <p>Plataformas como n8n, Make y Zapier con IA nativa eliminan la barrera entre el análisis de procesos y la implementación de automatizaciones. Un analista de mejora continua puede ahora construir soluciones funcionales sin depender del área de TI, acortando el tiempo de value delivery de meses a días. Esta tendencia es especialmente relevante en entidades financieras donde los ciclos de desarrollo tradicional son lentos.</p>
+    </div>
+
+    <div class="trend-card">
+      <span class="trend-number">4</span>
+      <h3>Governance de IA en Servicios Financieros: compliance y transparencia</h3>
+      <p>El AI Index Report 2026 de Stanford confirma que la velocidad de adopción de IA supera la capacidad regulatoria. Los bancos y fintech que implementan IA deben construir frameworks de gobernanza que aseguren auditabilidad, explicabilidad y compliance regulatorio. El analista de procesos con conocimiento de IA se vuelve esencial para diseñar estos marcos de control.</p>
+    </div>
+
+    <div class="trend-card">
+      <span class="trend-number">5</span>
+      <h3>Product Management Impulsado por Datos + IA: del intuition-driven al evidence-driven</h3>
+      <p>Las herramientas de PM 2026 (Linear, Productboard, PostHog) incorporan IA para scoring automático de features, clustering de feedback de clientes y generación de roadmaps basados en datos. Los PMs que adopten estas herramientas pueden tomar decisiones de priorización 10x más rápido con mayor fundamentación cuantitativa.</p>
+    </div>
+  </div>
+
+  <!-- ====== SECCIÓN 4: YOUTUBE ====== -->
+  <div class="section-wrap" id="youtube">
+    <div class="section-header">
+      <div class="section-icon">▶️</div>
+      <div class="section-title">
+        Videos Recomendados de YouTube
+        <span>Selección por calidad de contenido y relevancia para tu perfil</span>
+      </div>
+    </div>
+
+    <div class="yt-card" style="margin-bottom:22px">
+      <div class="yt-number">1</div>
+      <div class="yt-channel">📺 Andrej Karpathy · Canal: karpathy</div>
+      <h3>Neural Networks: Zero to Hero – Construyendo LLMs desde los fundamentos</h3>
+      <p style="font-size:14px;line-height:1.7;color:#444;margin-bottom:12px">La serie más valorada por la comunidad técnica de IA en 2026. Karpathy (ex-Tesla AI, ex-OpenAI) construye GPT desde Python puro, explicando cada componente con una claridad excepcional. No es teoría abstracta: es código funcional con intuición real sobre cómo razonan los modelos que usás todos los días.</p>
+      <div class="insight-box">
+        <div class="label">🎯 ¿Dónde te agrega valor?</div>
+        <p>Entender cómo funciona internamente un LLM te permite diseñar mejores prompts, comprender por qué una automatización falla y comunicar con credibilidad ante stakeholders técnicos sobre las capacidades y limitaciones reales de la IA en tus proyectos.</p>
+      </div>
+      <div class="example-box">
+        <div class="label">💡 Ejemplo concreto</div>
+        <p>Después de ver el episodio sobre "attention mechanisms", podés diseñar mejor tus prompts para análisis de documentos regulatorios: sabés que el modelo "atiende" a patrones específicos, así que estructurás el input para maximizar la precisión en la extracción de obligaciones de compliance.</p>
+      </div>
+      <div class="btn-link-row">
+        <a class="btn-link btn-yt" href="https://www.youtube.com/@AndrejKarpathy" target="_blank">▶ Canal de Andrej Karpathy</a>
+        <a class="btn-link btn-yt-secondary" href="https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ" target="_blank">📋 Ver Playlist Completa</a>
+      </div>
+    </div>
+
+    <div class="yt-card" style="margin-bottom:22px">
+      <div class="yt-number">2</div>
+      <div class="yt-channel">📺 Matt Wolfe · Canal: The Next Wave AI</div>
+      <h3>The Next Wave: Herramientas de IA para productividad y negocios – Edición 2026</h3>
+      <p style="font-size:14px;line-height:1.7;color:#444;margin-bottom:12px">Con más de 1.7 millones de suscriptores, Matt Wolfe analiza semanalmente las herramientas de IA más relevantes con demos reales y evaluaciones honestas. Su fortaleza es distinguir qué tools tienen impacto real en la productividad versus el hype. Actualización constante con los últimos lanzamientos del mercado.</p>
+      <div class="insight-box">
+        <div class="label">🎯 ¿Dónde te agrega valor?</div>
+        <p>Mantenerte al día con el ecosistema de tools de IA sin invertir horas de investigación. Matt condensa decenas de lanzamientos semanales en videos de 15-20 minutos con demos concretas, ideal para evaluar qué herramientas incorporar a tu stack de automatización.</p>
+      </div>
+      <div class="example-box">
+        <div class="label">💡 Ejemplo concreto</div>
+        <p>Su review de agentes de proceso tipo Zapier Central o Make AI te permite comparar rápidamente qué plataforma se integra mejor con los sistemas de tu entidad financiera antes de proponer su adopción a TI o Gerencia de Operaciones.</p>
+      </div>
+      <div class="btn-link-row">
+        <a class="btn-link btn-yt" href="https://www.youtube.com/@mreflow" target="_blank">▶ Canal Matt Wolfe</a>
+        <a class="btn-link btn-yt-secondary" href="https://www.youtube.com/channel/UCuK2Mf5As9OKfWU7XV6yzCg" target="_blank">▶ The Next Wave Podcast</a>
+      </div>
+    </div>
+
+    <div class="yt-card" style="margin-bottom:22px">
+      <div class="yt-number">3</div>
+      <div class="yt-channel">📺 Liam Ottley · Canal: Liam Ottley</div>
+      <h3>Cómo construir Agentes de IA para negocios con n8n + Claude [Template incluido]</h3>
+      <p style="font-size:14px;line-height:1.7;color:#444;margin-bottom:12px">Liam Ottley es el referente práctico más destacado de 2026 en construcción de agentes de IA para negocios reales. Sus videos incluyen templates descargables y casos de uso empresariales específicos (servicio al cliente, análisis de datos, automatización de procesos). Contenido 100% aplicable sin experiencia de programación avanzada.</p>
+      <div class="insight-box">
+        <div class="label">🎯 ¿Dónde te agrega valor?</div>
+        <p>Sus templates de n8n + Claude son directamente adaptables a procesos de entidades financieras: automatización de onboarding de clientes, análisis de reclamos, generación de reportes de gestión y monitoreo de SLAs operacionales.</p>
+      </div>
+      <div class="example-box">
+        <div class="label">💡 Ejemplo concreto</div>
+        <p>Tomás su template de "AI Customer Service Agent" y lo adaptás para el proceso de atención de reclamos de tu entidad: el agente recibe el reclamo por email, lo clasifica según normativa BCRA, busca precedentes en la base de conocimiento y genera el borrador de respuesta para revisión del analista.</p>
+      </div>
+      <div class="btn-link-row">
+        <a class="btn-link btn-yt" href="https://www.youtube.com/watch?v=AYQtRqW1xX4" target="_blank">▶ Ver Video: Build &amp; Sell AI Agents 2026</a>
+        <a class="btn-link btn-yt-secondary" href="https://www.youtube.com/@LiamOttley" target="_blank">▶ Canal de Liam Ottley</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== SECCIÓN 5: GITHUB ====== -->
+  <div class="section-wrap" id="github">
+    <div class="section-header">
+      <div class="section-icon">⚡</div>
+      <div class="section-title">
+        Repositorios GitHub Destacados
+        <span>Verificados · Sin contenido malicioso · Aplicables a tu trabajo</span>
+      </div>
+    </div>
+
+    <div class="gh-card" style="margin-bottom:20px">
+      <div class="gh-stars">⭐ 210.000+ estrellas</div>
+      <span class="security-badge">🛡️ Verificado · Seguro</span>
+      <h3>OpenClaw (PSPDFKit)</h3>
+      <p style="font-size:14px;line-height:1.7;color:#444;margin-bottom:10px"><strong>¿Qué es?</strong> Asistente personal de IA que corre completamente en tu dispositivo, actuando como gateway local que conecta modelos de IA con más de 50 integraciones (WhatsApp, Slack, Telegram, Gmail, etc.). Creado por el fundador de PSPDFKit, pasó de 9.000 a 210.000 estrellas en semanas.</p>
+      <div class="insight-box">
+        <div class="label">🎯 Valor para tu trabajo</div>
+        <p>Podés crear un asistente privado que conecte tus comunicaciones de equipo (Slack/Teams) con Claude para análisis de procesos, sin que los datos salgan de tu infraestructura. Ideal para entidades financieras con requisitos de confidencialidad estrictos.</p>
+      </div>
+      <div class="example-box">
+        <div class="label">💡 Ejemplo</div>
+        <p>Configurás OpenClaw para que Claude reciba las consultas del equipo vía WhatsApp corporativo y responda con las políticas de procesos actualizadas, funcionando como un knowledge bot privado del área de Operaciones.</p>
+      </div>
+      <div class="btn-link-row">
+        <a class="btn-link btn-gh" href="https://github.com/steinbergpeter/openclaw" target="_blank">⚡ Ver Repositorio en GitHub</a>
+      </div>
+    </div>
+
+    <div class="gh-card" style="margin-bottom:20px">
+      <div class="gh-stars">⭐ 95.000+ estrellas</div>
+      <span class="security-badge">🛡️ Verificado · Seguro</span>
+      <h3>n8n-io/n8n</h3>
+      <p style="font-size:14px;line-height:1.7;color:#444;margin-bottom:10px"><strong>¿Qué es?</strong> Plataforma open-source de automatización de workflows con interfaz visual y capacidades de IA nativas. Fair-code license, self-hosteable, con 400+ integraciones y nodos de agentes de IA con memoria. Es el estándar de facto para automatización low-code con IA en 2026.</p>
+      <div class="insight-box">
+        <div class="label">🎯 Valor para tu trabajo</div>
+        <p>Es la herramienta más directamente aplicable a tu rol. Podés construir automatizaciones de procesos complejas con IA sin depender de TI, desde pipelines de datos hasta agentes que monitorean KPIs operacionales en tiempo real.</p>
+      </div>
+      <div class="example-box">
+        <div class="label">💡 Ejemplo</div>
+        <p>Workflow en n8n: cuando un préstamo supera el SLA → consulta automática a Claude con el historial del caso → genera análisis de causa raíz → actualiza el sistema de gestión → notifica al supervisor con el análisis completo. Todo sin código.</p>
+      </div>
+      <div class="btn-link-row">
+        <a class="btn-link btn-gh" href="https://github.com/n8n-io/n8n" target="_blank">⚡ Ver Repositorio en GitHub</a>
+      </div>
+    </div>
+
+    <div class="gh-card" style="margin-bottom:20px">
+      <div class="gh-stars">⭐ 86.000+ estrellas</div>
+      <span class="security-badge">🛡️ Verificado · Seguro</span>
+      <h3>browser-use/browser-use</h3>
+      <p style="font-size:14px;line-height:1.7;color:#444;margin-bottom:10px"><strong>¿Qué es?</strong> Framework que permite a los agentes de IA interactuar con sitios web como lo haría un humano: clic, tipeo, navegación y extracción de información. Transforma cualquier proceso que requiera interacción web en automatizable por IA.</p>
+      <div class="insight-box">
+        <div class="label">🎯 Valor para tu trabajo</div>
+        <p>Automatizá la consulta de sistemas web que no tienen API: portales de reguladores (BCRA, CNV), sistemas de gestión legacy, plataformas de reportes sin exportación, o cualquier proceso que hoy requiere que alguien "entre manualmente a revisar".</p>
+      </div>
+      <div class="example-box">
+        <div class="label">💡 Ejemplo</div>
+        <p>Un agente usa browser-use para ingresar al portal del BCRA, descargar las últimas circulares publicadas, extraer los cambios regulatorios relevantes y generar automáticamente un resumen de impacto en los procesos de tu entidad.</p>
+      </div>
+      <div class="btn-link-row">
+        <a class="btn-link btn-gh" href="https://github.com/browser-use/browser-use" target="_blank">⚡ Ver Repositorio en GitHub</a>
+      </div>
+    </div>
+
+    <div class="gh-card" style="margin-bottom:20px">
+      <div class="gh-stars">⭐ 48.000+ estrellas</div>
+      <span class="security-badge">🛡️ Verificado · Seguro</span>
+      <h3>infiniflow/ragflow</h3>
+      <p style="font-size:14px;line-height:1.7;color:#444;margin-bottom:10px"><strong>¿Qué es?</strong> Motor open-source de RAG (Retrieval-Augmented Generation) que combina técnicas avanzadas de recuperación de documentos con agentes de IA. Cubre el ciclo completo: ingesta de documentos → indexación vectorial → planificación de consultas → respuestas contextualizadas.</p>
+      <div class="insight-box">
+        <div class="label">🎯 Valor para tu trabajo</div>
+        <p>Construí una base de conocimiento inteligente con todos los manuales de procedimientos, políticas, normativas y documentos de mejora continua de tu entidad. Cualquier miembro del equipo puede hacer preguntas en lenguaje natural y obtener respuestas precisas con citas de fuente.</p>
+      </div>
+      <div class="example-box">
+        <div class="label">💡 Ejemplo</div>
+        <p>"¿Cuál es el proceso vigente para la renegociación de deuda de clientes PyME según la última circular?" → RAGFlow busca en todos los documentos cargados y responde con la sección exacta del procedimiento y la referencia normativa correspondiente.</p>
+      </div>
+      <div class="btn-link-row">
+        <a class="btn-link btn-gh" href="https://github.com/infiniflow/ragflow" target="_blank">⚡ Ver Repositorio en GitHub</a>
+      </div>
+    </div>
+
+    <div class="gh-card" style="margin-bottom:20px">
+      <div class="gh-stars">⭐ 300+ recursos curados</div>
+      <span class="security-badge">🛡️ Verificado · Seguro</span>
+      <h3>caramaschiHG/awesome-ai-agents-2026</h3>
+      <p style="font-size:14px;line-height:1.7;color:#444;margin-bottom:10px"><strong>¿Qué es?</strong> La lista más completa de frameworks, herramientas y recursos de agentes de IA en 2026: más de 300 recursos en 20+ categorías, actualizado mensualmente. Es el directorio de referencia para mantenerse al día con el ecosistema de agentes sin perderse en el ruido.</p>
+      <div class="insight-box">
+        <div class="label">🎯 Valor para tu trabajo</div>
+        <p>Usalo como punto de partida cuando necesitás encontrar el agente o framework correcto para un caso de uso específico de automatización de procesos. Ahorra decenas de horas de investigación y te conecta con las mejores herramientas para cada necesidad operacional.</p>
+      </div>
+      <div class="example-box">
+        <div class="label">💡 Ejemplo</div>
+        <p>Necesitás un agente para análisis de documentos financieros → filtrás por "document processing" en el repo → encontrás 3-4 opciones específicas con demos, comparativas y casos de uso reales para entidades financieras.</p>
+      </div>
+      <div class="btn-link-row">
+        <a class="btn-link btn-gh" href="https://github.com/caramaschiHG/awesome-ai-agents-2026" target="_blank">⚡ Ver Repositorio en GitHub</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <p>☕ <strong>AI Briefing para Nacho</strong> · Generado automáticamente el 28 de Abril de 2026</p>
+  <p style="margin-top:6px">Curado para un perfil de Analista de Procesos, Mejora Continua y Automatización en Entidades Financieras</p>
+  <p style="margin-top:8px;font-size:11px">Próxima edición: <strong>Jueves 30 de Abril · 10:00 AM (ARG)</strong></p>
+</div>
+
+</body>
+</html>

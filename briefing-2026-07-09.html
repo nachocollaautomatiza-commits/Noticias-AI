@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🤖 AI Briefing Semanal — 9 de Julio 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Playfair+Display:wght@400;700&display=swap');
+
+  :root {
+    --verde: #00704A;
+    --verde-oscuro: #1E3932;
+    --verde-claro: #D4E9E2;
+    --cafe: #6B3A2A;
+    --beige: #F2EFE6;
+    --latte: #CBA258;
+    --crema: #FAF7F2;
+    --texto: #2C2C2C;
+    --gris-claro: #E8E4DC;
+    --dorado: #CBA258;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Lato', sans-serif;
+    background: var(--crema);
+    background-image: 
+      radial-gradient(ellipse at 20% 10%, rgba(0,112,74,0.04) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 90%, rgba(107,58,42,0.04) 0%, transparent 50%);
+    color: var(--texto);
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, var(--verde-oscuro) 0%, var(--verde) 60%, #004F35 100%);
+    padding: 50px 40px 60px;
+    position: relative;
+    overflow: hidden;
+    clip-path: ellipse(110% 100% at 50% 0%);
+    text-align: center;
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -50px; left: -80px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.03);
+  }
+
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; right: -40px;
+    width: 250px; height: 250px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.03);
+  }
+
+  .header-badge {
+    display: inline-block;
+    background: rgba(203,162,88,0.25);
+    color: var(--latte);
+    border: 1px solid rgba(203,162,88,0.4);
+    border-radius: 20px;
+    padding: 5px 18px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .header h1 {
+    font-family: 'Playfair Display', serif;
+    color: #fff;
+    font-size: 2.6rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+
+  .header h1 span {
+    color: var(--latte);
+  }
+
+  .header-meta {
+    color: rgba(255,255,255,0.7);
+    font-size: 0.9rem;
+    margin-top: 12px;
+  }
+
+  /* CONTAINER */
+  .container {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  /* SECTION HEADERS */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 48px 0 24px;
+  }
+
+  .section-icon {
+    width: 48px; height: 48px;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+  }
+
+  .icon-verde { background: var(--verde-claro); }
+  .icon-cafe { background: rgba(107,58,42,0.12); }
+  .icon-latte { background: rgba(203,162,88,0.15); }
+  .icon-azul { background: rgba(30,57,50,0.10); }
+  .icon-verde2 { background: rgba(0,112,74,0.12); }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--verde-oscuro);
+    border-bottom: 2px solid var(--verde-claro);
+    padding-bottom: 6px;
+    flex: 1;
+  }
+
+  /* CARDS */
+  .card {
+    background: #fff;
+    border-radius: 18px;
+    padding: 28px 30px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+    border-left: 4px solid var(--verde);
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 80px; height: 80px;
+    background: radial-gradient(ellipse, rgba(0,112,74,0.05) 0%, transparent 70%);
+    border-radius: 0 18px 0 80px;
+  }
+
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(0,0,0,0.10);
+  }
+
+  .card-cafe { border-left-color: var(--cafe); }
+  .card-latte { border-left-color: var(--latte); }
+  .card-dark { border-left-color: var(--verde-oscuro); }
+
+  .card-number {
+    position: absolute;
+    top: 20px; right: 24px;
+    font-size: 3rem;
+    font-weight: 900;
+    color: rgba(0,112,74,0.06);
+    line-height: 1;
+    font-family: 'Playfair Display', serif;
+  }
+
+  .card-number-cafe { color: rgba(107,58,42,0.06); }
+  .card-number-latte { color: rgba(203,162,88,0.10); }
+
+  .card h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--verde-oscuro);
+    margin-bottom: 10px;
+    line-height: 1.35;
+  }
+
+  .card p {
+    color: #555;
+    font-size: 0.93rem;
+    margin-bottom: 10px;
+  }
+
+  .tag-group {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+  }
+
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+
+  .tag-verde { background: var(--verde-claro); color: var(--verde-oscuro); }
+  .tag-cafe { background: rgba(107,58,42,0.10); color: var(--cafe); }
+  .tag-latte { background: rgba(203,162,88,0.15); color: #7A5C1E; }
+
+  .insight-box {
+    background: var(--verde-claro);
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin-top: 14px;
+    font-size: 0.85rem;
+    color: var(--verde-oscuro);
+  }
+
+  .insight-box strong {
+    display: block;
+    font-weight: 700;
+    margin-bottom: 2px;
+    color: var(--verde);
+  }
+
+  .insight-cafe {
+    background: rgba(107,58,42,0.07);
+    color: var(--cafe);
+  }
+
+  .insight-cafe strong { color: var(--cafe); }
+
+  .insight-latte {
+    background: rgba(203,162,88,0.12);
+    color: #7A5C1E;
+  }
+
+  .insight-latte strong { color: var(--latte); }
+
+  /* TOOL CARD */
+  .tool-card {
+    background: #fff;
+    border-radius: 18px;
+    padding: 26px 28px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 18px;
+  }
+
+  .tool-icon {
+    width: 56px; height: 56px;
+    border-radius: 16px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.8rem;
+    flex-shrink: 0;
+  }
+
+  .tool-icon-verde { background: var(--verde-claro); }
+  .tool-icon-cafe { background: rgba(107,58,42,0.10); }
+  .tool-icon-latte { background: rgba(203,162,88,0.15); }
+  .tool-icon-dark { background: rgba(30,57,50,0.10); }
+
+  .tool-content h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--verde-oscuro);
+    margin-bottom: 6px;
+  }
+
+  .tool-badge {
+    display: inline-block;
+    background: #E8F5F0;
+    color: var(--verde);
+    border-radius: 20px;
+    padding: 2px 10px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .tool-badge-cafe {
+    background: rgba(107,58,42,0.10);
+    color: var(--cafe);
+  }
+
+  /* VIDEO CARD */
+  .video-card {
+    background: #fff;
+    border-radius: 18px;
+    padding: 22px 26px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 14px rgba(0,0,0,0.06);
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    border-top: 3px solid var(--latte);
+  }
+
+  .video-thumb {
+    width: 52px; height: 52px;
+    background: linear-gradient(135deg, var(--verde-oscuro), var(--verde));
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    color: white;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+  }
+
+  .video-content h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--verde-oscuro);
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+
+  .video-content a {
+    color: var(--verde);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.82rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 8px;
+  }
+
+  .video-content a:hover { text-decoration: underline; }
+
+  /* REPO CARD */
+  .repo-card {
+    background: #fff;
+    border-radius: 18px;
+    padding: 22px 26px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 14px rgba(0,0,0,0.06);
+    border-top: 3px solid var(--verde-oscuro);
+    position: relative;
+  }
+
+  .repo-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+
+  .repo-icon {
+    width: 40px; height: 40px;
+    background: var(--verde-claro);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+  }
+
+  .repo-header h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--verde-oscuro);
+  }
+
+  .repo-header h4 a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .repo-header h4 a:hover { color: var(--verde); }
+
+  .stars-badge {
+    margin-left: auto;
+    background: rgba(203,162,88,0.15);
+    color: #7A5C1E;
+    border-radius: 20px;
+    padding: 3px 12px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    white-space: nowrap;
+  }
+
+  /* DIVIDER */
+  .divider {
+    height: 2px;
+    background: linear-gradient(90deg, var(--verde-claro), transparent);
+    border-radius: 2px;
+    margin: 40px 0;
+  }
+
+  /* FOOTER */
+  .footer {
+    background: var(--verde-oscuro);
+    color: rgba(255,255,255,0.7);
+    text-align: center;
+    padding: 32px;
+    font-size: 0.85rem;
+  }
+
+  .footer strong { color: var(--latte); }
+
+  /* STAT ROW */
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 24px 0;
+  }
+
+  .stat-box {
+    background: #fff;
+    border-radius: 14px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  }
+
+  .stat-box .number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--verde);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .stat-box .label {
+    font-size: 0.78rem;
+    color: #777;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  /* HIGHLIGHT QUOTE */
+  .highlight-quote {
+    background: linear-gradient(135deg, var(--verde-oscuro) 0%, #00583C 100%);
+    border-radius: 16px;
+    padding: 24px 28px;
+    margin: 24px 0;
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .highlight-quote::before {
+    content: '"';
+    position: absolute;
+    top: -10px; left: 16px;
+    font-size: 6rem;
+    font-family: 'Playfair Display', serif;
+    color: rgba(255,255,255,0.08);
+    line-height: 1;
+  }
+
+  .highlight-quote p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.9);
+  }
+
+  .highlight-quote .quote-source {
+    margin-top: 10px;
+    font-size: 0.8rem;
+    color: var(--latte);
+    font-weight: 700;
+  }
+
+  @media (max-width: 600px) {
+    .header h1 { font-size: 1.8rem; }
+    .stat-row { grid-template-columns: 1fr; }
+    .tool-card { grid-template-columns: 1fr; }
+    .video-card { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-badge">📰 Briefing Semanal</div>
+  <h1>🤖 AI Weekly Briefing<br><span>9 de Julio · 2026</span></h1>
+  <p class="header-meta">Preparado para <strong style="color:#fff">Nacho Colla</strong> · Gerente de Operaciones Financieras · Mejora de Procesos & Automatización</p>
+</div>
+
+<!-- CONTAINER -->
+<div class="container">
+
+  <!-- SECCIÓN 1: NOTICIAS -->
+  <div class="section-header">
+    <div class="section-icon icon-verde">📰</div>
+    <h2 class="section-title">5 Noticias Clave de la Semana en IA</h2>
+  </div>
+
+  <!-- Noticia 1 -->
+  <div class="card">
+    <div class="card-number">01</div>
+    <h3>🟢 Claude Sonnet 5 es el nuevo modelo por defecto para todos los usuarios</h3>
+    <p>Desde el 1° de julio 2026, Claude Sonnet 5 reemplaza a Sonnet 4.6 como modelo predeterminado en planes Free y Pro. Con ventana de contexto nativa de 1M tokens, rinde muy cerca del flagship Opus 4.8 y tiene pricing promocional de $2/$10 por Mtok hasta el 31 de agosto.</p>
+    <div class="insight-box">
+      <strong>💼 Relevancia para Nacho</strong>
+      Más poder por el mismo precio en tus flujos de análisis de procesos y automatización. Con 1M tokens de contexto podés procesar documentos regulatorios completos, historiales de transacciones o bases de conocimiento en una sola llamada.
+    </div>
+    <div class="tag-group">
+      <span class="tag tag-verde">🤖 Anthropic</span>
+      <span class="tag tag-cafe">💰 Pricing</span>
+      <span class="tag tag-verde">📈 Upgrade</span>
+    </div>
+  </div>
+
+  <!-- Noticia 2 -->
+  <div class="card card-cafe">
+    <div class="card-number card-number-cafe">02</div>
+    <h3>☁️ Claude Cowork se expande a Web y Mobile (Plan Max)</h3>
+    <p>Claude Cowork — el modo desktop que usás para generar este briefing — ahora está disponible también en web y móvil para suscriptores Max. Sesiones remotas, archivos sincronizados y un espacio unificado para chats, proyectos y artefactos entre dispositivos.</p>
+    <div class="insight-box insight-cafe">
+      <strong>💼 Relevancia para Nacho</strong>
+      Podés iniciar un análisis de proceso desde el escritorio y revisar el resultado desde el celular camino a una reunión. Las tareas programadas corren aunque no haya ningún dispositivo encendido.
+    </div>
+    <div class="tag-group">
+      <span class="tag tag-verde">🖥️ Cowork</span>
+      <span class="tag tag-latte">📱 Mobile</span>
+      <span class="tag tag-cafe">⚡ Productividad</span>
+    </div>
+  </div>
+
+  <!-- Noticia 3 -->
+  <div class="card">
+    <div class="card-number">03</div>
+    <h3>🔵 OpenAI lanza GPT-5.6 GA con 1.5M tokens de contexto y agentes mejorados</h3>
+    <p>GPT-5.6 entra en disponibilidad general: Enterprise API desde el 7 de julio, ChatGPT Plus el 10 de julio. Contexto de 1.5M tokens en Enterprise (3.75x más que GPT-5.5). ChatGPT Agent Mode v2 incorpora memoria persistente, ejecución de tareas programadas y conectores nativos con GitHub/Jira.</p>
+    <div class="insight-box">
+      <strong>💼 Relevancia para Nacho</strong>
+      La memoria persistente y los agentes programados de ChatGPT se acercan a lo que Hermes Agent ya hace localmente. Validar qué ofrece cada plataforma para decidir dónde correr distintos workflows operativos.
+    </div>
+    <div class="tag-group">
+      <span class="tag tag-verde">🤖 OpenAI</span>
+      <span class="tag tag-cafe">🔧 Agents</span>
+      <span class="tag tag-latte">🏦 Enterprise</span>
+    </div>
+  </div>
+
+  <!-- Noticia 4 -->
+  <div class="card card-latte">
+    <div class="card-number card-number-latte">04</div>
+    <h3>🔴 Google retrasa Gemini 3.5 Pro al 17 de julio — reconstrucción total de arquitectura</h3>
+    <p>DeepMind descartó la arquitectura existente de 2.5 Pro para una reconstrucción completa, apuntando a mejoras en razonamiento matemático, generación SVG y calidad de imagen. La nueva versión apunta a competir directamente con GPT-5.6 y Claude Fable 5. Gemini ya tiene 900 millones de usuarios activos mensuales.</p>
+    <div class="insight-box insight-latte">
+      <strong>💼 Relevancia para Nacho</strong>
+      Con Gemini 3.5 Pro disponible vía Antigravity, los agentes del ecosistema Google van a tener un motor mucho más potente. Seguir de cerca para evaluar si migrar parte del stack de orquestación.
+    </div>
+    <div class="tag-group">
+      <span class="tag tag-verde">🔍 Google</span>
+      <span class="tag tag-cafe">🚀 Coming Soon</span>
+      <span class="tag tag-latte">🏗️ Architecture</span>
+    </div>
+  </div>
+
+  <!-- Noticia 5 -->
+  <div class="card">
+    <div class="card-number">05</div>
+    <h3>🪟 Microsoft fusiona todos sus Copilots en una sola "Super App" (agosto 2026)</h3>
+    <p>Microsoft anunció la fusión de todos los productos Copilot (consumer y enterprise) en una única app unificada con los agentes "AutoPilot" (always-on, automating the mundane) disponibles como tier premium. Contexto: los suscriptores pagos de Copilot cayeron del 18.8% al 11.5% en solo 6 meses.</p>
+    <div class="insight-box">
+      <strong>💼 Relevancia para Nacho</strong>
+      Si tu entidad financiera usa Microsoft 365, esta unificación afecta cómo se entregan los agentes IA a los equipos. Los "AutoPilot agents" pueden automatizar flujos de aprobación, reportes y compliance dentro del ecosistema M365.
+    </div>
+    <div class="tag-group">
+      <span class="tag tag-verde">🪟 Microsoft</span>
+      <span class="tag tag-cafe">🏦 FinServ</span>
+      <span class="tag tag-latte">🤖 Copilot</span>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SECCIÓN 2: HERRAMIENTAS -->
+  <div class="section-header">
+    <div class="section-icon icon-cafe">🛠️</div>
+    <h2 class="section-title">Actualizaciones de Tus Herramientas</h2>
+  </div>
+
+  <!-- Hermes -->
+  <div class="tool-card">
+    <div class="tool-icon tool-icon-dark">🤖</div>
+    <div class="tool-content">
+      <span class="tool-badge">🧠 Local AI</span>
+      <h3>Hermes AI (NousResearch) — v0.18.0 + Hermes 4.3 36B</h3>
+      <p style="font-size:0.9rem; color:#555; margin-top:6px;">El <strong>v0.18.0</strong> llegó con cambios importantes: Mixture-of-Agents nativo, self-verifying goals (el agente verifica sus propios resultados), workflows <code>/learn</code> y <code>/journey</code>, background subagent fan-out y escala a cero en operaciones gateway.</p>
+      <p style="font-size:0.9rem; color:#555; margin-top:8px;"><strong>Nuevo modelo Hermes 4.3 36B</strong>: Construido sobre ByteDance Seed-OSS-36B, ~21.8 GB en Q4_K_M. El modelo recomendado para Hermes Agent ahora es <strong>Qwen 3.6</strong>: 22% más rápido, 30% mejor razonamiento, 40% menos alucinaciones que Hermes 3.</p>
+      <div class="insight-box insight-cafe">
+        <strong>💼 Impacto en tu trabajo diario</strong>
+        El bot de Telegram con Hermes puede ahora lanzar subagentes en paralelo para distintos análisis (uno para KPIs, otro para compliance, otro para reportes) y verificar sus propias respuestas antes de enviarte resultados. Considera migrar a Qwen 3.6 para mejores respuestas en tus consultas operativas.
+      </div>
+    </div>
+  </div>
+
+  <!-- Google Antigravity -->
+  <div class="tool-card">
+    <div class="tool-icon tool-icon-verde">⚡</div>
+    <div class="tool-content">
+      <span class="tool-badge">🚀 Agent Platform</span>
+      <h3>Google Antigravity 2.0 — Desktop App + CLI + SDK</h3>
+      <p style="font-size:0.9rem; color:#555; margin-top:6px;">Lanzado en Google I/O 2026, Antigravity 2.0 es ahora una plataforma completa para desarrollo agent-first: <strong>Desktop App</strong> independiente optimizada para agentes, <strong>CLI en Go</strong> para automatizar workflows desde terminal, y un <strong>SDK</strong> para construir agentes custom.</p>
+      <p style="font-size:0.9rem; color:#555; margin-top:8px;"><strong>Managed Agents en Gemini API</strong>: Con una sola llamada a la API podés lanzar un agente que razona, usa herramientas y ejecuta código en un entorno Linux aislado — ideal para tasks de análisis de datos.</p>
+      <div class="insight-box">
+        <strong>💼 Impacto en tu trabajo diario</strong>
+        Antigravity permite orquestar agentes especializados para servicios financieros: uno para extracción de datos de sistemas core, otro para análisis de procesos, otro para generación de reportes regulatorios. Todo con Gemini 3.5 Flash como motor (4x más rápido que otros frontier models).
+      </div>
+    </div>
+  </div>
+
+  <!-- Claude Code -->
+  <div class="tool-card">
+    <div class="tool-icon tool-icon-verde">💻</div>
+    <div class="tool-content">
+      <span class="tool-badge">🖥️ Coding Agent</span>
+      <h3>Claude Code — Sonnet 5 por defecto + Org Models + Background Agents</h3>
+      <p style="font-size:0.9rem; color:#555; margin-top:6px;"><strong>Claude Sonnet 5</strong> es ahora el modelo por defecto en Claude Code. Se agregaron <strong>Organization Default Models</strong> (los admins pueden fijarlo para toda la org), <strong>nombres de sesión legibles</strong> al inicio y <strong>archivos adjuntos clickeables</strong>.</p>
+      <p style="font-size:0.9rem; color:#555; margin-top:8px;">Los <strong>background agents</strong> mejoraron: ya no piden terminar la respuesta al lanzarlos, permiten continuar con otras tareas en paralelo. Se corrigió un bug donde el cierre de sesión cancelaba tasks que debían continuar.</p>
+      <div class="insight-box">
+        <strong>💼 Impacto en tu trabajo diario</strong>
+        En proyectos de vibe coding, podés lanzar un agente en background analizando la codebase mientras seguís dialogando con Claude sobre el diseño del proceso. Los org models permiten que toda tu entidad use el mismo modelo optimizado por el admin de IT.
+      </div>
+    </div>
+  </div>
+
+  <!-- Claude Cowork -->
+  <div class="tool-card">
+    <div class="tool-icon tool-icon-latte">🖥️</div>
+    <div class="tool-content">
+      <span class="tool-badge tool-badge-cafe">⭐ Esta herramienta</span>
+      <h3>Claude Cowork — Web & Mobile + Government Beta + Skills Nuevas</h3>
+      <p style="font-size:0.9rem; color:#555; margin-top:6px;">Además de la expansión a web y móvil, Cowork llegó en beta pública para <strong>Government Desktop</strong> con FedRAMP High, controles admin avanzados, audit logs anti-manipulación y governance de gasto. Clave para entidades financieras reguladas.</p>
+      <p style="font-size:0.9rem; color:#555; margin-top:8px;">Las skills incorporadas ahora incluyen: <code>pdf, docx, pptx, xlsx, canvas-design, algorithmic-art, skill-creator</code> y los connectors de Google Workspace (Gmail, Calendar, Drive, Docs) vía MCPs oficiales.</p>
+      <div class="insight-box insight-latte">
+        <strong>💼 Impacto en tu trabajo diario</strong>
+        La versión Government con FedRAMP High es relevante si tu entidad tiene requerimientos de compliance tipo SOC 2 o regulaciones de datos financieros. Los audit logs permiten trazabilidad completa de qué hizo Claude con tus documentos.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SECCIÓN 3: TENDENCIAS -->
+  <div class="section-header">
+    <div class="section-icon icon-verde2">📈</div>
+    <h2 class="section-title">Tendencias en Agentes IA & Orquestación</h2>
+  </div>
+
+  <div class="highlight-quote">
+    <p>Token cost optimization is no longer a side concern — in 2026, it is the control lever that separates scalable AI systems from budget black holes.</p>
+    <div class="quote-source">— Rewarx, Agentic AI Token Costs Crisis 2026</div>
+  </div>
+
+  <div class="stat-row">
+    <div class="stat-box">
+      <div class="number">1.8d</div>
+      <div class="label">Ciclo de Cierre Financiero con Agentes (vs. 6.2 días antes)</div>
+    </div>
+    <div class="stat-box">
+      <div class="number">73%</div>
+      <div class="label">CFOs planean deployar orquestación de agentes en 18 meses (Gartner 2026)</div>
+    </div>
+    <div class="stat-box">
+      <div class="number">90%</div>
+      <div class="label">Reducción de costos de tokens posible con prompt caching bien implementado</div>
+    </div>
+  </div>
+
+  <!-- Tendencia 1 -->
+  <div class="card">
+    <h3>🏗️ Arquitectura Multi-Agente: 4-8 Agentes Especializados + Orchestrator</h3>
+    <p>El patrón que domina en 2026 para servicios financieros: un <strong>agente orquestador</strong> coordina entre 4 y 8 agentes especializados (reconciliación, análisis de varianza, asientos contables, disclosure, compliance). Las empresas mid-market comprimen el ciclo de cierre contable de 6.2 a 1.8 días.</p>
+    <div class="insight-box">
+      <strong>🎯 Aplicación para Nacho</strong>
+      Diseñar un orchestrator que coordine: Agente KPIs (extrae métricas de sistemas core) → Agente Análisis (detecta desvíos) → Agente Reporte (genera informe ejecutivo) → Agente Notificación (envía por Telegram). Cada agente especializado, mejor que uno genérico que haga todo.
+    </div>
+    <div class="tag-group">
+      <span class="tag tag-verde">🏦 FinServ</span>
+      <span class="tag tag-cafe">🤖 Multi-Agent</span>
+      <span class="tag tag-latte">⚡ ROI Comprobado</span>
+    </div>
+  </div>
+
+  <!-- Tendencia 2 -->
+  <div class="card card-cafe">
+    <h3>📱 Stack Local Preferido 2026: Ollama + Telegram + SQLite</h3>
+    <p>La combinación Telegram + Ollama se consolida como el setup de "AI personal en el bolsillo" más popular de 2026: sin costo de API, privacidad total, transcripción de voz local (faster-whisper), historial en SQLite y análisis de imágenes con modelos de visión. Hermes Agent suma 16+ plataformas de mensajería.</p>
+    <div class="insight-box insight-cafe">
+      <strong>🎯 Aplicación para Nacho</strong>
+      Tu bot Hermes en Telegram ya está en el stack ganador. El paso siguiente: agregar <strong>voice transcription</strong> para dictar consultas operativas, e integrar SQLite para que el agente recuerde contexto de proyectos entre conversaciones.
+    </div>
+  </div>
+
+  <!-- Tendencia 3 -->
+  <div class="card">
+    <h3>💰 Token Efficiency: El Nuevo KPI de los Sistemas Agénticos</h3>
+    <p>Con agentes produciendo multi-step reasoning, tool calls, retries y loops de verificación, una app corriendo 1M requests/día puede gastar $10k-$50k mensuales en tokens. Las tres técnicas más efectivas: <strong>Prompt Caching</strong> (-90% en input tokens), <strong>Context Sharing</strong> entre agentes (-52% en costos de imágenes), y <strong>Dynamic Turn Limits</strong> (-24% por task con límites adaptativos).</p>
+    <div class="insight-box">
+      <strong>🎯 Aplicación para Nacho</strong>
+      Para tus automatizaciones: cachear los prompts del sistema que no cambian (instrucciones de rol, contexto institucional), compartir contexto entre agentes del mismo workflow en lugar de repetirlo, y limitar el número de turns según la complejidad del task. Esto puede reducir hasta 80% el costo de tokens en workflows repetitivos.
+    </div>
+  </div>
+
+  <!-- Tendencia 4 -->
+  <div class="card card-latte">
+    <h3>🏦 Servicios Financieros + Agentes IA: Los Números que Importan</h3>
+    <p>Procesamiento de préstamos: de días a horas (20x más rápido). Reducción de procesamiento manual: 60-85%. Reducción de errores: 40-67%. Los checkpoints <strong>human-in-the-loop</strong> en cada frontera de decisión son el estándar para compliance en servicios financieros. Los sistemas de orquestación implementan "self-healing" con reintentos automáticos y rutas de fallback.</p>
+    <div class="insight-box insight-latte">
+      <strong>🎯 Aplicación para Nacho</strong>
+      Definir con anticipación la estrategia de resolución de conflictos entre agentes: ¿mayoría de votos? ¿override del supervisor? ¿escalamiento humano? ¿selección por nivel de confianza? En entidades financieras reguladas, siempre incluir el punto de escalamiento humano para decisiones críticas.
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SECCIÓN 4: VIDEOS YOUTUBE -->
+  <div class="section-header">
+    <div class="section-icon icon-latte">📺</div>
+    <h2 class="section-title">5 Videos de YouTube Recomendados</h2>
+  </div>
+
+  <div class="video-card">
+    <div class="video-thumb">▶️</div>
+    <div class="video-content">
+      <h4>1. AI Agents In 2026 — Complete Guide with Hyperagent</h4>
+      <p style="font-size:0.85rem; color:#666;">Guía completa actualizada sobre el estado del arte de agentes IA en 2026. Cubre frameworks, patrones de orquestación y casos de uso reales con Hyperagent para gestión autónoma de workflows complejos.</p>
+      <div class="tag-group" style="margin-top:8px; margin-bottom:4px;">
+        <span class="tag tag-verde" style="font-size:0.72rem;">🤖 Agentes</span>
+        <span class="tag tag-cafe" style="font-size:0.72rem;">🏗️ Frameworks</span>
+      </div>
+      <p style="font-size:0.8rem; color:#888; margin-top:6px;">🎯 <em>Por qué verlo:</em> Visión completa de dónde está el mercado de agentes — ideal para evaluar qué conviene construir vs. comprar en tu entidad.</p>
+      <a href="https://www.youtube.com/watch?v=17KSeri9EZc" target="_blank">▶ Ver en YouTube →</a>
+    </div>
+  </div>
+
+  <div class="video-card">
+    <div class="video-thumb">▶️</div>
+    <div class="video-content">
+      <h4>2. Agentic AI for Enterprise Workflows: Automation & ROI in 2026</h4>
+      <p style="font-size:0.85rem; color:#666;">Casos concretos de ROI en implementaciones enterprise de agentes IA. Métricas reales de reducción de tiempo, costos y errores en workflows financieros y operativos. Muy alineado con contexto de Gerencia de Operaciones.</p>
+      <div class="tag-group" style="margin-top:8px; margin-bottom:4px;">
+        <span class="tag tag-latte" style="font-size:0.72rem;">🏦 Enterprise</span>
+        <span class="tag tag-verde" style="font-size:0.72rem;">📊 ROI</span>
+      </div>
+      <p style="font-size:0.8rem; color:#888; margin-top:6px;">🎯 <em>Por qué verlo:</em> Los números de ROI que muestra son exactamente el lenguaje que necesitás para presentar propuestas de automatización a dirección.</p>
+      <a href="https://www.youtube.com/watch?v=64nmcTgRWsE" target="_blank">▶ Ver en YouTube →</a>
+    </div>
+  </div>
+
+  <div class="video-card">
+    <div class="video-thumb">▶️</div>
+    <div class="video-content">
+      <h4>3. How to Use AI Agents to Automate Your Entire Workflow in 2026</h4>
+      <p style="font-size:0.85rem; color:#666;">Tutorial práctico de automatización de workflows completos usando agentes IA. Incluye integración entre herramientas, manejo de errores y patrones de orquestación aplicables directamente.</p>
+      <div class="tag-group" style="margin-top:8px; margin-bottom:4px;">
+        <span class="tag tag-verde" style="font-size:0.72rem;">⚡ Automatización</span>
+        <span class="tag tag-cafe" style="font-size:0.72rem;">🔧 Práctico</span>
+      </div>
+      <p style="font-size:0.8rem; color:#888; margin-top:6px;">🎯 <em>Por qué verlo:</em> Las técnicas son directamente aplicables a procesos operativos financieros como cierres, reportes y conciliaciones.</p>
+      <a href="https://www.youtube.com/watch?v=3_BbMHwNLzc" target="_blank">▶ Ver en YouTube →</a>
+    </div>
+  </div>
+
+  <div class="video-card">
+    <div class="video-thumb">▶️</div>
+    <div class="video-content">
+      <h4>4. The Agentic Engineer Workflow You Need In 2026</h4>
+      <p style="font-size:0.85rem; color:#666;">Workflow de un "agentic engineer" en 2026: cómo estructurar el trabajo con Claude Code, agentes en background y orchestration. Muy aplicable para el perfil de vibe coding y automatización de Nacho.</p>
+      <div class="tag-group" style="margin-top:8px; margin-bottom:4px;">
+        <span class="tag tag-verde" style="font-size:0.72rem;">💻 Claude Code</span>
+        <span class="tag tag-latte" style="font-size:0.72rem;">🚀 Vibe Coding</span>
+      </div>
+      <p style="font-size:0.8rem; color:#888; margin-top:6px;">🎯 <em>Por qué verlo:</em> Te muestra cómo estructurar tu día de trabajo como analista de procesos que también desarrolla con agentes IA — el workflow del futuro cercano.</p>
+      <a href="https://www.youtube.com/watch?v=ElYxdpYi4U0" target="_blank">▶ Ver en YouTube →</a>
+    </div>
+  </div>
+
+  <div class="video-card">
+    <div class="video-thumb">▶️</div>
+    <div class="video-content">
+      <h4>5. AGENTIC WORKFLOWS: Build & Sell AI Automations (2026)</h4>
+      <p style="font-size:0.85rem; color:#666;">De Sabrina Ramonov — una de las mejores creadoras de contenido sobre automatización con n8n y agentes IA. Este video cubre cómo construir y monetizar automatizaciones, con templates reales descargables (librería de 1000+ workflows).</p>
+      <div class="tag-group" style="margin-top:8px; margin-bottom:4px;">
+        <span class="tag tag-cafe" style="font-size:0.72rem;">⚙️ n8n</span>
+        <span class="tag tag-verde" style="font-size:0.72rem;">🔄 Workflows</span>
+      </div>
+      <p style="font-size:0.8rem; color:#888; margin-top:6px;">🎯 <em>Por qué verlo:</em> Los templates de n8n para automatización financiera y operativa son reutilizables directamente. Canal con 299K suscriptores, calidad muy alta en contenido práctico.</p>
+      <a href="https://www.youtube.com/watch?v=MxyRjL7NG18" target="_blank">▶ Ver en YouTube →</a>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SECCIÓN 5: GITHUB -->
+  <div class="section-header">
+    <div class="section-icon icon-verde">⭐</div>
+    <h2 class="section-title">5 Repositorios GitHub Top de la Semana</h2>
+  </div>
+
+  <!-- Repo 1 -->
+  <div class="repo-card">
+    <div class="repo-header">
+      <div class="repo-icon">🌊</div>
+      <h4><a href="https://github.com/openshape/openclaw" target="_blank">OpenClaw</a> — El repo de IA de más rápido crecimiento en GitHub</h4>
+      <div class="stars-badge">⭐ 210k+</div>
+    </div>
+    <p style="font-size:0.88rem; color:#555;">Plataforma visual de orquestación de agentes con workflow builder drag-and-drop, RAG pipeline integrado, soporte multi-provider (OpenAI, Anthropic, open-source) y monitoreo de uso. Surgió de 9k a 210k+ estrellas en meses — el "n8n de los agentes IA".</p>
+    <div class="insight-box">
+      <strong>🎯 Valor para Nacho</strong>
+      Permite a analistas de procesos (sin ser ML engineers) diseñar pipelines de agentes visualmente. Conecta con APIs de sistemas financieros core para extracción de datos y construcción de reportes automatizados.
+    </div>
+    <div class="tag-group">
+      <span class="tag tag-verde">🔧 No-Code Agents</span>
+      <span class="tag tag-cafe">🏦 Multi-Provider</span>
+    </div>
+  </div>
+
+  <!-- Repo 2 -->
+  <div class="repo-card">
+    <div class="repo-header">
+      <div class="repo-icon">🤝</div>
+      <h4><a href="https://github.com/wshobson/agents" target="_blank">wshobson/agents</a> — Multi-harness Agentic Plugin Marketplace</h4>
+      <div class="stars-badge">⭐ Trending</div>
+    </div>
+    <p style="font-size:0.88rem; color:#555;">Marketplace de plugins agénticos que funciona con Claude Code, Codex CLI, Cursor, OpenCode, GitHub Copilot y Gemini CLI. Permite intercambiar "harnesses" sin reescribir código y colaborar en tiempo real desde cualquier dispositivo.</p>
+    <div class="insight-box">
+      <strong>🎯 Valor para Nacho</strong>
+      Si usás Claude Code para vibe coding y también Gemini CLI ocasionalmente, este marketplace te permite reusar los mismos plugins y agentes en ambos entornos. Reduce el lock-in a un solo proveedor.
+    </div>
+    <div class="tag-group">
+      <span class="tag tag-verde">💻 Claude Code</span>
+      <span class="tag tag-latte">🔌 Plugins</span>
+    </div>
+  </div>
+
+  <!-- Repo 3 -->
+  <div class="repo-card">
+    <div class="repo-header">
+      <div class="repo-icon">🌊</div>
+      <h4><a href="https://github.com/langflow-ai/langflow" target="_blank">Langflow</a> — Visual AI Agent Builder</h4>
+      <div class="stars-badge">⭐ 146k</div>
+    </div>
+    <p style="font-size:0.88rem; color:#555;">Builder visual de pipelines de agentes IA con interfaz drag-and-drop. Uno de los tres proyectos que dominan el diseño visual de flujos de agentes en 2026. Soporta LangChain, OpenAI, Anthropic y modelos locales vía Ollama.</p>
+    <div class="insight-box">
+      <strong>🎯 Valor para Nacho</strong>
+      Ideal para prototipado rápido de flujos de automatización antes de codificarlos. Podés diseñar un agente de análisis de procesos en 30 minutos sin código, validarlo con el equipo y luego implementarlo con Claude Code.
+    </div>
+    <div class="tag-group">
+      <span class="tag tag-verde">🎨 Visual Builder</span>
+      <span class="tag tag-cafe">⚡ Prototipado</span>
+    </div>
+  </div>
+
+  <!-- Repo 4 -->
+  <div class="repo-card">
+    <div class="repo-header">
+      <div class="repo-icon">📚</div>
+      <h4><a href="https://github.com/caramaschiHG/awesome-ai-agents-2026" target="_blank">awesome-ai-agents-2026</a> — 300+ Recursos de Agentes IA</h4>
+      <div class="stars-badge">⭐ Curated</div>
+    </div>
+    <p style="font-size:0.88rem; color:#555;">Lista curada con más de 300 recursos de agentes IA para 2026: frameworks, herramientas, plataformas, casos de uso enterprise. Organizado en 20+ categorías incluyendo servicios financieros, automatización de procesos y orquestación multi-agente. Actualizado mensualmente.</p>
+    <div class="insight-box">
+      <strong>🎯 Valor para Nacho</strong>
+      El mejor punto de partida para explorar el ecosistema de agentes antes de elegir una herramienta para un proyecto. Ahorra horas de investigación y tiene benchmarks comparativos entre frameworks.
+    </div>
+    <div class="tag-group">
+      <span class="tag tag-latte">📖 Referencia</span>
+      <span class="tag tag-verde">🗂️ Curado</span>
+    </div>
+  </div>
+
+  <!-- Repo 5 -->
+  <div class="repo-card">
+    <div class="repo-header">
+      <div class="repo-icon">🔗</div>
+      <h4><a href="https://github.com/ma2za/telegram-llm-bot" target="_blank">ma2za/telegram-llm-bot</a> — Local Telegram AI Bot con Ollama</h4>
+      <div class="stars-badge">⭐ Trending</div>
+    </div>
+    <p style="font-size:0.88rem; color:#555;">Bot de Telegram local-first con Ollama tool calling, transcripción de voz (faster-whisper), almacenamiento MinIO, búsqueda web SearchApi y health checks de deployment. Stack similar al que ya usás con Hermes, con capas adicionales de persistencia y voz.</p>
+    <div class="insight-box">
+      <strong>🎯 Valor para Nacho</strong>
+      Podés tomar componentes de este repo para mejorar tu bot Hermes actual: agregar transcripción de voz para consultas rápidas, integrar búsqueda web en tiempo real para análisis de mercado, y mejorar la persistencia con SQLite o MinIO.
+    </div>
+    <div class="tag-group">
+      <span class="tag tag-cafe">📱 Telegram</span>
+      <span class="tag tag-verde">🦙 Ollama</span>
+      <span class="tag tag-latte">🔊 Voice</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <p>📰 <strong>AI Weekly Briefing — 9 de Julio 2026</strong></p>
+  <p style="margin-top:8px;">Preparado automáticamente por <strong>Claude Sonnet 5</strong> vía Claude Cowork Scheduled Tasks</p>
+  <p style="margin-top:4px; font-size:0.78rem; opacity:0.6;">Para Nacho Colla · nachocolla.automatiza@gmail.com · Gerente de Operaciones en Entidades Financieras</p>
+  <p style="margin-top:12px; font-size:0.8rem;">🌐 <a href="https://nachocollaautomatiza-commits.github.io/Noticias-AI/" style="color: var(--latte);">nachocollaautomatiza-commits.github.io/Noticias-AI/</a></p>
+</div>
+
+</body>
+</html>

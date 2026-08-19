@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Briefing – 13 de mayo 2026</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Playfair+Display:wght@600;700&display=swap');
+
+    :root {
+      --green-dark:   #1E3932;
+      --green-mid:    #2C5F4A;
+      --green-main:   #00704A;
+      --green-light:  #D4E9E2;
+      --cream:        #F5F0E8;
+      --beige:        #EAE0D0;
+      --brown:        #6B3A2A;
+      --gold:         #CBA135;
+      --text-dark:    #1C1C1C;
+      --text-mid:     #4A4A4A;
+      --text-light:   #7A7A7A;
+      --white:        #FFFFFF;
+      --shadow:       rgba(30,57,50,0.12);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--cream);
+      background-image:
+        radial-gradient(ellipse at 20% 20%, rgba(0,112,74,0.05) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 80%, rgba(203,161,53,0.06) 0%, transparent 60%);
+      font-family: 'Lato', sans-serif;
+      color: var(--text-dark);
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-mid) 60%, var(--green-main) 100%);
+      padding: 48px 32px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      top: -60px; left: -60px;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.04);
+    }
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; right: -40px;
+      width: 280px; height: 280px;
+      border-radius: 50%;
+      background: rgba(203,161,53,0.08);
+    }
+    .header-badge {
+      display: inline-block;
+      background: rgba(203,161,53,0.25);
+      color: var(--gold);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      padding: 6px 18px;
+      border-radius: 20px;
+      border: 1px solid rgba(203,161,53,0.4);
+      margin-bottom: 16px;
+    }
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 5vw, 44px);
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 10px;
+      position: relative;
+      z-index: 1;
+    }
+    header p.subtitle {
+      color: rgba(255,255,255,0.72);
+      font-size: 15px;
+      font-weight: 300;
+      letter-spacing: 0.5px;
+      position: relative;
+      z-index: 1;
+    }
+    .header-meta {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+    .meta-pill {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.85);
+      font-size: 12px;
+      padding: 5px 14px;
+      border-radius: 14px;
+    }
+
+    /* ── LAYOUT ── */
+    .container { max-width: 1100px; margin: 0 auto; padding: 40px 20px 60px; }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+      margin-top: 48px;
+    }
+    .section-icon {
+      width: 42px; height: 42px;
+      border-radius: 12px;
+      background: var(--green-main);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .section-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      color: var(--green-dark);
+    }
+    .section-header .section-count {
+      margin-left: auto;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--green-main);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* ── CARDS ── */
+    .cards-grid { display: grid; gap: 20px; }
+    .cards-grid.cols-2 { grid-template-columns: repeat(auto-fill, minmax(460px, 1fr)); }
+    .cards-grid.cols-3 { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+
+    .card {
+      background: var(--white);
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 0 4px 20px var(--shadow);
+      border: 1px solid rgba(0,112,74,0.08);
+      position: relative;
+      transition: transform 0.2s, box-shadow 0.2s;
+      overflow: hidden;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 36px rgba(30,57,50,0.18);
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--green-main), var(--gold));
+      border-radius: 18px 18px 0 0;
+    }
+
+    .card-source {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--green-main);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .card-source::before {
+      content: '';
+      display: inline-block;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--green-main);
+    }
+
+    .card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px;
+      color: var(--green-dark);
+      margin-bottom: 10px;
+      line-height: 1.35;
+    }
+    .card p { font-size: 14px; color: var(--text-mid); line-height: 1.65; }
+
+    .insight-box {
+      background: var(--green-light);
+      border-left: 3px solid var(--green-main);
+      border-radius: 0 10px 10px 0;
+      padding: 12px 16px;
+      margin-top: 14px;
+    }
+    .insight-box .label {
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      color: var(--green-main);
+      margin-bottom: 5px;
+    }
+    .insight-box p { font-size: 13px; color: var(--green-dark); line-height: 1.55; }
+
+    .example-box {
+      background: linear-gradient(135deg, #FDF8EE, #FAF3E0);
+      border: 1px solid rgba(203,161,53,0.3);
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin-top: 10px;
+    }
+    .example-box .label {
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      color: var(--gold);
+      margin-bottom: 5px;
+    }
+    .example-box p { font-size: 13px; color: var(--brown); line-height: 1.55; }
+
+    /* ── NEWS CARD with number ── */
+    .news-num {
+      position: absolute;
+      top: 18px; right: 20px;
+      font-family: 'Playfair Display', serif;
+      font-size: 48px;
+      font-weight: 700;
+      color: rgba(0,112,74,0.07);
+      line-height: 1;
+    }
+
+    /* ── VIDEO CARD ── */
+    .video-card {
+      background: var(--white);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px var(--shadow);
+      border: 1px solid rgba(0,112,74,0.08);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .video-card:hover { transform: translateY(-3px); box-shadow: 0 10px 36px rgba(30,57,50,0.18); }
+    .video-thumb {
+      background: linear-gradient(135deg, var(--green-dark), var(--green-mid));
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      position: relative;
+    }
+    .video-thumb a {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-size: 36px;
+    }
+    .yt-play {
+      width: 52px; height: 52px;
+      background: rgba(255,255,255,0.15);
+      border: 2px solid rgba(255,255,255,0.4);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      backdrop-filter: blur(4px);
+    }
+    .yt-play::after { content: '▶'; color: white; font-size: 18px; margin-left: 4px; }
+    .video-body { padding: 18px; }
+    .video-channel {
+      font-size: 11px; font-weight: 700;
+      color: var(--green-main);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 6px;
+    }
+    .video-body h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 15px;
+      color: var(--green-dark);
+      margin-bottom: 8px;
+      line-height: 1.35;
+    }
+    .video-body p { font-size: 13px; color: var(--text-mid); line-height: 1.6; }
+    .video-link {
+      display: inline-block;
+      margin-top: 12px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--green-main);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(0,112,74,0.3);
+      transition: border-color 0.2s;
+    }
+    .video-link:hover { border-color: var(--green-main); }
+
+    /* ── GITHUB CARD ── */
+    .repo-card {
+      background: var(--white);
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: 0 4px 20px var(--shadow);
+      border: 1px solid rgba(0,112,74,0.08);
+      transition: transform 0.2s;
+    }
+    .repo-card:hover { transform: translateY(-3px); }
+    .repo-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .repo-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--green-dark), var(--green-main));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .repo-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 15px;
+      color: var(--green-dark);
+      font-weight: 600;
+    }
+    .repo-name a { color: inherit; text-decoration: none; border-bottom: 1px solid rgba(0,112,74,0.3); }
+    .repo-stars {
+      font-size: 12px;
+      color: var(--gold);
+      font-weight: 700;
+      margin-top: 3px;
+    }
+    .repo-card p { font-size: 13px; color: var(--text-mid); line-height: 1.6; margin-bottom: 10px; }
+    .repo-tag {
+      display: inline-block;
+      background: var(--green-light);
+      color: var(--green-dark);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 8px;
+      margin: 3px 3px 0 0;
+    }
+    .security-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: #E8F5E9;
+      color: #2E7D32;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 8px;
+      margin-top: 8px;
+    }
+
+    /* ── TREND CARD ── */
+    .trend-card {
+      background: var(--white);
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: 0 4px 20px var(--shadow);
+      border: 1px solid rgba(0,112,74,0.08);
+    }
+    .trend-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      color: var(--green-dark);
+      margin-bottom: 8px;
+    }
+    .trend-card p { font-size: 13px; color: var(--text-mid); line-height: 1.6; }
+    .trend-level {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    .level-high { background: #FCE4EC; color: #C62828; }
+    .level-mid  { background: #FFF8E1; color: #E65100; }
+
+    /* ── TOOLS STRIP ── */
+    .tools-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 16px;
+      margin-top: 0;
+    }
+    .tool-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 3px 14px var(--shadow);
+      border: 1px solid rgba(0,112,74,0.08);
+    }
+    .tool-name {
+      font-size: 14px;
+      font-weight: 900;
+      color: var(--green-dark);
+      margin-bottom: 6px;
+    }
+    .tool-card p { font-size: 13px; color: var(--text-mid); line-height: 1.55; }
+    .tool-new {
+      display: inline-block;
+      background: var(--green-main);
+      color: white;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      padding: 2px 8px;
+      border-radius: 6px;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0,112,74,0.2), transparent);
+      margin: 16px 0;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--green-dark);
+      color: rgba(255,255,255,0.6);
+      text-align: center;
+      padding: 28px;
+      font-size: 13px;
+      margin-top: 60px;
+    }
+    footer strong { color: var(--gold); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      .cards-grid.cols-2 { grid-template-columns: 1fr; }
+      .cards-grid.cols-3 { grid-template-columns: 1fr; }
+      .tools-strip { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════ HEADER ═══════════════════════════ -->
+<header>
+  <div class="header-badge">📡 Briefing Semanal</div>
+  <h1>AI Intelligence Briefing</h1>
+  <p class="subtitle">Tu pulso semanal de Inteligencia Artificial · Procesos · Automatización</p>
+  <div class="header-meta">
+    <span class="meta-pill">📅 13 de mayo, 2026</span>
+    <span class="meta-pill">🤖 5 Noticias clave</span>
+    <span class="meta-pill">🎬 5 Videos curados</span>
+    <span class="meta-pill">⭐ 5 Repos GitHub</span>
+    <span class="meta-pill">📈 Tendencias BPM & PM</span>
+  </div>
+</header>
+
+<div class="container">
+
+<!-- ═══════════════════ SECCIÓN 1 — NOTICIAS AI ═══════════════════ -->
+<div class="section-header">
+  <div class="section-icon">📰</div>
+  <h2>Las 5 Noticias de la Semana en IA</h2>
+  <span class="section-count">Mayo 2026</span>
+</div>
+
+<div class="cards-grid cols-2">
+
+  <!-- NOTICIA 1 -->
+  <div class="card">
+    <span class="news-num">01</span>
+    <div class="card-source">Anthropic · anthropic.com</div>
+    <h3>Claude Opus 4.7 ya disponible: mejor visión y creatividad profesional</h3>
+    <p>Anthropic lanzó Claude Opus 4.7 con mejoras sustanciales en ingeniería de software avanzada, mayor resolución de imágenes y mayor refinamiento creativo en tareas profesionales. El precio se mantiene igual: $5 por millón de tokens de entrada y $25 por millón de salida.</p>
+    <div class="insight-box">
+      <div class="label">🔍 Insight para tu perfil</div>
+      <p>Como analista de procesos en entidades financieras, la mejora en visión te permite subir diagramas BPMN complejos y recibir análisis detallados directamente.</p>
+    </div>
+    <div class="example-box">
+      <div class="label">💡 Ejemplo de uso</div>
+      <p>Sube un diagrama BPMN de tu proceso de onboarding y pedí a Opus 4.7 que identifique cuellos de botella y proponga optimizaciones con criterio regulatorio financiero.</p>
+    </div>
+  </div>
+
+  <!-- NOTICIA 2 -->
+  <div class="card">
+    <span class="news-num">02</span>
+    <div class="card-source">Anthropic · 9to5mac.com</div>
+    <h3>Claude Managed Agents: "Dreaming", multi-agente y orquestación paralela</h3>
+    <p>Anthropic lanzó tres nuevas capacidades para sus agentes gestionados: (1) <strong>Dreaming</strong> — revisión de sesiones pasadas para auto-mejora; (2) <strong>Multi-agent orchestration</strong> — un agente líder delega tareas a especialistas que trabajan en paralelo; (3) <strong>Shared filesystem</strong> entre agentes colaboradores.</p>
+    <div class="insight-box">
+      <div class="label">🔍 Insight para tu perfil</div>
+      <p>Esto es exactamente orquestación agéntica: podés armar un "equipo" donde un agente analiza procesos, otro busca benchmarks y un tercero redacta el informe, todo en paralelo.</p>
+    </div>
+    <div class="example-box">
+      <div class="label">💡 Ejemplo de uso</div>
+      <p>Orquestá: Agente 1 extrae datos de eficiencia de tu área, Agente 2 busca mejores prácticas del sector financiero, Agente 3 redacta el reporte ejecutivo con KPIs consolidados.</p>
+    </div>
+  </div>
+
+  <!-- NOTICIA 3 -->
+  <div class="card">
+    <span class="news-num">03</span>
+    <div class="card-source">OpenAI · techcrunch.com</div>
+    <h3>OpenAI lanza GPT-5.5 Instant: 52% menos alucinaciones en temas críticos</h3>
+    <p>OpenAI reemplazó GPT-5.3 Instant como modelo por defecto de ChatGPT con GPT-5.5 Instant, que produce 52.5% menos afirmaciones alucinadas en temas de alto riesgo como medicina, derecho y finanzas. También incluyó nuevos modelos de voz en tiempo real y traducción live en 70+ idiomas.</p>
+    <div class="insight-box">
+      <div class="label">🔍 Insight para tu perfil</div>
+      <p>En contextos de gerencia de operaciones financieras donde la precisión regulatoria es crítica, esta mejora en fiabilidad reduce significativamente el riesgo de usar IA en análisis sensibles.</p>
+    </div>
+    <div class="example-box">
+      <div class="label">💡 Ejemplo de uso</div>
+      <p>Usá GPT-5.5 Instant para consultas sobre normativa BCRA o requisitos CONAIF con mayor confianza. Combinaló con revisión humana para validación final en decisiones de compliance.</p>
+    </div>
+  </div>
+
+  <!-- NOTICIA 4 -->
+  <div class="card">
+    <span class="news-num">04</span>
+    <div class="card-source">Google · cnbc.com</div>
+    <h3>Google convierte a Gemini en capa operativa de Android: automatización de apps</h3>
+    <p>Google lanzó actualizaciones que transforman a Gemini de chatbot a sistema operativo de inteligencia sobre Android, Chrome, Android Auto y laptop. Incluye automatización de apps (ejecuta flujos en cualquier app), Chrome potenciado y herramientas para creadores. La IA pasa de asistente a orquestador.</p>
+    <div class="insight-box">
+      <div class="label">🔍 Insight para tu perfil</div>
+      <p>El modelo de "IA como capa de orquestación" es exactamente la arquitectura que deberías pensar para tus automatizaciones de procesos: no herramientas aisladas, sino un sistema coordinador central.</p>
+    </div>
+    <div class="example-box">
+      <div class="label">💡 Ejemplo de uso</div>
+      <p>Usá Gemini en Android para automatizar el flujo: recibir alerta de email → abrir CRM → registrar gestión → actualizar hoja de seguimiento, todo sin cambiar manualmente entre apps.</p>
+    </div>
+  </div>
+
+  <!-- NOTICIA 5 -->
+  <div class="card">
+    <span class="news-num">05</span>
+    <div class="card-source">CNBC · cnbc.com</div>
+    <h3>El 76% de las organizaciones ya tiene un Chief AI Officer (vs 26% en 2025)</h3>
+    <p>Una encuesta a más de 2.000 organizaciones revela que el 76% creó el cargo de Chief AI Officer en el último año, frente al 26% de 2025. Simultáneamente, Isomorphic Labs (IA para drug discovery) cerró una Serie B de $2.1B liderada por Thrive Capital, señal de la madurez del sector.</p>
+    <div class="insight-box">
+      <div class="label">🔍 Insight para tu perfil</div>
+      <p>Como analista de mejora continua en entidades financieras, estás en posición ideal para posicionarte como referente interno de IA en procesos. La demanda de este perfil híbrido (procesos + IA) está en su pico histórico.</p>
+    </div>
+    <div class="example-box">
+      <div class="label">💡 Ejemplo de uso</div>
+      <p>Documentá tus automatizaciones con IA en formato de casos de uso (problema → solución → resultado medible) y presentalos en tu próxima reunión de gerencia como evidencia de madurez en IA aplicada.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════ SECCIÓN 2 — HERRAMIENTAS ═══════════════════ -->
+<div class="section-header">
+  <div class="section-icon">🛠️</div>
+  <h2>Últimas Funcionalidades de tus Herramientas</h2>
+</div>
+
+<div class="tools-strip">
+  <div class="tool-card">
+    <div class="tool-name">Claude / Anthropic <span class="tool-new">NEW</span></div>
+    <p><strong>Claude Platform en AWS</strong> ya disponible con acceso completo a Files API, Message Batches API y Agent Skills. <strong>Claude para Pequeñas Empresas</strong> se integra nativamente con QuickBooks, HubSpot, Canva y Google Workspace.</p>
+  </div>
+  <div class="tool-card">
+    <div class="tool-name">n8n <span class="tool-new">v2.0</span></div>
+    <p><strong>n8n 2.0</strong>: eliminó límites de workflows activos, nuevo AI Agent builder con memoria y guardrails, soporte MCP nativo y orquestación multi-agente. El 75% de los usuarios ya usa sus funciones de IA. Podés describir qué querés automatizar y genera el workflow.</p>
+  </div>
+  <div class="tool-card">
+    <div class="tool-name">ChatGPT / OpenAI <span class="tool-new">GPT-5.5</span></div>
+    <p><strong>GPT-5.5 Instant</strong> como modelo por defecto con menos alucinaciones. Nuevo <strong>panel de Analytics</strong> para admins. <strong>Fast Answers</strong> para respuestas inmediatas en preguntas frecuentes. Personalización desde historial, archivos y Gmail conectado.</p>
+  </div>
+  <div class="tool-card">
+    <div class="tool-name">Claude Code <span class="tool-new">Agentes</span></div>
+    <p>Nuevas capacidades de <strong>orquestación multi-agente</strong> con agentes especializados en paralelo. Soporte de <strong>"dreaming"</strong> para auto-mejora entre sesiones. <strong>20+ conectores MCP legales</strong> y 12 plugins por área de práctica.</p>
+  </div>
+  <div class="tool-card">
+    <div class="tool-name">Linear / PM Tools <span class="tool-new">IA</span></div>
+    <p><strong>Linear</strong> con auto-triage de issues por IA. <strong>Granola</strong> genera notas de reuniones sin bot. <strong>PostHog</strong> integra analytics + feature flags + experimentos. <strong>ChatPRD</strong> genera historias de usuario y PRDs con integración a Jira/Confluence.</p>
+  </div>
+  <div class="tool-card">
+    <div class="tool-name">Gemini / Google <span class="tool-new">Android</span></div>
+    <p>Gemini actúa como <strong>capa de orquestación en Android</strong>, ejecutando flujos entre apps de forma autónoma. <strong>Chrome potenciado</strong> con IA contextual. Nuevo <strong>Android Auto</strong> con inteligencia conversacional para gestión en movilidad.</p>
+  </div>
+</div>
+
+<!-- ═══════════════════ SECCIÓN 3 — TENDENCIAS BPM / PM ═══════════════════ -->
+<div class="section-header">
+  <div class="section-icon">📈</div>
+  <h2>Tendencias en Process Management &amp; Product Management</h2>
+</div>
+
+<div class="cards-grid cols-3">
+
+  <div class="trend-card">
+    <span class="trend-level level-high">🔥 Tendencia alta</span>
+    <h3>IA Agéntica en Procesos de Negocio</h3>
+    <p>Los agentes de IA ya manejan aprobaciones, enrutamiento de excepciones y gestión de casos sin intervención humana constante. El modelo dominante en 2026 es híbrido: IA para lo rutinario, humano para lo crítico.</p>
+    <div class="divider"></div>
+    <p style="font-size:12px; color:var(--green-main); font-weight:700;">➜ Para vos: automatizá los primeros niveles de atención y desvíos en tus procesos financieros con agentes especializados.</p>
+  </div>
+
+  <div class="trend-card">
+    <span class="trend-level level-high">🔥 Tendencia alta</span>
+    <h3>Process Mining con IA</h3>
+    <p>Las herramientas de process mining ahora usan IA para identificar proactivamente cuellos de botella, retrabajos y oportunidades de mejora dentro de los workflows, generando sugerencias de optimización automáticas.</p>
+    <div class="divider"></div>
+    <p style="font-size:12px; color:var(--green-main); font-weight:700;">➜ Para vos: combiná tus diagramas BPMN con análisis de datos para descubrir brechas entre el proceso diseñado y el real.</p>
+  </div>
+
+  <div class="trend-card">
+    <span class="trend-level level-mid">⚡ Tendencia media-alta</span>
+    <h3>Hyperautomation &amp; Gobernanza</h3>
+    <p>Las empresas combinan RPA + IA + APIs + BPM para automatizar procesos end-to-end. El foco 2026 está en gobernanza de la IA: marcos de control, auditoría de decisiones automatizadas y cumplimiento regulatorio.</p>
+    <div class="divider"></div>
+    <p style="font-size:12px; color:var(--green-main); font-weight:700;">➜ Para vos: diseñá controles de auditoría en tus flujos automatizados, especialmente en contextos regulados (BCRA, UIF).</p>
+  </div>
+
+  <div class="trend-card">
+    <span class="trend-level level-mid">⚡ Tendencia media-alta</span>
+    <h3>No-Code / Low-Code para PM y BPM</h3>
+    <p>Los dueños de proceso sin perfil técnico pueden ahora crear y ajustar workflows de IA sin depender de IT. Herramientas como n8n, Zapier AI y Make permiten iterar rápido sobre automatizaciones complejas.</p>
+    <div class="divider"></div>
+    <p style="font-size:12px; color:var(--green-main); font-weight:700;">➜ Para vos: tu perfil de analista + herramientas no-code = capacidad de implementar sin esperar al área de sistemas.</p>
+  </div>
+
+  <div class="trend-card">
+    <span class="trend-level level-high">🔥 Tendencia alta</span>
+    <h3>Product Management con IA Generativa</h3>
+    <p>AI para priorización de roadmaps (Linear, Aha!), síntesis automática de feedback, generación de PRDs y prototipado funcional con Lovable/Bolt. Los PMs que dominan IA multiplican su output individual por 3x-5x.</p>
+    <div class="divider"></div>
+    <p style="font-size:12px; color:var(--green-main); font-weight:700;">➜ Para vos: usá IA para procesar feedback de stakeholders, priorizar mejoras de proceso y generar reportes de avance automatizados.</p>
+  </div>
+
+  <div class="trend-card">
+    <span class="trend-level level-mid">⚡ Tendencia media-alta</span>
+    <h3>Orquestación Multi-Agente en Operaciones</h3>
+    <p>El modelo de 2026 es un "equipo de agentes": un coordinador central delega a especialistas (datos, análisis, redacción, validación). Esto replica a nivel digital los equipos de trabajo en operaciones.</p>
+    <div class="divider"></div>
+    <p style="font-size:12px; color:var(--green-main); font-weight:700;">➜ Para vos: diseñá "células de trabajo" de agentes para tus reportes de KPIs mensuales: extracción, análisis, formato y distribución automatizados.</p>
+  </div>
+
+</div>
+
+<!-- ═══════════════════ SECCIÓN 4 — VIDEOS YOUTUBE ═══════════════════ -->
+<div class="section-header">
+  <div class="section-icon">🎬</div>
+  <h2>5 Videos / Canales de YouTube Recomendados</h2>
+  <span class="section-count">Verificados activos</span>
+</div>
+
+<div class="cards-grid cols-3">
+
+  <!-- VIDEO 1 -->
+  <div class="video-card">
+    <div class="video-thumb" style="background: linear-gradient(135deg, #1a1a2e, #16213e);">
+      <a href="https://www.youtube.com/@mreflow" target="_blank">
+        <div class="yt-play"></div>
+      </a>
+    </div>
+    <div class="video-body">
+      <div class="video-channel">Matt Wolfe · @mreflow</div>
+      <h3>AI News Weekly: Huge Updates from Anthropic, OpenAI &amp; Google</h3>
+      <p>Matt Wolfe publica múltiples videos por semana cubriendo lanzamientos de herramientas, actualizaciones de modelos y demos prácticas. Es el canal más completo para estar al día sin perderse en el ruido. Cobertura accesible con entusiasmo genuino.</p>
+      <div class="insight-box" style="margin-top:12px;">
+        <div class="label">Valor para tu stack</div>
+        <p>Cada video incluye casos de uso prácticos para no-técnicos. Ideal para descubrir herramientas nuevas que puedas incorporar a tus automatizaciones de procesos.</p>
+      </div>
+      <a class="video-link" href="https://www.youtube.com/@mreflow" target="_blank">Ver canal → youtube.com/@mreflow</a>
+    </div>
+  </div>
+
+  <!-- VIDEO 2 -->
+  <div class="video-card">
+    <div class="video-thumb" style="background: linear-gradient(135deg, #0d2137, #1a4a6e);">
+      <a href="https://www.youtube.com/watch?v=EV7WhVT270Q" target="_blank">
+        <div class="yt-play"></div>
+      </a>
+    </div>
+    <div class="video-body">
+      <div class="video-channel">Lex Fridman Podcast · #490</div>
+      <h3>State of AI in 2026: LLMs, Scaling Laws, China, Agents &amp; AGI</h3>
+      <p>~4 horas de conversación profunda sobre el estado de la IA en 2026: leyes de escala, modelos de lenguaje, agentes, competencia geopolítica (China vs USA), y predicciones sobre AGI. Con Nathan Lambert y Sebastian Raschka.</p>
+      <div class="insight-box" style="margin-top:12px;">
+        <div class="label">Valor para tu stack</div>
+        <p>Contexto estratégico para entender hacia dónde va la IA en los próximos 2-3 años. Te permite tomar decisiones de inversión en herramientas con visión de largo plazo.</p>
+      </div>
+      <a class="video-link" href="https://www.youtube.com/watch?v=EV7WhVT270Q" target="_blank">Ver episodio → youtube.com/watch?v=EV7WhVT270Q</a>
+    </div>
+  </div>
+
+  <!-- VIDEO 3 -->
+  <div class="video-card">
+    <div class="video-thumb" style="background: linear-gradient(135deg, #1b3a2d, #2d6a4f);">
+      <a href="https://www.youtube.com/@ColeMedin" target="_blank">
+        <div class="yt-play"></div>
+      </a>
+    </div>
+    <div class="video-body">
+      <div class="video-channel">Cole Medin · @ColeMedin</div>
+      <h3>Stop Vibe Coding: Context Engineering &amp; RAG for AI Agents</h3>
+      <p>Canal con 204K+ suscriptores, el más consistente para aprender a construir agentes reales de IA con n8n, Python y LangGraph. Foco en flujos que los negocios realmente pagan: research agents, pipelines de contenido, automatizaciones con integraciones complejas.</p>
+      <div class="insight-box" style="margin-top:12px;">
+        <div class="label">Valor para tu stack</div>
+        <p>Sus tutoriales de n8n + agentes IA son directamente aplicables a tus automatizaciones. Aprendé a construir agentes de investigación para análisis de procesos y benchmarking.</p>
+      </div>
+      <a class="video-link" href="https://www.youtube.com/watch?v=7zZtxUW6dhc" target="_blank">Ver video → Context Engineering & RAG</a>
+    </div>
+  </div>
+
+  <!-- VIDEO 4 -->
+  <div class="video-card">
+    <div class="video-thumb" style="background: linear-gradient(135deg, #2d1b3d, #5c2d91);">
+      <a href="https://www.youtube.com/channel/UCsBjURrPoezykLs9EqgamOA" target="_blank">
+        <div class="yt-play"></div>
+      </a>
+    </div>
+    <div class="video-body">
+      <div class="video-channel">Fireship · @Fireship</div>
+      <h3>AI Tools Explained in 100 Seconds + Dev News</h3>
+      <p>Jeff Delaney produce los videos técnicos más densos y bien editados de YouTube. El formato "100 segundos" explica modelos, herramientas y conceptos complejos de forma brillante. Ideal para mantenerse al día sin invertir horas.</p>
+      <div class="insight-box" style="margin-top:12px;">
+        <div class="label">Valor para tu stack</div>
+        <p>Perfecta para entender rápidamente tecnologías que mencionan tus proveedores o clientes internos (APIs, MCP, RAG) sin necesidad de background técnico profundo.</p>
+      </div>
+      <a class="video-link" href="https://www.youtube.com/channel/UCsBjURrPoezykLs9EqgamOA" target="_blank">Ver canal → Fireship</a>
+    </div>
+  </div>
+
+  <!-- VIDEO 5 -->
+  <div class="video-card">
+    <div class="video-thumb" style="background: linear-gradient(135deg, #3d1f00, #7a3e00);">
+      <a href="https://www.youtube.com/@NateHerk" target="_blank">
+        <div class="yt-play"></div>
+      </a>
+    </div>
+    <div class="video-body">
+      <div class="video-channel">Nate Herk · @NateHerk</div>
+      <h3>n8n AI Agents &amp; Workflow Automation Masterclass 2026</h3>
+      <p>Uno de los creadores de más rápido crecimiento en 2026, especialista en n8n, construcción de agentes IA y automatización práctica. Sus tutoriales van desde cero hasta flujos avanzados con memoria y herramientas conectadas, sin requerir conocimientos de programación.</p>
+      <div class="insight-box" style="margin-top:12px;">
+        <div class="label">Valor para tu stack</div>
+        <p>Sus flujos de automatización son directamente replicables para tus casos de uso: reportes de KPIs, notificaciones inteligentes, procesamiento de documentos financieros con IA.</p>
+      </div>
+      <a class="video-link" href="https://www.youtube.com/@NateHerk" target="_blank">Ver canal → youtube.com/@NateHerk</a>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════ SECCIÓN 5 — GITHUB REPOS ═══════════════════ -->
+<div class="section-header">
+  <div class="section-icon">⭐</div>
+  <h2>5 Repositorios GitHub Recomendados</h2>
+  <span class="section-count">Verificados · Confiables · MIT</span>
+</div>
+
+<div class="cards-grid cols-2">
+
+  <!-- REPO 1 -->
+  <div class="repo-card">
+    <div class="repo-header">
+      <div class="repo-icon">🤖</div>
+      <div>
+        <div class="repo-name"><a href="https://github.com/ruvnet/ruflo" target="_blank">ruvnet / ruflo</a></div>
+        <div class="repo-stars">⭐ 31,100+ estrellas · MIT License</div>
+      </div>
+    </div>
+    <p><strong>Ruflo</strong> es la plataforma líder de orquestación de agentes para Claude. Despliega swarms inteligentes de múltiples agentes, coordina workflows autónomos y construye sistemas conversacionales con arquitectura enterprise. Incluye RAG, integración nativa con Claude Code, auto-aprendizaje entre sesiones y un 84.8% de tasa de resolución en SWE-bench con 75% de ahorro en costos de tokens vs uso directo.</p>
+    <div class="insight-box">
+      <div class="label">Valor + Ejemplo</div>
+      <p>Perfecta para orquestar tu "equipo de agentes" en análisis de procesos. Ejemplo: Agente A extrae métricas de eficiencia, Agente B compara con benchmarks del sector, Agente C genera el reporte ejecutivo, todo coordinado automáticamente.</p>
+    </div>
+    <div style="margin-top:10px;">
+      <span class="repo-tag">Orquestación</span>
+      <span class="repo-tag">Multi-Agente</span>
+      <span class="repo-tag">Claude Code</span>
+      <span class="repo-tag">RAG</span>
+      <div class="security-badge">✅ Verificado · MIT · Open Source</div>
+    </div>
+  </div>
+
+  <!-- REPO 2 -->
+  <div class="repo-card">
+    <div class="repo-header">
+      <div class="repo-icon">📚</div>
+      <div>
+        <div class="repo-name"><a href="https://github.com/hesreallyhim/awesome-claude-code" target="_blank">hesreallyhim / awesome-claude-code</a></div>
+        <div class="repo-stars">⭐ 43,500+ estrellas · Curated List</div>
+      </div>
+    </div>
+    <p><strong>Awesome Claude Code</strong> es la lista canónica y mantenida por la comunidad de skills, hooks, slash-commands, agentes, servidores MCP y plugins para Claude Code. Contiene recursos de alta calidad seleccionados a mano, incluyendo los mejores integradores, herramientas de memoria y configuraciones de producción. Es el punto de partida para maximizar Claude Code.</p>
+    <div class="insight-box">
+      <div class="label">Valor + Ejemplo</div>
+      <p>Encontrá skills pre-construidas para análisis de procesos, diagramas BPMN, generación de reportes y automatización de KPIs. Ahorrás horas de desarrollo usando lo que ya construyó la comunidad.</p>
+    </div>
+    <div style="margin-top:10px;">
+      <span class="repo-tag">Claude Code</span>
+      <span class="repo-tag">Skills</span>
+      <span class="repo-tag">MCP</span>
+      <span class="repo-tag">Hooks</span>
+      <div class="security-badge">✅ Verificado · Comunidad activa · Sin contenido malicioso</div>
+    </div>
+  </div>
+
+  <!-- REPO 3 -->
+  <div class="repo-card">
+    <div class="repo-header">
+      <div class="repo-icon">🌐</div>
+      <div>
+        <div class="repo-name"><a href="https://github.com/caramaschiHG/awesome-ai-agents-2026" target="_blank">caramaschiHG / awesome-ai-agents-2026</a></div>
+        <div class="repo-stars">⭐ Alta adopción · Actualizado mensualmente</div>
+      </div>
+    </div>
+    <p><strong>Awesome AI Agents 2026</strong> es la lista más comprensiva de agentes IA, frameworks y herramientas de 2026 con 300+ recursos en 20+ categorías: orquestación, memoria, tools, RAG, evaluación, seguridad y deployment. Actualizado mensualmente con los últimos proyectos.</p>
+    <div class="insight-box">
+      <div class="label">Valor + Ejemplo</div>
+      <p>Tu mapa del ecosistema agéntico completo. Cuando necesites un agente para una tarea específica (extracción de datos, análisis regulatorio, procesamiento de documentos), aquí encontrás la opción mejor valorada.</p>
+    </div>
+    <div style="margin-top:10px;">
+      <span class="repo-tag">AI Agents</span>
+      <span class="repo-tag">Frameworks</span>
+      <span class="repo-tag">300+ recursos</span>
+      <div class="security-badge">✅ Verificado · Curado · Actualizado</div>
+    </div>
+  </div>
+
+  <!-- REPO 4 -->
+  <div class="repo-card">
+    <div class="repo-header">
+      <div class="repo-icon">🧠</div>
+      <div>
+        <div class="repo-name"><a href="https://github.com/shanraisshan/claude-code-best-practice" target="_blank">shanraisshan / claude-code-best-practice</a></div>
+        <div class="repo-stars">⭐ Crecimiento acelerado 2026</div>
+      </div>
+    </div>
+    <p><strong>Claude Code Best Practices</strong> es la guía definitiva de "from vibe coding to agentic engineering". Documenta mejores prácticas para escribir CLAUDE.md efectivos, optimizar el uso de tokens, estructurar contexto para mayor eficiencia, y construir agentes confiables. Es el manual de ingeniería de contexto para Claude Code.</p>
+    <div class="insight-box">
+      <div class="label">Valor + Ejemplo</div>
+      <p>Aprendé a escribir prompts y configuraciones que reducen el consumo de tokens hasta un 40%. Ejemplo: estructurar tu CLAUDE.md con contexto de tus procesos financieros para que Claude responda con precisión regulatoria desde el inicio.</p>
+    </div>
+    <div style="margin-top:10px;">
+      <span class="repo-tag">Context Engineering</span>
+      <span class="repo-tag">Tokens</span>
+      <span class="repo-tag">CLAUDE.md</span>
+      <div class="security-badge">✅ Verificado · MIT · Comunidad activa</div>
+    </div>
+  </div>
+
+  <!-- REPO 5 -->
+  <div class="repo-card">
+    <div class="repo-header">
+      <div class="repo-icon">🔗</div>
+      <div>
+        <div class="repo-name"><a href="https://github.com/coleam00/ai-agents-masterclass" target="_blank">coleam00 / ai-agents-masterclass</a></div>
+        <div class="repo-stars">⭐ Alta popularidad · Actualizado semanalmente</div>
+      </div>
+    </div>
+    <p><strong>AI Agents Masterclass</strong> de Cole Medin contiene todo el código de su serie en YouTube sobre construcción de agentes IA. Incluye ejemplos completos de agentes con n8n, Python y LangGraph: research agents, customer support, pipelines de contenido, y flujos de integración avanzados. Código listo para adaptar a tus casos de uso.</p>
+    <div class="insight-box">
+      <div class="label">Valor + Ejemplo</div>
+      <p>Tomá el template de "research agent" y adaptalo para analizar procesos internos: que el agente recorra tus documentos de procedimientos, identifique inconsistencias con normativas y genere un reporte de gaps de forma autónoma.</p>
+    </div>
+    <div style="margin-top:10px;">
+      <span class="repo-tag">n8n</span>
+      <span class="repo-tag">Python</span>
+      <span class="repo-tag">LangGraph</span>
+      <span class="repo-tag">Ejemplos prácticos</span>
+      <div class="security-badge">✅ Verificado · MIT · Cole Medin (204K subs)</div>
+    </div>
+  </div>
+
+</div>
+
+</div><!-- /container -->
+
+<!-- ═══════════════════════════ FOOTER ═══════════════════════════ -->
+<footer>
+  <p>
+    Generado automáticamente con <strong>Claude AI Briefing</strong> ·
+    <strong>13 de mayo, 2026</strong> ·
+    Para: <strong>Nacho Colla</strong> — Analista de Procesos & Mejora Continua
+  </p>
+  <p style="margin-top:8px; font-size:11px; opacity:0.6;">
+    Fuentes: Anthropic · OpenAI · Google · CNBC · TechCrunch · 9to5Mac · Releasebot · n8n Blog · GitHub
+  </p>
+</footer>
+
+</body>
+</html>

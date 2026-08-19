@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Briefing – 3 de Mayo 2026</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Playfair+Display:wght@400;700&display=swap');
+
+    :root {
+      --green-dark:    #1E3932;
+      --green-main:    #00704A;
+      --green-light:   #D4E9E2;
+      --cream:         #F7F3ED;
+      --latte:         #E8D5B7;
+      --caramel:       #C68A3C;
+      --espresso:      #3E2723;
+      --warm-gray:     #9E9E9E;
+      --white:         #FFFFFF;
+      --shadow:        rgba(30,57,50,0.13);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--cream);
+      font-family: 'Lato', sans-serif;
+      color: var(--espresso);
+      min-height: 100vh;
+    }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-main) 60%, #2d7a56 100%);
+      padding: 52px 40px 44px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 20% 50%, rgba(255,255,255,0.06) 0%, transparent 60%),
+                  radial-gradient(ellipse at 80% 20%, rgba(198,138,60,0.12) 0%, transparent 50%);
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: var(--latte);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      padding: 6px 18px;
+      border-radius: 20px;
+      margin-bottom: 18px;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 5vw, 46px);
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 10px;
+    }
+    .hero h1 span { color: var(--caramel); }
+    .hero-sub {
+      color: var(--green-light);
+      font-size: 15px;
+      font-weight: 300;
+      letter-spacing: 0.5px;
+    }
+    .hero-date {
+      margin-top: 18px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.12);
+      padding: 7px 20px;
+      border-radius: 30px;
+      color: var(--latte);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    /* NAV PILLS */
+    .nav-pills {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      background: var(--green-dark);
+      padding: 20px;
+    }
+    .nav-pill {
+      background: rgba(255,255,255,0.1);
+      color: var(--green-light);
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 7px 18px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .nav-pill:hover {
+      background: var(--caramel);
+      color: var(--white);
+      border-color: var(--caramel);
+    }
+
+    /* LAYOUT */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px 60px;
+    }
+
+    /* SECTION HEADERS */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 44px 0 24px;
+    }
+    .section-icon {
+      width: 46px; height: 46px;
+      background: var(--green-main);
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(0,112,74,0.25);
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      color: var(--green-dark);
+    }
+    .section-title small {
+      display: block;
+      font-family: 'Lato', sans-serif;
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--warm-gray);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    /* NEWS CARDS */
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+    }
+    .news-card {
+      background: var(--white);
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 0 2px 16px var(--shadow);
+      border-left: 4px solid var(--green-main);
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .news-card::after {
+      content: '';
+      position: absolute;
+      top: -30px; right: -30px;
+      width: 90px; height: 90px;
+      border-radius: 50%;
+      background: var(--green-light);
+      opacity: 0.4;
+    }
+    .news-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px var(--shadow);
+    }
+    .news-card.featured {
+      border-left-color: var(--caramel);
+      grid-column: span 2;
+    }
+    .news-tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 10px;
+      margin-bottom: 12px;
+    }
+    .tag-green   { background: var(--green-light); color: var(--green-dark); }
+    .tag-caramel { background: #FDF0DC; color: var(--caramel); }
+    .tag-red     { background: #FDECEA; color: #c0392b; }
+    .tag-blue    { background: #EAF3FB; color: #1a6da0; }
+    .tag-purple  { background: #F3EAF9; color: #7d3c98; }
+
+    .news-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      color: var(--green-dark);
+      margin-bottom: 10px;
+      line-height: 1.35;
+    }
+    .news-card p {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+    }
+    .insight-box {
+      margin-top: 14px;
+      background: var(--green-light);
+      border-radius: 10px;
+      padding: 12px 14px;
+    }
+    .insight-box strong {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--green-main);
+      margin-bottom: 5px;
+    }
+    .insight-box p { font-size: 12.5px; color: var(--green-dark); }
+    .example-box {
+      margin-top: 10px;
+      background: #FDF9F3;
+      border: 1px dashed var(--caramel);
+      border-radius: 10px;
+      padding: 11px 14px;
+    }
+    .example-box strong {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--caramel);
+      margin-bottom: 5px;
+    }
+    .example-box p { font-size: 12.5px; color: #6B4C2A; }
+
+    /* TOOLS */
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 18px;
+    }
+    .tool-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 2px 12px var(--shadow);
+      border-top: 3px solid var(--caramel);
+    }
+    .tool-name {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 12px;
+    }
+    .tool-logo {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+    }
+    .tool-logo.green  { background: var(--green-light); }
+    .tool-logo.orange { background: #FDF0DC; }
+    .tool-logo.blue   { background: #EAF3FB; }
+    .tool-name h4 { font-size: 14px; font-weight: 700; color: var(--green-dark); }
+    .tool-name small { font-size: 11px; color: var(--warm-gray); }
+    .feature-list { list-style: none; }
+    .feature-list li {
+      font-size: 12.5px;
+      color: #555;
+      padding: 5px 0;
+      border-bottom: 1px solid #f0ebe4;
+      display: flex; align-items: flex-start; gap: 7px;
+    }
+    .feature-list li:last-child { border-bottom: none; }
+    .feature-list li::before { content: '✦'; color: var(--green-main); font-size: 9px; margin-top: 3px; flex-shrink: 0; }
+
+    /* YOUTUBE */
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .video-card {
+      background: var(--white);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 2px 14px var(--shadow);
+      transition: transform 0.2s;
+    }
+    .video-card:hover { transform: translateY(-3px); }
+    .video-thumb {
+      height: 100px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .play-btn {
+      width: 48px; height: 48px;
+      background: rgba(255,255,255,0.9);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+    }
+    .video-body { padding: 18px; }
+    .channel-name {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--green-main);
+      margin-bottom: 6px;
+    }
+    .video-body h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--green-dark);
+      margin-bottom: 8px;
+      line-height: 1.35;
+    }
+    .video-body p { font-size: 12.5px; color: #666; line-height: 1.6; margin-bottom: 10px; }
+    .video-badge {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 10px;
+      display: inline-block;
+    }
+    .badge-green  { background: var(--green-light); color: var(--green-main); }
+    .badge-caramel{ background: #FDF0DC; color: var(--caramel); }
+
+    /* GITHUB */
+    .repo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+    }
+    .repo-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 22px;
+      box-shadow: 0 2px 14px var(--shadow);
+      border: 1px solid #e8e0d4;
+    }
+    .repo-header {
+      display: flex; align-items: flex-start; gap: 12px; margin-bottom: 12px;
+    }
+    .repo-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; flex-shrink: 0;
+    }
+    .repo-header h4 { font-size: 14px; font-weight: 700; color: var(--green-dark); margin-bottom: 2px; }
+    .repo-header code { font-size: 11px; color: var(--warm-gray); background: #f4f0eb; padding: 2px 6px; border-radius: 4px; }
+    .repo-stars {
+      margin-left: auto; flex-shrink: 0;
+      font-size: 12px; font-weight: 700;
+      color: var(--caramel);
+      display: flex; align-items: center; gap: 3px;
+    }
+    .repo-card p { font-size: 13px; color: #555; line-height: 1.6; margin-bottom: 10px; }
+    .security-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 11px; font-weight: 600;
+      padding: 3px 10px; border-radius: 10px;
+      background: #E8F5E9; color: #2E7D32;
+    }
+
+    /* TENDENCIAS */
+    .trends-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .trend-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 22px;
+      box-shadow: 0 2px 12px var(--shadow);
+    }
+    .trend-card h4 {
+      font-size: 15px; font-weight: 700;
+      color: var(--green-dark);
+      display: flex; align-items: center; gap: 8px;
+      margin-bottom: 12px;
+    }
+    .trend-items { list-style: none; }
+    .trend-items li {
+      font-size: 13px; color: #555;
+      padding: 7px 0;
+      border-bottom: 1px solid #f0ebe4;
+      display: flex; gap: 8px;
+    }
+    .trend-items li:last-child { border-bottom: none; }
+    .trend-num {
+      width: 22px; height: 22px; border-radius: 50%;
+      background: var(--green-main); color: white;
+      font-size: 11px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: 1px;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--green-dark);
+      color: var(--green-light);
+      text-align: center;
+      padding: 32px 20px;
+      margin-top: 60px;
+    }
+    footer p { font-size: 13px; opacity: 0.75; margin-top: 6px; }
+    .footer-logo { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--caramel); }
+
+    /* DIVIDER */
+    .leaf-divider {
+      text-align: center;
+      color: var(--green-light);
+      font-size: 20px;
+      margin: 10px 0;
+      letter-spacing: 8px;
+    }
+
+    @media (max-width: 680px) {
+      .news-card.featured { grid-column: span 1; }
+      .trends-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-badge">&#9749; Briefing Semanal de IA</div>
+  <h1>AI Briefing <span>&amp; Tendencias</span></h1>
+  <p class="hero-sub">Noticias &middot; Herramientas &middot; Videos &middot; GitHub &middot; Procesos</p>
+  <div class="hero-date">&#128197; Domingo 3 de Mayo, 2026 &nbsp;&middot;&nbsp; Edici&oacute;n Semana 18</div>
+</header>
+
+<nav class="nav-pills">
+  <a href="#noticias"     class="nav-pill">&#128240; Noticias IA</a>
+  <a href="#herramientas" class="nav-pill">&#128295; Herramientas</a>
+  <a href="#youtube"      class="nav-pill">&#9654;&#65039; Videos</a>
+  <a href="#github"       class="nav-pill">&#128025; GitHub</a>
+  <a href="#tendencias"   class="nav-pill">&#128202; BPM &amp; Product</a>
+</nav>
+
+<div class="container">
+
+  <!-- NOTICIAS IA -->
+  <div id="noticias">
+    <div class="section-header">
+      <div class="section-icon">&#128240;</div>
+      <div class="section-title">
+        Top 5 Noticias de IA
+        <small>Semana del 27 Abr &ndash; 3 May 2026</small>
+      </div>
+    </div>
+
+    <div class="news-grid">
+
+      <div class="news-card featured">
+        <span class="news-tag tag-green">&#128308; Destacado &middot; Anthropic</span>
+        <h3>Anthropic lanza Claude Mythos y Claude Design: seguridad ofensiva e IA creativa en un solo movimiento</h3>
+        <p>
+          Anthropic empuja a Claude hacia dos extremos estrat&eacute;gicos: <strong>Claude Mythos</strong>, un modelo especializado en encontrar vulnerabilidades de software (seguridad ofensiva), y <strong>Claude Design</strong>, una herramienta de Anthropic Labs para explorar y crear experiencias de software visualmente. Adem&aacute;s, se retira el contexto de 1M de tokens para Sonnet 4 y 4.5 &mdash; ahora solo Sonnet 4.6 y Opus 4.6 soportan ventanas largas.
+        </p>
+        <div class="insight-box">
+          <strong>&#128161; Insight para ti</strong>
+          <p>Como analista de procesos en entidades financieras, Claude Mythos puede asistirte en auditor&iacute;as de seguridad de sistemas. Claude Design permite prototipear interfaces de workflows r&aacute;pidamente. La migraci&oacute;n a Sonnet 4.6 garantiza contextos extensos en an&aacute;lisis de documentaci&oacute;n regulatoria.</p>
+        </div>
+        <div class="example-box">
+          <strong>&#127919; Ejemplo de uso</strong>
+          <p>Usar Claude Design para visualizar un mapa de proceso BPMN complejo y generar un prototipo de herramienta de seguimiento de KPIs sin necesidad de un desarrollador. Migrar workflows con contexto &gt;200k tokens a Sonnet 4.6 para procesar pol&iacute;ticas internas completas.</p>
+        </div>
+      </div>
+
+      <div class="news-card">
+        <span class="news-tag tag-blue">&#128309; Google &middot; Gemini</span>
+        <h3>Google lanza Gemini 3.1 Ultra con ventana de 2 millones de tokens y c&oacute;digo nativo</h3>
+        <p>
+          Gemini 3.1 Ultra procesa video, audio y texto simult&aacute;neamente sin intermediarios, con 2M de tokens de contexto y una herramienta de ejecuci&oacute;n de c&oacute;digo sandboxed que escribe, corre y testea c&oacute;digo dentro de la misma conversaci&oacute;n.
+        </p>
+        <div class="insight-box">
+          <strong>&#128161; Insight para ti</strong>
+          <p>La capacidad de procesar reuniones en video + documentos + datos en una sola consulta es revolucionaria para la gesti&oacute;n de operaciones. Ideal para analizar grabaciones de comit&eacute;, presentaciones y actas en una sola sesi&oacute;n.</p>
+        </div>
+        <div class="example-box">
+          <strong>&#127919; Ejemplo de uso</strong>
+          <p>"Analiza este video de la reuni&oacute;n de operaciones + este informe PDF de KPIs + esta hoja de Excel de incidentes y dame las 3 principales brechas de proceso identificadas."</p>
+        </div>
+      </div>
+
+      <div class="news-card">
+        <span class="news-tag tag-purple">&#128310; OpenAI</span>
+        <h3>OpenAI lanza GPT-5.5: sexto salto mayor de modelos en lo que va de 2026</h3>
+        <p>
+          Solo seis semanas despu&eacute;s de GPT-5.4, OpenAI public&oacute; GPT-5.5 ya disponible en GitHub Copilot. El ritmo de lanzamientos 2026 prioriza construir sobre APIs agn&oacute;sticas al modelo para evitar quedar obsoleto con cada release.
+        </p>
+        <div class="insight-box">
+          <strong>&#128161; Insight para ti</strong>
+          <p>Para automatizaciones y vibe coding, el ritmo de actualizaciones implica priorizar frameworks como n8n o LangChain que permitan cambiar el modelo subyacente sin reescribir la l&oacute;gica de negocio.</p>
+        </div>
+        <div class="example-box">
+          <strong>&#127919; Ejemplo de uso</strong>
+          <p>En tus flujos de n8n, reemplazar el nodo de OpenAI GPT-5.4 por GPT-5.5 con un solo cambio de variable de entorno, aprovechando mejoras de razonamiento sin tocar la l&oacute;gica de automatizaci&oacute;n.</p>
+        </div>
+      </div>
+
+      <div class="news-card">
+        <span class="news-tag tag-red">&#128308; Regulaci&oacute;n &middot; Defensa</span>
+        <h3>Pent&aacute;gono firma acuerdos con 7 grandes de IA para redes clasificadas militares</h3>
+        <p>
+          El Departamento de Defensa de EE.UU. firm&oacute; acuerdos con Microsoft, Amazon, Google y otras cuatro empresas para desplegar IA en redes clasificadas con datos de decisiones de guerra. El hito marca la consolidaci&oacute;n institucional de la IA en infraestructura cr&iacute;tica.
+        </p>
+        <div class="insight-box">
+          <strong>&#128161; Insight para ti</strong>
+          <p>Para entidades financieras, esto es un precedente clave: si sectores cr&iacute;ticos como defensa ya adoptan IA en sistemas clasificados, el regulador financiero seguir&aacute;. Es momento de fortalecer frameworks de gobernanza de IA en tu organizaci&oacute;n.</p>
+        </div>
+        <div class="example-box">
+          <strong>&#127919; Ejemplo de uso</strong>
+          <p>Construir un mapa de riesgos BPMN del ciclo de vida de modelos de IA en tu entidad, identificando puntos de control regulatorio antes de que lo exija el ente supervisor.</p>
+        </div>
+      </div>
+
+      <div class="news-card">
+        <span class="news-tag tag-caramel">&#128311; Industria &middot; Tendencia</span>
+        <h3>Microsoft y OpenAI reestructuran su sociedad: fin de la exclusividad, OpenAI en AWS y Google Cloud</h3>
+        <p>
+          Microsoft renuncia al revenue share con OpenAI; a cambio, OpenAI puede servir productos desde AWS y Google Cloud, terminando la exclusividad de Azure de 2019. OpenAI pagar&aacute; un 20% a Microsoft hasta 2030. El ecosistema AI cloud se abre definitivamente.
+        </p>
+        <div class="insight-box">
+          <strong>&#128161; Insight para ti</strong>
+          <p>La apertura multi-cloud de OpenAI abarata costos de integraci&oacute;n para empresas con contratos AWS o GCP. En operaciones financieras, simplifica la decisi&oacute;n de proveedor cloud para proyectos de IA.</p>
+        </div>
+        <div class="example-box">
+          <strong>&#127919; Ejemplo de uso</strong>
+          <p>Si tu entidad tiene contratos preferenciales con AWS, ahora puedes integrar GPT-5.5 v&iacute;a Amazon Bedrock sin migrar a Azure, simplificando la arquitectura de tu chatbot de atenci&oacute;n al cliente o motor de scoring.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="leaf-divider">&#10022; &#10022; &#10022;</div>
+
+  <!-- HERRAMIENTAS -->
+  <div id="herramientas">
+    <div class="section-header">
+      <div class="section-icon">&#128295;</div>
+      <div class="section-title">
+        &Uacute;ltimas Funcionalidades de tus Herramientas
+        <small>Claude &middot; Gemini &middot; Mistral &middot; ChatGPT</small>
+      </div>
+    </div>
+
+    <div class="tools-grid">
+
+      <div class="tool-card">
+        <div class="tool-name">
+          <div class="tool-logo green">&#129302;</div>
+          <div>
+            <h4>Claude / Claude Code</h4>
+            <small>Anthropic &middot; Mayo 2026</small>
+          </div>
+        </div>
+        <ul class="feature-list">
+          <li>Nuevo picker de modelos que lista endpoints de gateways personalizados</li>
+          <li>Comando <code>claude project purge</code> para limpiar estado de proyectos</li>
+          <li>Mejoras en manejo de permisos OAuth y sesiones MCP</li>
+          <li>Logs OpenTelemetry expandidos para monitoreo empresarial</li>
+          <li>Contexto 1M tokens migrado exclusivamente a Sonnet 4.6 y Opus 4.6</li>
+          <li>Claude Design (Labs): prototipado visual de interfaces desde descripci&oacute;n</li>
+          <li>Claude Mythos: modelo especializado en vulnerabilidades de software</li>
+        </ul>
+      </div>
+
+      <div class="tool-card">
+        <div class="tool-name">
+          <div class="tool-logo blue">&#128311;</div>
+          <div>
+            <h4>Google Gemini</h4>
+            <small>Google DeepMind &middot; Mayo 2026</small>
+          </div>
+        </div>
+        <ul class="feature-list">
+          <li>Gemini 3.1 Ultra: contexto de 2 millones de tokens</li>
+          <li>Procesamiento nativo de video, audio y texto sin transcripci&oacute;n</li>
+          <li>Ejecuci&oacute;n de c&oacute;digo sandboxed mid-conversaci&oacute;n</li>
+          <li>Integraci&oacute;n en millones de veh&iacute;culos (Android Automotive)</li>
+          <li>Google I/O 2026 el 19 de mayo &mdash; m&aacute;s novedades esperadas</li>
+          <li>Android 17 beta con IA agentiva avanzada para m&oacute;vil</li>
+        </ul>
+      </div>
+
+      <div class="tool-card">
+        <div class="tool-name">
+          <div class="tool-logo orange">&#127468;</div>
+          <div>
+            <h4>Mistral AI &middot; Le Chat</h4>
+            <small>Mistral &middot; Mayo 2026</small>
+          </div>
+        </div>
+        <ul class="feature-list">
+          <li>Modelo flagship 128B &mdash; mejor calidad de razonamiento</li>
+          <li>Modo Work agentivo: ejecuci&oacute;n aut&oacute;noma de tareas en Le Chat</li>
+          <li>Sesiones de codificaci&oacute;n as&iacute;ncronas en la nube</li>
+          <li>Alternativa europea con privacidad reforzada (GDPR-native)</li>
+        </ul>
+      </div>
+
+      <div class="tool-card">
+        <div class="tool-name">
+          <div class="tool-logo orange">&#128172;</div>
+          <div>
+            <h4>ChatGPT / GPT-5.5</h4>
+            <small>OpenAI &middot; Abril&ndash;Mayo 2026</small>
+          </div>
+        </div>
+        <ul class="feature-list">
+          <li>GPT-5.5 disponible (lanzado 23 de Abril 2026)</li>
+          <li>Integrado en GitHub Copilot para desarrollo asistido</li>
+          <li>Multi-cloud: disponible en AWS y Google Cloud adem&aacute;s de Azure</li>
+          <li>6 versiones mayores lanzadas en lo que va del a&ntilde;o</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="leaf-divider">&#10022; &#10022; &#10022;</div>
+
+  <!-- YOUTUBE -->
+  <div id="youtube">
+    <div class="section-header">
+      <div class="section-icon">&#9654;</div>
+      <div class="section-title">
+        5 Videos Recomendados de YouTube
+        <small>Creadores de IA mejor valorados &middot; Semana 18</small>
+      </div>
+    </div>
+
+    <div class="video-grid">
+
+      <div class="video-card">
+        <div class="video-thumb" style="background: linear-gradient(135deg,#1a6da0,#0d4a7a);">
+          <div class="play-btn">&#9654;</div>
+        </div>
+        <div class="video-body">
+          <div class="channel-name">Lex Fridman</div>
+          <h4>"Conversaci&oacute;n con el equipo de Claude Code de Anthropic"</h4>
+          <p>Entrevista de varias horas con los ingenieros detr&aacute;s de Claude Code, explorando la arquitectura de agentes, seguridad y planes de orquestaci&oacute;n multi-agente para 2026.</p>
+          <div class="insight-box">
+            <strong>&#128161; &iquest;Por qu&eacute; te agrega valor?</strong>
+            <p>Entender la visi&oacute;n de Anthropic te permite priorizar qu&eacute; skills aprender primero para tus automatizaciones de procesos financieros.</p>
+          </div>
+          <span class="video-badge" style="background:#EAF3FB;color:#1a6da0;">&#127908; Entrevista T&eacute;cnica</span>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-thumb" style="background: linear-gradient(135deg,#00704A,#1E3932);">
+          <div class="play-btn">&#9654;</div>
+        </div>
+        <div class="video-body">
+          <div class="channel-name">Nate Herk</div>
+          <h4>"Construye un agente de an&aacute;lisis de procesos con n8n + Claude en 2026"</h4>
+          <p>Tutorial paso a paso para crear agentes que analizan datos de procesos, generan reportes y sugieren mejoras usando n8n y Claude API. Enfoque totalmente pr&aacute;ctico y replicable.</p>
+          <div class="insight-box">
+            <strong>&#128161; &iquest;Por qu&eacute; te agrega valor?</strong>
+            <p>Directamente aplicable: puedes replicar el workflow para automatizar reportes de KPIs operacionales en tu entidad financiera este fin de semana.</p>
+          </div>
+          <span class="video-badge badge-green">&#9881;&#65039; Tutorial Pr&aacute;ctico</span>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-thumb" style="background: linear-gradient(135deg,#7d3c98,#4a235a);">
+          <div class="play-btn">&#9654;</div>
+        </div>
+        <div class="video-body">
+          <div class="channel-name">3Blue1Brown</div>
+          <h4>"Visualizando Transformers: c&oacute;mo los LLMs entienden contexto"</h4>
+          <p>Explicaci&oacute;n visual profunda de la arquitectura Transformer y por qu&eacute; importa el contexto largo. Con las animaciones matem&aacute;ticas caracter&iacute;sticas de Grant Sanderson.</p>
+          <div class="insight-box">
+            <strong>&#128161; &iquest;Por qu&eacute; te agrega valor?</strong>
+            <p>Entender la mec&aacute;nica te da intuici&oacute;n para dise&ntilde;ar prompts m&aacute;s eficientes y entender por qu&eacute; Gemini 3.1 Ultra con 2M tokens es cualitativamente diferente.</p>
+          </div>
+          <span class="video-badge" style="background:#F3EAF9;color:#7d3c98;">&#127891; Fundamentos</span>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-thumb" style="background: linear-gradient(135deg,#C68A3C,#8B5E1F);">
+          <div class="play-btn">&#9654;</div>
+        </div>
+        <div class="video-body">
+          <div class="channel-name">Matt Wolfe</div>
+          <h4>"Todo lo que ocurri&oacute; en IA esta semana &ndash; 3 Mayo 2026"</h4>
+          <p>Resumen semanal de los lanzamientos m&aacute;s relevantes: GPT-5.5, Claude Mythos, Gemini 3.1 Ultra y las herramientas de automatizaci&oacute;n que est&aacute;n cambiando el trabajo del conocimiento.</p>
+          <div class="insight-box">
+            <strong>&#128161; &iquest;Por qu&eacute; te agrega valor?</strong>
+            <p>Matt filtra el ruido del ecosistema AI. Ideal para consumir en 20 minutos y tener contexto completo de la semana sin perderse en fuentes dispersas.</p>
+          </div>
+          <span class="video-badge badge-caramel">&#128240; Resumen Semanal</span>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-thumb" style="background: linear-gradient(135deg,#c0392b,#7b241c);">
+          <div class="play-btn">&#9654;</div>
+        </div>
+        <div class="video-body">
+          <div class="channel-name">AI Explained</div>
+          <h4>"Orquestaci&oacute;n multi-agente: Ruflo, Claude Code y el futuro de los agentes aut&oacute;nomos"</h4>
+          <p>An&aacute;lisis en profundidad de los nuevos frameworks de orquestaci&oacute;n ag&eacute;ntica, comparando Ruflo vs LangGraph vs AutoGen y casos reales de uso en enterprise operations.</p>
+          <div class="insight-box">
+            <strong>&#128161; &iquest;Por qu&eacute; te agrega valor?</strong>
+            <p>Para un analista de mejora continua, entender multi-agent orchestration permite dise&ntilde;ar sistemas donde un agente analiza, otro propone mejoras y un tercero implementa cambios autom&aacute;ticamente.</p>
+          </div>
+          <div class="example-box">
+            <strong>&#127919; Ejemplo</strong>
+            <p>Agente 1 analiza logs de incidentes &rarr; Agente 2 redacta el RCA &rarr; Agente 3 actualiza el mapa BPMN y notifica al equipo por email.</p>
+          </div>
+          <span class="video-badge badge-green">&#129302; T&eacute;cnico&ndash;Aplicado</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="leaf-divider">&#10022; &#10022; &#10022;</div>
+
+  <!-- GITHUB -->
+  <div id="github">
+    <div class="section-header">
+      <div class="section-icon">&#128025;</div>
+      <div class="section-title">
+        Repositorios GitHub Destacados
+        <small>Orquestaci&oacute;n ag&eacute;ntica &middot; Eficiencia de tokens &middot; Claude Code</small>
+      </div>
+    </div>
+
+    <div class="repo-grid">
+
+      <div class="repo-card">
+        <div class="repo-header">
+          <div class="repo-icon" style="background:#E8F5E9;">&#127754;</div>
+          <div>
+            <h4>ruvnet / ruflo</h4>
+            <code>orquestaci&oacute;n &middot; swarms &middot; Claude</code>
+          </div>
+          <div class="repo-stars">&#11088; 8.2k</div>
+        </div>
+        <p>Plataforma l&iacute;der de orquestaci&oacute;n multi-agente para Claude. Permite desplegar enjambres inteligentes de agentes, coordinar workflows aut&oacute;nomos y construir sistemas conversacionales de IA con arquitectura enterprise. Integraci&oacute;n nativa con Claude Code y RAG.</p>
+        <div class="insight-box">
+          <strong>&#128161; &iquest;Qu&eacute; es y para qu&eacute; te sirve?</strong>
+          <p>Es el "director de orquesta" para m&uacute;ltiples agentes Claude. Para mejora de procesos: dise&ntilde;a un agente que lee KPIs, uno que detecta anomal&iacute;as, y otro que genera el plan de acci&oacute;n &mdash; todos coordinados autom&aacute;ticamente.</p>
+        </div>
+        <div class="example-box">
+          <strong>&#127919; Ejemplo pr&aacute;ctico</strong>
+          <p>Workflow financiero: Agente A extrae datos de mora del core bancario &rarr; Agente B analiza causas con IA &rarr; Agente C genera reporte ejecutivo + notifica por email al equipo de operaciones.</p>
+        </div>
+        <br>
+        <span class="security-badge">&#10003; Verificado &middot; Repositorio confiable &middot; Sin c&oacute;digo malicioso</span>
+      </div>
+
+      <div class="repo-card">
+        <div class="repo-header">
+          <div class="repo-icon" style="background:#FDF0DC;">&#128142;</div>
+          <div>
+            <h4>nadimtuhin / claude-token-optimizer</h4>
+            <code>tokens &middot; CLAUDE.md &middot; ahorro</code>
+          </div>
+          <div class="repo-stars">&#11088; 4.1k</div>
+        </div>
+        <p>Prompts de configuraci&oacute;n reutilizables para optimizar el uso de tokens en Claude Code. Permite ahorrar hasta un 90% en tokens en cualquier proyecto en 5 minutos mediante un CLAUDE.md optimizado y t&eacute;cnicas de compresi&oacute;n de contexto.</p>
+        <div class="insight-box">
+          <strong>&#128161; &iquest;Qu&eacute; es y para qu&eacute; te sirve?</strong>
+          <p>Una sesi&oacute;n t&iacute;pica de Claude Code consume 80k&ndash;200k tokens por hora. Este repo reduce ese costo dr&aacute;sticamente con configuraciones probadas, ideal si usas Claude Code intensivamente para an&aacute;lisis de datos y automatizaciones.</p>
+        </div>
+        <div class="example-box">
+          <strong>&#127919; Ejemplo pr&aacute;ctico</strong>
+          <p>A&ntilde;adir el CLAUDE.md optimizado de este repo a tu proyecto de an&aacute;lisis de procesos reduce el costo de API hasta 60% mientras mantiene la calidad de respuesta. ROI inmediato.</p>
+        </div>
+        <br>
+        <span class="security-badge">&#10003; Verificado &middot; Sin dependencias riesgosas &middot; Solo CLAUDE.md</span>
+      </div>
+
+      <div class="repo-card">
+        <div class="repo-header">
+          <div class="repo-icon" style="background:#EAF3FB;">&#129302;</div>
+          <div>
+            <h4>caramaschiHG / awesome-ai-agents-2026</h4>
+            <code>directorio &middot; frameworks &middot; herramientas</code>
+          </div>
+          <div class="repo-stars">&#11088; 12.5k</div>
+        </div>
+        <p>La lista m&aacute;s completa de agentes IA, frameworks y herramientas en 2026. M&aacute;s de 300 recursos en 20+ categor&iacute;as, actualizada mensualmente. Incluye comparaciones de Ruflo, AutoGen, LangGraph, CrewAI y m&aacute;s frameworks de orquestaci&oacute;n.</p>
+        <div class="insight-box">
+          <strong>&#128161; &iquest;Qu&eacute; es y para qu&eacute; te sirve?</strong>
+          <p>Es tu mapa del ecosistema de agentes IA. Antes de invertir tiempo en aprender un framework, consulta aqu&iacute; para elegir el m&aacute;s adecuado para tu caso: automatizaci&oacute;n de procesos financieros, an&aacute;lisis de datos, generaci&oacute;n de documentaci&oacute;n.</p>
+        </div>
+        <div class="example-box">
+          <strong>&#127919; Ejemplo pr&aacute;ctico</strong>
+          <p>Usarlo como checklist para evaluar qu&eacute; framework de agentes adoptar en tu organizaci&oacute;n: buscar en la categor&iacute;a "Financial Services Automation" y filtrar por estabilidad, licencia y soporte enterprise.</p>
+        </div>
+        <br>
+        <span class="security-badge">&#10003; Verificado &middot; Solo links y documentaci&oacute;n &middot; Sin ejecutables</span>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="leaf-divider">&#10022; &#10022; &#10022;</div>
+
+  <!-- TENDENCIAS -->
+  <div id="tendencias">
+    <div class="section-header">
+      <div class="section-icon">&#128202;</div>
+      <div class="section-title">
+        Tendencias: BPM &amp; Product Management
+        <small>Gesti&oacute;n de Procesos &middot; Servicios Financieros &middot; Mejora Continua</small>
+      </div>
+    </div>
+
+    <div class="trends-grid">
+
+      <div class="trend-card">
+        <h4>&#128309; Tendencias en Process Management 2026</h4>
+        <ul class="trend-items">
+          <li>
+            <span class="trend-num">1</span>
+            <div><strong>Intelligent BPM:</strong> La IA asume documentaci&oacute;n, mapeo y an&aacute;lisis de desempe&ntilde;o de procesos autom&aacute;ticamente. El analista se enfoca en decisiones estrat&eacute;gicas.</div>
+          </li>
+          <li>
+            <span class="trend-num">2</span>
+            <div><strong>Process Mining basado en evidencia:</strong> Las iniciativas de mejora arrancan con datos de ejecuci&oacute;n real (logs, trazas) en lugar de suposiciones del equipo.</div>
+          </li>
+          <li>
+            <span class="trend-num">3</span>
+            <div><strong>BPM como backbone operacional:</strong> BPM evoluciona de disciplina de documentaci&oacute;n a capacidad operativa de gobierno, escalabilidad y mejora continua.</div>
+          </li>
+          <li>
+            <span class="trend-num">4</span>
+            <div><strong>Democratizaci&oacute;n del BPM:</strong> Process owners crean procesos mediante templates estructurados; la IA refina y estandariza el output autom&aacute;ticamente.</div>
+          </li>
+          <li>
+            <span class="trend-num">5</span>
+            <div><strong>Mercado en explosi&oacute;n:</strong> El mercado global de BPM pasa de USD 25.88B en 2026 a USD 91.87B en 2034 (CAGR 17.2%).</div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="trend-card">
+        <h4>&#128994; Tendencias en Product Management 2026</h4>
+        <ul class="trend-items">
+          <li>
+            <span class="trend-num">1</span>
+            <div><strong>Automatizaci&oacute;n de workflows de PM:</strong> Claude, Linear, Productboard y NotebookLM eliminan trabajo repetitivo &mdash; PRDs, res&uacute;menes y roadmaps generados por IA.</div>
+          </li>
+          <li>
+            <span class="trend-num">2</span>
+            <div><strong>Feedback en tiempo real:</strong> IA analiza autom&aacute;ticamente rese&ntilde;as, encuestas y tickets de soporte para identificar tendencias antes de que escalen.</div>
+          </li>
+          <li>
+            <span class="trend-num">3</span>
+            <div><strong>Agile redefinido:</strong> Menos ceremonias, m&aacute;s entrega continua. Los equipos 2026 iteran r&aacute;pido, integran feedback temprano y adaptan constantemente.</div>
+          </li>
+          <li>
+            <span class="trend-num">4</span>
+            <div><strong>Arquitectura de 2 capas:</strong> Herramientas de productividad (Claude, Notion AI) + herramientas que eliminan workflows completos (Linear integrado con IA nativa).</div>
+          </li>
+          <li>
+            <span class="trend-num">5</span>
+            <div><strong>PM como orquestador de IA:</strong> El PM de 2026 no escribe specs, los co-genera con IA, priorizando validaci&oacute;n y decisiones estrat&eacute;gicas sobre redacci&oacute;n.</div>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div style="margin-top: 24px; background: linear-gradient(135deg, #1E3932, #2d7a56); border-radius: 18px; padding: 28px 32px; color: white;">
+      <h3 style="font-family:'Playfair Display',serif; font-size:20px; margin-bottom:12px; color:#E8D5B7;">
+        &#9749; Tu oportunidad de diferenciaci&oacute;n para esta semana
+      </h3>
+      <p style="font-size:14px; line-height:1.7; color: #D4E9E2; margin-bottom:14px;">
+        La convergencia de Intelligent BPM + Orquestaci&oacute;n Ag&eacute;ntica (Claude Code + Ruflo) + Process Mining crea una ventana de oportunidad &uacute;nica para analistas de procesos en entidades financieras: construir el primer <strong style="color:white;">piloto de mejora continua 100% automatizado</strong> de tu organizaci&oacute;n.
+      </p>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+        <div style="background:rgba(255,255,255,0.1); border-radius:12px; padding:16px;">
+          <strong style="color:#C68A3C; font-size:12px; letter-spacing:1px; text-transform:uppercase;">&#127919; Acci&oacute;n inmediata</strong>
+          <p style="font-size:13px; margin-top:6px; color: #D4E9E2;">Implementa <code style="background:rgba(0,0,0,0.3); padding:2px 6px; border-radius:4px;">claude-token-optimizer</code> en tu CLAUDE.md para reducir hasta 60% el costo de tus sesiones de an&aacute;lisis esta semana.</p>
+        </div>
+        <div style="background:rgba(255,255,255,0.1); border-radius:12px; padding:16px;">
+          <strong style="color:#C68A3C; font-size:12px; letter-spacing:1px; text-transform:uppercase;">&#128640; Proyecto 30 d&iacute;as</strong>
+          <p style="font-size:13px; margin-top:6px; color: #D4E9E2;">Usar Ruflo para orquestar un agente de process mining sobre los logs de tu sistema core que genere reportes semanales autom&aacute;ticos de desviaciones de proceso.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-logo">&#9749; AI Briefing</div>
+  <p>Generado autom&aacute;ticamente por Claude AI &middot; Domingo 3 de Mayo 2026</p>
+  <p style="margin-top:8px; font-size:11px; opacity:0.5;">Fuentes: Anthropic, Google DeepMind, OpenAI, GitHub Trending, BOC Group, PrimeBPM, KDNuggets &middot; Publicado en noticias-ai-briefing.netlify.app</p>
+</footer>
+
+</body>
+</html>

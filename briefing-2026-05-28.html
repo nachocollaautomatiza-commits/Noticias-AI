@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Briefing Semanal – 28 de Mayo 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Playfair+Display:wght@400;700&display=swap');
+
+  :root {
+    --verde: #00704A;
+    --verde-oscuro: #1E3932;
+    --verde-claro: #D4EDDA;
+    --cafe: #4A2C2A;
+    --beige: #F2EAD3;
+    --latte: #D4B896;
+    --dorado: #CBA258;
+    --crema: #FAF6F0;
+    --texto: #2C1A0E;
+    --gris: #6B6B6B;
+    --blanco: #FFFFFF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Lato', sans-serif;
+    background-color: var(--crema);
+    color: var(--texto);
+    line-height: 1.7;
+    font-size: 16px;
+  }
+
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, var(--verde-oscuro) 0%, var(--verde) 60%, #00885a 100%);
+    padding: 50px 40px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -80px; left: -80px;
+    width: 300px; height: 300px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 50%;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -100px; right: -60px;
+    width: 400px; height: 400px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 50%;
+  }
+  .header-logo {
+    font-size: 48px;
+    margin-bottom: 12px;
+  }
+  .header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.6em;
+    color: var(--blanco);
+    letter-spacing: 1px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .header .subtitle {
+    color: var(--latte);
+    font-size: 1.1em;
+    font-weight: 300;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .header .date-badge {
+    display: inline-block;
+    margin-top: 20px;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: var(--blanco);
+    padding: 8px 24px;
+    border-radius: 30px;
+    font-size: 0.9em;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+
+  /* WAVE */
+  .wave {
+    background: var(--verde-oscuro);
+    height: 40px;
+    clip-path: ellipse(55% 100% at 50% 0%);
+    margin-top: -1px;
+  }
+
+  /* CONTAINER */
+  .container {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  /* SECTION CARDS */
+  .section {
+    background: var(--blanco);
+    border-radius: 24px;
+    padding: 40px;
+    margin-bottom: 40px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    border-left: 6px solid var(--verde);
+    position: relative;
+  }
+  .section.cafe { border-left-color: var(--cafe); }
+  .section.dorado { border-left-color: var(--dorado); }
+  .section.latte { border-left-color: var(--latte); }
+  .section.verde-oscuro { border-left-color: var(--verde-oscuro); }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--beige);
+  }
+  .section-icon {
+    font-size: 2em;
+    width: 60px; height: 60px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--verde-claro);
+    border-radius: 16px;
+    flex-shrink: 0;
+  }
+  .section.cafe .section-icon { background: #F5E6E3; }
+  .section.dorado .section-icon { background: #FDF3D8; }
+  .section.latte .section-icon { background: #F5EDE0; }
+  .section.verde-oscuro .section-icon { background: #E0EDE9; }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6em;
+    color: var(--verde-oscuro);
+    font-weight: 700;
+  }
+  .section.cafe .section-title { color: var(--cafe); }
+  .section.dorado .section-title { color: #7a5c1e; }
+
+  .section-number {
+    font-size: 0.75em;
+    font-weight: 900;
+    color: var(--verde);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  /* NEWS ITEMS */
+  .news-item {
+    background: var(--crema);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 20px;
+    border: 1px solid var(--beige);
+    transition: box-shadow 0.2s;
+  }
+  .news-item:last-child { margin-bottom: 0; }
+  .news-item:hover { box-shadow: 0 4px 16px rgba(0,112,74,0.12); }
+
+  .news-tag {
+    display: inline-block;
+    font-size: 0.72em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 3px 12px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+  }
+  .tag-anthropic { background: var(--verde-claro); color: var(--verde-oscuro); }
+  .tag-openai { background: #E8F4F8; color: #1a5276; }
+  .tag-google { background: #FDF3D8; color: #7a5c1e; }
+  .tag-microsoft { background: #EBF3FF; color: #1a3a6b; }
+  .tag-finanzas { background: #F5E6E3; color: var(--cafe); }
+
+  .news-title {
+    font-weight: 700;
+    font-size: 1.1em;
+    color: var(--texto);
+    margin-bottom: 10px;
+    line-height: 1.4;
+  }
+  .news-summary { color: var(--gris); margin-bottom: 14px; font-size: 0.95em; }
+
+  .info-box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 12px;
+  }
+  .info-pill {
+    flex: 1; min-width: 200px;
+    background: var(--blanco);
+    border-radius: 12px;
+    padding: 12px 16px;
+    border: 1px solid var(--beige);
+  }
+  .info-pill-label {
+    font-size: 0.7em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--verde);
+    margin-bottom: 4px;
+  }
+  .info-pill-text { font-size: 0.88em; color: var(--texto); }
+
+  /* TOOL CARDS */
+  .tool-card {
+    background: var(--crema);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 20px;
+    border: 1px solid var(--beige);
+  }
+  .tool-card:last-child { margin-bottom: 0; }
+
+  .tool-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+  .tool-emoji { font-size: 1.8em; }
+  .tool-name {
+    font-weight: 700;
+    font-size: 1.05em;
+    color: var(--verde-oscuro);
+  }
+  .tool-version {
+    font-size: 0.78em;
+    background: var(--verde);
+    color: white;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-weight: 600;
+  }
+
+  .feature-list {
+    list-style: none;
+    margin: 12px 0;
+  }
+  .feature-list li {
+    padding: 6px 0 6px 24px;
+    position: relative;
+    font-size: 0.92em;
+    color: var(--texto);
+    border-bottom: 1px dashed var(--beige);
+  }
+  .feature-list li:last-child { border-bottom: none; }
+  .feature-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--verde);
+    font-weight: 700;
+  }
+
+  .apply-box {
+    background: linear-gradient(135deg, var(--verde-oscuro), var(--verde));
+    color: white;
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin-top: 14px;
+    font-size: 0.88em;
+  }
+  .apply-box strong { color: var(--latte); }
+
+  /* TREND CARDS */
+  .trend-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 18px;
+    margin-bottom: 24px;
+  }
+  .trend-card {
+    background: var(--crema);
+    border-radius: 16px;
+    padding: 22px;
+    border: 1px solid var(--beige);
+  }
+  .trend-icon { font-size: 2em; margin-bottom: 10px; }
+  .trend-title { font-weight: 700; font-size: 1em; color: var(--verde-oscuro); margin-bottom: 8px; }
+  .trend-text { font-size: 0.88em; color: var(--gris); }
+
+  .stat-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 8px 0;
+  }
+  .stat-label { font-size: 0.82em; color: var(--texto); flex-shrink: 0; width: 140px; }
+  .stat-track { flex: 1; background: var(--beige); border-radius: 4px; height: 8px; }
+  .stat-fill { height: 8px; border-radius: 4px; background: var(--verde); }
+  .stat-value { font-size: 0.82em; font-weight: 700; color: var(--verde); flex-shrink: 0; width: 40px; text-align: right; }
+
+  /* VIDEO CARDS */
+  .video-card {
+    background: var(--crema);
+    border-radius: 16px;
+    padding: 22px;
+    margin-bottom: 18px;
+    border: 1px solid var(--beige);
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+  }
+  .video-card:last-child { margin-bottom: 0; }
+  .video-thumb {
+    width: 90px; height: 64px;
+    background: var(--verde-oscuro);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8em;
+    flex-shrink: 0;
+  }
+  .video-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4em;
+    color: var(--dorado);
+    font-weight: 700;
+    flex-shrink: 0;
+    width: 30px;
+    margin-top: 2px;
+  }
+  .video-content { flex: 1; }
+  .video-channel {
+    font-size: 0.72em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--verde);
+    margin-bottom: 4px;
+  }
+  .video-title { font-weight: 700; font-size: 0.98em; color: var(--texto); margin-bottom: 8px; }
+  .video-desc { font-size: 0.86em; color: var(--gris); margin-bottom: 10px; }
+  .video-link {
+    display: inline-block;
+    font-size: 0.8em;
+    font-weight: 700;
+    color: var(--verde);
+    text-decoration: none;
+    border: 1.5px solid var(--verde);
+    padding: 4px 14px;
+    border-radius: 20px;
+    transition: all 0.2s;
+  }
+  .video-link:hover { background: var(--verde); color: white; }
+
+  /* REPO CARDS */
+  .repo-card {
+    background: var(--crema);
+    border-radius: 16px;
+    padding: 22px;
+    margin-bottom: 18px;
+    border: 1px solid var(--beige);
+  }
+  .repo-card:last-child { margin-bottom: 0; }
+  .repo-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .repo-name {
+    font-family: 'Courier New', monospace;
+    font-weight: 700;
+    font-size: 1em;
+    color: var(--verde-oscuro);
+  }
+  .repo-stars {
+    font-size: 0.85em;
+    font-weight: 700;
+    color: var(--dorado);
+    background: #FDF3D8;
+    padding: 3px 12px;
+    border-radius: 20px;
+  }
+  .repo-desc { font-size: 0.9em; color: var(--gris); margin-bottom: 12px; }
+  .repo-link {
+    display: inline-block;
+    font-size: 0.8em;
+    font-weight: 700;
+    color: var(--cafe);
+    text-decoration: none;
+    border: 1.5px solid var(--cafe);
+    padding: 4px 14px;
+    border-radius: 20px;
+    transition: all 0.2s;
+  }
+  .repo-link:hover { background: var(--cafe); color: white; }
+  .repo-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+  .repo-tag {
+    font-size: 0.72em;
+    padding: 2px 10px;
+    border-radius: 12px;
+    background: var(--beige);
+    color: var(--gris);
+    font-weight: 600;
+  }
+
+  /* FOOTER */
+  .footer {
+    background: var(--verde-oscuro);
+    color: var(--latte);
+    text-align: center;
+    padding: 40px 24px;
+    font-size: 0.88em;
+    margin-top: 20px;
+  }
+  .footer strong { color: var(--blanco); }
+  .footer .divider { color: var(--verde); margin: 0 10px; }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    .header h1 { font-size: 1.8em; }
+    .section { padding: 24px 18px; }
+    .video-card { flex-direction: column; }
+    .info-pill { min-width: 100%; }
+    .trend-grid { grid-template-columns: 1fr; }
+  }
+
+  /* PULSE ANIMATION for new badge */
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(0,112,74,0.4); }
+    70% { box-shadow: 0 0 0 8px rgba(0,112,74,0); }
+    100% { box-shadow: 0 0 0 0 rgba(0,112,74,0); }
+  }
+  .new-badge {
+    display: inline-block;
+    background: var(--verde);
+    color: white;
+    font-size: 0.65em;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 10px;
+    vertical-align: middle;
+    margin-left: 8px;
+    animation: pulse 2s infinite;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-logo">☕</div>
+  <h1>AI Briefing Semanal</h1>
+  <div class="subtitle">Inteligencia para Nacho Colla · Gerencia de Operaciones</div>
+  <div class="date-badge">📅 Semana del 28 de Mayo, 2026</div>
+</div>
+<div class="wave"></div>
+
+<div class="container">
+
+  <!-- ===== SECCIÓN 1: NOTICIAS ===== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon">📰</div>
+      <div>
+        <span class="section-number">Sección 1</span>
+        <div class="section-title">5 Noticias Clave de la Semana en IA</div>
+      </div>
+    </div>
+
+    <!-- Noticia 1 -->
+    <div class="news-item">
+      <span class="news-tag tag-anthropic">Anthropic</span>
+      <div class="news-title">Anthropic lanza Claude Opus 4.7 con mejoras en agentes de larga duración y visión avanzada <span class="new-badge">HOT</span></div>
+      <div class="news-summary">Anthropic presentó Claude Opus 4.7 con capacidades superiores en software engineering complejo, mejor atención a instrucciones detalladas, auto-verificación de outputs antes de reportar, y visión de imágenes en mayor resolución. El modelo está disponible en Claude, API, Amazon Bedrock, Google Cloud Vertex AI y Microsoft Foundry. Mismo precio que Opus 4.6: $5/M tokens input, $25/M tokens output.</div>
+      <div class="info-box">
+        <div class="info-pill">
+          <div class="info-pill-label">⚡ Relevancia Ops Financieras</div>
+          <div class="info-pill-text">Mejor ejecución de tareas largas sin errores — ideal para reconciliaciones automáticas y auditorías de procesos.</div>
+        </div>
+        <div class="info-pill">
+          <div class="info-pill-label">🛠️ Ejemplo concreto</div>
+          <div class="info-pill-text">Usar Opus 4.7 para revisar contratos financieros complejos con múltiples condiciones y auto-verificar cláusulas antes de reportar hallazgos.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Noticia 2 -->
+    <div class="news-item">
+      <span class="news-tag tag-openai">OpenAI</span>
+      <div class="news-title">OpenAI lanza GPT-5.5 Instant como nuevo modelo por defecto con 52% menos alucinaciones</div>
+      <div class="news-summary">GPT-5.5 Instant reemplaza a GPT-5.3 como modelo por defecto de ChatGPT. En evaluaciones internas logró 52.5% menos afirmaciones alucinadas en áreas críticas como medicina, derecho y finanzas. Incorpora búsqueda conectada a conversaciones pasadas, archivos y Gmail. OpenAI también lanzó una experiencia de finanzas personales para usuarios Pro en EE.UU. con conexión segura a cuentas bancarias y análisis de gastos.</div>
+      <div class="info-box">
+        <div class="info-pill">
+          <div class="info-pill-label">⚡ Relevancia Ops Financieras</div>
+          <div class="info-pill-text">Menos alucinaciones en consultas financieras y legales = mayor confiabilidad en análisis de riesgo y compliance automatizado.</div>
+        </div>
+        <div class="info-pill">
+          <div class="info-pill-label">🛠️ Ejemplo concreto</div>
+          <div class="info-pill-text">Analizar políticas de crédito con GPT-5.5 Instant sabiendo que la tasa de error en normativas financieras se redujo a la mitad.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Noticia 3 -->
+    <div class="news-item">
+      <span class="news-tag tag-google">Google I/O 2026</span>
+      <div class="news-title">Google I/O 2026: Gemini 3.5 Flash, Gemini Spark agente personal y procesamiento 7x más rápido <span class="new-badge">HOT</span></div>
+      <div class="news-summary">En Google I/O 2026, Google presentó Gemini 3.5 Flash como nuevo modelo por defecto en AI Mode Search (supera a Gemini 3.1 Pro en benchmarks agénticos). Gemini Spark es un agente personal 24/7 que actúa de forma autónoma en tu ecosistema Google (Gmail, Calendar, Drive) incluso con tu computadora apagada. El procesamiento de tokens de Google saltó 7x hasta 3.2 cuatrillones de tokens por mes.</div>
+      <div class="info-box">
+        <div class="info-pill">
+          <div class="info-pill-label">⚡ Relevancia Ops Financieras</div>
+          <div class="info-pill-text">Gemini Spark como asistente de operaciones autónomo puede monitorear KPIs en Sheets, enviar alertas y ejecutar workflows sin intervención humana.</div>
+        </div>
+        <div class="info-pill">
+          <div class="info-pill-label">🛠️ Ejemplo concreto</div>
+          <div class="info-pill-text">Configurar Gemini Spark para que revise diariamente reportes de morosidad en Google Sheets y envíe resúmenes automáticos por Gmail al equipo.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Noticia 4 -->
+    <div class="news-item">
+      <span class="news-tag tag-microsoft">Microsoft</span>
+      <div class="news-title">Microsoft Copilot supera 20 millones de seats con agentes de computer-use disponibles en general</div>
+      <div class="news-summary">Microsoft 365 Copilot superó 20 millones de seats pagos (crecimiento +250% YoY). Los Computer-Using Agents están ahora en disponibilidad general en Copilot Studio, permitiendo que los agentes operen aplicaciones de escritorio de forma autónoma. Microsoft también lanzó AI industrial para fábricas (Azure Foundry Copilot for Factories) y pivotó hacia estrategia multi-modelo incluyendo Claude de Anthropic junto a modelos OpenAI.</div>
+      <div class="info-box">
+        <div class="info-pill">
+          <div class="info-pill-label">⚡ Relevancia Ops Financieras</div>
+          <div class="info-pill-text">Computer-Using Agents pueden automatizar tareas en sistemas legacy (core bancario, ERPs) que no tienen API, simplemente operando la interfaz visual.</div>
+        </div>
+        <div class="info-pill">
+          <div class="info-pill-label">🛠️ Ejemplo concreto</div>
+          <div class="info-pill-text">Un agente que opera el sistema core bancario para extraer datos de cierre mensual sin necesidad de integración técnica.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Noticia 5 -->
+    <div class="news-item">
+      <span class="news-tag tag-anthropic">Anthropic</span>
+      <div class="news-title">Anthropic suma $200M con Gates Foundation y alianzas con PwC y KPMG para transformación empresarial</div>
+      <div class="news-summary">Anthropic anunció una alianza de $200M con la Gates Foundation para salud global, ciencias de la vida y educación durante 4 años. Simultáneamente expandió alianzas estratégicas con PwC para transformación de funciones empresariales con Claude, y con KPMG para integrar Claude en el núcleo de sus operaciones globales. Además, un acuerdo de cómputo con SpaceX elevará significativamente los límites de uso de Claude Code y la API.</div>
+      <div class="info-box">
+        <div class="info-pill">
+          <div class="info-pill-label">⚡ Relevancia Ops Financieras</div>
+          <div class="info-pill-text">Las grandes consultoras están estandarizando Claude para transformación operativa — esto valida el uso de Claude en procesos financieros y abre casos de estudio aplicables.</div>
+        </div>
+        <div class="info-pill">
+          <div class="info-pill-label">🛠️ Ejemplo concreto</div>
+          <div class="info-pill-text">Acceder a los casos de uso documentados por PwC y KPMG con Claude para replicar mejoras de procesos en entidades financieras de menor escala.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SECCIÓN 2: HERRAMIENTAS ===== -->
+  <div class="section cafe">
+    <div class="section-header">
+      <div class="section-icon">🔧</div>
+      <div>
+        <span class="section-number">Sección 2</span>
+        <div class="section-title">Actualizaciones de Herramientas que Usás</div>
+      </div>
+    </div>
+
+    <!-- Hermes AI -->
+    <div class="tool-card">
+      <div class="tool-header">
+        <div class="tool-emoji">🤖</div>
+        <div>
+          <div class="tool-name">Hermes Agent (NousResearch / Ollama)</div>
+          <span class="tool-version">v0.14.0 — MIT License</span>
+        </div>
+      </div>
+      <ul class="feature-list">
+        <li><strong>Qwen 3.6 ahora es el modelo recomendado</strong> para Hermes Agent en 2026 — 22% más rápido, 30% mejor razonamiento, 40% menos alucinaciones que versiones anteriores.</li>
+        <li><strong>Hermes Agent v0.14.0</strong> está disponible como framework open-source autónomo bajo licencia MIT en GitHub (github.com/nousresearch/hermes-agent).</li>
+        <li>Hermes 3 mantiene soporte full en Ollama (8B, 70B, 405B) con GGUF quantizations compatibles con llama.cpp y LM Studio.</li>
+        <li>Mejoras en function calling y tool use para integraciones con Telegram bots — ideal para el agente de Nacho en Telegram.</li>
+        <li>Las versiones 8B corren eficientemente en hardware local moderno sin GPU dedicada.</li>
+      </ul>
+      <div class="apply-box">
+        💡 <strong>Para el agente Telegram de Nacho:</strong> Considera actualizar a Qwen 3.6 en Ollama como base del agente — mejor respuesta en consultas de procesos y análisis de datos operativos con menor latencia.
+      </div>
+    </div>
+
+    <!-- Google Antigravity -->
+    <div class="tool-card">
+      <div class="tool-header">
+        <div class="tool-emoji">⚡</div>
+        <div>
+          <div class="tool-name">Google Antigravity</div>
+          <span class="tool-version">v2.0 — Anunciado Google I/O 2026</span>
+        </div>
+      </div>
+      <ul class="feature-list">
+        <li><strong>Antigravity 2.0</strong> ahora incluye 5 componentes: Desktop App, CLI, SDK, Managed Agents API y Enterprise Platform.</li>
+        <li><strong>Subagentes dinámicos</strong> para workflows paralelos — ejecuta múltiples agentes simultáneamente con un solo llamado API.</li>
+        <li><strong>Managed Agents API</strong>: con una sola llamada lanzás un agente que razona, usa tools y ejecuta código en entorno Linux aislado.</li>
+        <li><strong>Enterprise Support</strong>: integración directa con Google Cloud, herencia de data privacy y Terms of Service corporativos.</li>
+        <li>Plan AI Ultra $100/mes: 5x más límites de uso que el plan Google AI Pro.</li>
+        <li>Programación de tareas en background y comandos de voz nativos integrados.</li>
+      </ul>
+      <div class="apply-box">
+        💡 <strong>Aplicación práctica:</strong> Antigravity 2.0 puede orquestar agentes para monitoreo de KPIs operativos: un subagente extrae datos, otro los analiza, otro genera el reporte — todo en paralelo y con datos del ecosistema Google.
+      </div>
+    </div>
+
+    <!-- Claude Code -->
+    <div class="tool-card">
+      <div class="tool-header">
+        <div class="tool-emoji">💻</div>
+        <div>
+          <div class="tool-name">Claude Code</div>
+          <span class="tool-version">Mayo 2026 — Actualizaciones continuas</span>
+        </div>
+      </div>
+      <ul class="feature-list">
+        <li><strong>Agent View</strong>: nueva pantalla unificada que muestra todas las sesiones activas de Claude Code — qué está corriendo, qué espera input, qué finalizó.</li>
+        <li><strong>Comando /goal</strong>: mantiene a Claude trabajando entre turnos hasta que se cumple una condición de completitud — perfecto para automatizaciones largas.</li>
+        <li><strong>Fast Mode ahora corre en Opus 4.7</strong> por defecto — más potencia de razonamiento en modo rápido.</li>
+        <li><strong>Context Compression</strong>: menú Rewind puede comprimir contexto antiguo con "Summarize up to here" — ahorra tokens en sesiones largas.</li>
+        <li>Background Sessions: sesiones iniciadas con <code>claude --bg</code> corren en segundo plano y aparecen en Agent View.</li>
+        <li>Mejor soporte PowerShell en Windows, JSON session listing y plugin marketplace mejorado con estimaciones de costo.</li>
+      </ul>
+      <div class="apply-box">
+        💡 <strong>Para Nacho:</strong> Usar /goal + Agent View para automatizar análisis de procesos end-to-end — definís el objetivo (ej. "documentar el proceso de originación de créditos") y Claude trabaja hasta completarlo, pidiendo input solo cuando necesita.
+      </div>
+    </div>
+
+    <!-- Claude Cowork -->
+    <div class="tool-card">
+      <div class="tool-header">
+        <div class="tool-emoji">🖥️</div>
+        <div>
+          <div class="tool-name">Claude Cowork (Desktop)</div>
+          <span class="tool-version">Modo actual — Briefing generado aquí</span>
+        </div>
+      </div>
+      <ul class="feature-list">
+        <li><strong>Skills del Operations Plugin</strong>: capacity-plan, change-management, process-optimization, risk-assessment, vendor-management — todas disponibles para Nacho.</li>
+        <li><strong>Scheduled Tasks</strong>: este mismo briefing se genera automáticamente cada semana — el sistema de tareas programadas está activo y funcional.</li>
+        <li><strong>Integración Canva MCP</strong>: creación de diseños en lote directamente desde Cowork.</li>
+        <li><strong>Integración Miro MCP</strong>: diagramas BPMN, tablas, documentos y code reviews directo en tableros Miro.</li>
+        <li><strong>GitHub Pages automático</strong>: este briefing se publica automáticamente en la web tras cada ejecución.</li>
+        <li>Artifact viewer: HTMLs interactivos se renderizan directamente en el chat para revisión inmediata.</li>
+      </ul>
+      <div class="apply-box">
+        💡 <strong>Tip de uso:</strong> Combiná la skill "operations:process-doc" con el MCP de Miro para generar diagramas BPMN directamente desde una descripción de proceso — sin salir de Cowork.
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SECCIÓN 3: TENDENCIAS ===== -->
+  <div class="section dorado">
+    <div class="section-header">
+      <div class="section-icon">📈</div>
+      <div>
+        <span class="section-number">Sección 3</span>
+        <div class="section-title">Tendencias en Agentes IA y Orquestación</div>
+      </div>
+    </div>
+
+    <div class="trend-grid">
+      <div class="trend-card">
+        <div class="trend-icon">🕸️</div>
+        <div class="trend-title">Multi-Agent Orchestration 2026</div>
+        <div class="trend-text">El tamaño práctico de equipos agénticos es 3-4 agentes (por overhead de coordinación). Patrones emergentes: comunicación sparse, descomposición jerárquica, orquestación asíncrona y routing por capacidades. LangGraph 2.0 codifica 3 años de patrones de producción.</div>
+      </div>
+      <div class="trend-card">
+        <div class="trend-icon">💰</div>
+        <div class="trend-title">Token Efficiency como KPI</div>
+        <div class="trend-text">El routing inteligente (modelo barato para tareas simples, modelo potente para razonamiento complejo) logra 40-60% de reducción en costo de tokens. GenericAgent logra 6x menos consumo de tokens que frameworks estándar. El control de costos ya es feature nativa en orquestadores.</div>
+      </div>
+      <div class="trend-card">
+        <div class="trend-icon">🏦</div>
+        <div class="trend-title">IA en Servicios Financieros</div>
+        <div class="trend-text">98% de bancos norteamericanos integraron IA en al menos un proceso core. El mercado de agentes en finanzas crecerá a $6.7B para 2033 (CAGR 31.5%). 44% de equipos financieros usarán agentes en 2026 — +600% vs año anterior.</div>
+      </div>
+      <div class="trend-card">
+        <div class="trend-icon">🏠</div>
+        <div class="trend-title">Agentes Locales (Ollama)</div>
+        <div class="trend-text">Qwen 3.6 lidera en modelos locales para agentes en 2026. Combinación recomendada: Hermes Agent + Qwen 3.6 corriendo en Ollama para agentes en Telegram/Discord. Ventaja clave: privacidad de datos + costo cero de inferencia.</div>
+      </div>
+      <div class="trend-card">
+        <div class="trend-icon">⚙️</div>
+        <div class="trend-title">Process Management + IA</div>
+        <div class="trend-text">Agentes de reconciliación automática reducen cargas manuales de back-office hasta 40%. Agentes de compliance paralelo en loan underwriting garantizan KYC/AML antes de que llegue al analista humano. El analista ya no ejecuta — supervisa y aprueba.</div>
+      </div>
+      <div class="trend-card">
+        <div class="trend-icon">🔄</div>
+        <div class="trend-title">Build vs. Buy en 2026</div>
+        <div class="trend-text">El modelo híbrido domina: frameworks open-source para la lógica de dominio (única capa donde construir supera comprar), plataformas managed para infraestructura y coordinación. LangGraph, CrewAI y AutoGen AG2 (event-driven, async-first) son los líderes.</div>
+      </div>
+    </div>
+
+    <div style="background: var(--crema); border-radius: 16px; padding: 24px; border: 1px solid var(--beige); margin-top: 8px;">
+      <div style="font-weight: 700; color: #7a5c1e; margin-bottom: 16px;">📊 Adopción de IA en Finanzas — Estado Actual 2026</div>
+      <div class="stat-bar">
+        <div class="stat-label">Bancos con IA en core</div>
+        <div class="stat-track"><div class="stat-fill" style="width:98%"></div></div>
+        <div class="stat-value">98%</div>
+      </div>
+      <div class="stat-bar">
+        <div class="stat-label">Adopción agentes 2026</div>
+        <div class="stat-track"><div class="stat-fill" style="width:44%;background:#CBA258"></div></div>
+        <div class="stat-value">44%</div>
+      </div>
+      <div class="stat-bar">
+        <div class="stat-label">Reducción carga back-office</div>
+        <div class="stat-track"><div class="stat-fill" style="width:40%;background:#4A2C2A"></div></div>
+        <div class="stat-value">40%</div>
+      </div>
+      <div class="stat-bar">
+        <div class="stat-label">Ahorro en tokens con routing</div>
+        <div class="stat-track"><div class="stat-fill" style="width:60%;background:#1E3932"></div></div>
+        <div class="stat-value">60%</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SECCIÓN 4: VIDEOS ===== -->
+  <div class="section latte">
+    <div class="section-header">
+      <div class="section-icon">▶️</div>
+      <div>
+        <span class="section-number">Sección 4</span>
+        <div class="section-title">5 Videos de YouTube Recomendados</div>
+      </div>
+    </div>
+
+    <div class="video-card">
+      <div class="video-num">01</div>
+      <div class="video-thumb">📰</div>
+      <div class="video-content">
+        <div class="video-channel">Matt Wolfe · @mreflow</div>
+        <div class="video-title">AI News: These Google Updates Are Dividing People (Mayo 19, 2026)</div>
+        <div class="video-desc">Análisis completo de las novedades de Google I/O 2026, con foco en Gemini Spark como agente autónomo personal y las Search Agents que monitorean temas continuamente. Matt desglosa por qué estos updates están generando debate en la comunidad IA.</div>
+        <div class="info-box" style="margin-bottom: 12px;">
+          <div class="info-pill" style="min-width: 0; font-size: 0.82em; padding: 8px 12px;">
+            <div class="info-pill-label">Aplicación</div>
+            <div class="info-pill-text">Entender cómo configurar Gemini Spark para monitorear KPIs operativos en entidades financieras.</div>
+          </div>
+        </div>
+        <a href="https://www.youtube.com/@mreflow/videos" class="video-link">Ver canal →</a>
+      </div>
+    </div>
+
+    <div class="video-card">
+      <div class="video-num">02</div>
+      <div class="video-thumb">🎯</div>
+      <div class="video-content">
+        <div class="video-channel">AI Conference 2026 · Zach Lloyd (Warp)</div>
+        <div class="video-title">2026: The Year of Agent Orchestration</div>
+        <div class="video-desc">Lightning talk en el Coding Agents Conference en el Computer History Museum (Marzo 2026). Zach Lloyd de Warp explica por qué 2026 es el año en que la orquestación de agentes pasa de concepto a infraestructura de producción. Cobertura de patrones prácticos y lecciones aprendidas.</div>
+        <div class="info-box" style="margin-bottom: 12px;">
+          <div class="info-pill" style="min-width: 0; font-size: 0.82em; padding: 8px 12px;">
+            <div class="info-pill-label">Aplicación</div>
+            <div class="info-pill-text">Framework mental para diseñar sistemas multi-agente en procesos de operaciones financieras.</div>
+          </div>
+        </div>
+        <a href="https://www.youtube.com/watch?v=eT1F2BAZJ64" class="video-link">Ver video →</a>
+      </div>
+    </div>
+
+    <div class="video-card">
+      <div class="video-num">03</div>
+      <div class="video-thumb">🏆</div>
+      <div class="video-content">
+        <div class="video-channel">Canal de Orquestación IA</div>
+        <div class="video-title">Multi AI Agent Orchestration Tier List — Ranking Every Framework That Matters</div>
+        <div class="video-desc">Ranking completo y comparativa de todos los frameworks de orquestación de agentes IA disponibles en 2026: LangGraph, CrewAI, AutoGen AG2, OpenAI Swarm, Antigravity SDK. Benchmarks de velocidad, uso de tokens y facilidad de adopción para cada uno.</div>
+        <div class="info-box" style="margin-bottom: 12px;">
+          <div class="info-pill" style="min-width: 0; font-size: 0.82em; padding: 8px 12px;">
+            <div class="info-pill-label">Aplicación</div>
+            <div class="info-pill-text">Elegir el framework correcto para el stack de automatización de Nacho según el tipo de proceso a automatizar.</div>
+          </div>
+        </div>
+        <a href="https://www.youtube.com/watch?v=3BYrnBDSoPo" class="video-link">Ver video →</a>
+      </div>
+    </div>
+
+    <div class="video-card">
+      <div class="video-num">04</div>
+      <div class="video-thumb">🍄</div>
+      <div class="video-content">
+        <div class="video-channel">Sabrina Ramonov · @sabrina_ramonov</div>
+        <div class="video-title">The AI System That Built a 1.4M Audience (n8n + AI Agents)</div>
+        <div class="video-desc">Sabrina muestra cómo construyó un sistema de automatización con n8n y agentes IA que escaló a 1.4 millones de seguidores. Técnicas de workflow automation aplicables a cualquier área — contenido, comunicación con clientes, reportes periódicos. Nivel práctico, sin código complejo.</div>
+        <div class="info-box" style="margin-bottom: 12px;">
+          <div class="info-pill" style="min-width: 0; font-size: 0.82em; padding: 8px 12px;">
+            <div class="info-pill-label">Aplicación</div>
+            <div class="info-pill-text">Replicar los patrones de automatización con n8n para workflows de reportes operativos periódicos en la entidad financiera.</div>
+          </div>
+        </div>
+        <a href="https://www.youtube.com/watch?v=m6DQBiNajW0" class="video-link">Ver video →</a>
+      </div>
+    </div>
+
+    <div class="video-card">
+      <div class="video-num">05</div>
+      <div class="video-thumb">📊</div>
+      <div class="video-content">
+        <div class="video-channel">AI Agents Conference · Ed Keisling</div>
+        <div class="video-title">Episode 132: AI Agents Orchestration — Qué deben hacer diferente los ejecutivos en 2026</div>
+        <div class="video-desc">Ed Keisling, Chief AI Officer de Progress Software, desempaca qué cambió en el panorama IA y qué deben hacer diferente los ejecutivos en 2026. Foco en decisiones estratégicas: build vs. buy, governance de agentes, ROI real de orquestación y preparación de equipos operativos.</div>
+        <div class="info-box" style="margin-bottom: 12px;">
+          <div class="info-pill" style="min-width: 0; font-size: 0.82em; padding: 8px 12px;">
+            <div class="info-pill-label">Aplicación</div>
+            <div class="info-pill-text">Marco ejecutivo para presentar propuestas de automatización con IA a liderazgo en entidades financieras con foco en ROI y gobierno.</div>
+          </div>
+        </div>
+        <a href="https://www.youtube.com/watch?v=aUWRJ_pIOw8" class="video-link">Ver video →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SECCIÓN 5: REPOS GITHUB ===== -->
+  <div class="section verde-oscuro">
+    <div class="section-header">
+      <div class="section-icon">⭐</div>
+      <div>
+        <span class="section-number">Sección 5</span>
+        <div class="section-title">5 Repositorios GitHub Top de la Semana</div>
+      </div>
+    </div>
+
+    <div class="repo-card">
+      <div class="repo-header">
+        <div class="repo-name">ComposioHQ/agent-orchestrator</div>
+        <div class="repo-stars">⭐ Trending #1</div>
+      </div>
+      <div class="repo-tags">
+        <span class="repo-tag">Orquestación</span>
+        <span class="repo-tag">Agentes paralelos</span>
+        <span class="repo-tag">Zero tokens coordinación</span>
+      </div>
+      <div class="repo-desc">Orquestador agéntico determinístico para agentes de coding en paralelo — planifica tareas, lanza agentes, y maneja autónomamente fixes de CI, conflictos de merge y code reviews. Logra <strong>zero tokens LLM en coordinación</strong>, reduciendo costos de orquestación drásticamente. Ideal para pipelines de automatización complejos donde múltiples agentes trabajan simultáneamente.</div>
+      <div class="apply-box" style="margin-bottom: 14px; font-size: 0.84em;">
+        💡 <strong>Para Nacho:</strong> Usar para orquestar agentes de análisis de procesos en paralelo — un agente mapea el flujo actual, otro identifica cuellos de botella, otro propone mejoras, todo sin costo de coordinación.
+      </div>
+      <a href="https://github.com/ComposioHQ/agent-orchestrator" class="repo-link">Ver en GitHub →</a>
+    </div>
+
+    <div class="repo-card">
+      <div class="repo-header">
+        <div class="repo-name">lsdefine/GenericAgent</div>
+        <div class="repo-stars">⭐ 48K+ estrellas</div>
+      </div>
+      <div class="repo-tags">
+        <span class="repo-tag">Token efficiency</span>
+        <span class="repo-tag">Self-evolving</span>
+        <span class="repo-tag">6x menos tokens</span>
+      </div>
+      <div class="repo-desc">Agente auto-evolutivo que crece un árbol de habilidades desde una semilla de 3.3K líneas, logrando control completo del sistema con <strong>6x menos consumo de tokens</strong> que frameworks estándar. Las ejecuciones convergen a un régimen estable de bajo costo. Relevante para quien necesita automatizaciones complejas con presupuesto controlado de tokens.</div>
+      <div class="apply-box" style="margin-bottom: 14px; font-size: 0.84em;">
+        💡 <strong>Para Nacho:</strong> Explorar como base para un agente de análisis de procesos que aprende los patrones específicos de la entidad financiera y optimiza sus propios prompts con el tiempo.
+      </div>
+      <a href="https://github.com/lsdefine/GenericAgent" class="repo-link">Ver en GitHub →</a>
+    </div>
+
+    <div class="repo-card">
+      <div class="repo-header">
+        <div class="repo-name">ai-boost/awesome-harness-engineering</div>
+        <div class="repo-stars">⭐ Trending semana</div>
+      </div>
+      <div class="repo-tags">
+        <span class="repo-tag">Harness engineering</span>
+        <span class="repo-tag">MCP</span>
+        <span class="repo-tag">Observabilidad</span>
+        <span class="repo-tag">Memoria</span>
+      </div>
+      <div class="repo-desc">Lista curada de herramientas, patrones, evaluaciones, memoria, MCP, permisos, observabilidad y orquestación para ingeniería de agentes IA en producción. El "awesome list" más completo para harness engineering — la disciplina de construir la infraestructura alrededor de los agentes (control, monitoreo, seguridad).</div>
+      <div class="apply-box" style="margin-bottom: 14px; font-size: 0.84em;">
+        💡 <strong>Para Nacho:</strong> Referencia obligatoria para diseñar la infraestructura de supervisión y control de los agentes de automatización — especialmente crítico en entidades financieras donde el control es no negociable.
+      </div>
+      <a href="https://github.com/ai-boost/awesome-harness-engineering" class="repo-link">Ver en GitHub →</a>
+    </div>
+
+    <div class="repo-card">
+      <div class="repo-header">
+        <div class="repo-name">caramaschiHG/awesome-ai-agents-2026</div>
+        <div class="repo-stars">⭐ 105K+ estrellas</div>
+      </div>
+      <div class="repo-tags">
+        <span class="repo-tag">Directorio</span>
+        <span class="repo-tag">300+ recursos</span>
+        <span class="repo-tag">Frameworks</span>
+        <span class="repo-tag">Actualización mensual</span>
+      </div>
+      <div class="repo-desc">La lista más completa de agentes IA, frameworks y herramientas en 2026. Más de 300 recursos en 20+ categorías, actualizado mensualmente. Cubre: coding agents, voice agents, research agents, enterprise agents, benchmarks y guías de comparación. Punto de entrada ideal para cualquier evaluación de herramientas.</div>
+      <div class="apply-box" style="margin-bottom: 14px; font-size: 0.84em;">
+        💡 <strong>Para Nacho:</strong> Usar como mapa de navegación al evaluar herramientas de automatización — filtrar por categoría "Enterprise" y "Finance" para encontrar los agentes más relevantes para entidades financieras.
+      </div>
+      <a href="https://github.com/caramaschiHG/awesome-ai-agents-2026" class="repo-link">Ver en GitHub →</a>
+    </div>
+
+    <div class="repo-card">
+      <div class="repo-header">
+        <div class="repo-name">anthropics/claude-code</div>
+        <div class="repo-stars">⭐ Top Claude Ecosystem</div>
+      </div>
+      <div class="repo-tags">
+        <span class="repo-tag">Claude Code</span>
+        <span class="repo-tag">CLI</span>
+        <span class="repo-tag">Agentic coding</span>
+        <span class="repo-tag">Releases activos</span>
+      </div>
+      <div class="repo-desc">Repositorio oficial de Claude Code con releases actualizados continuamente. El changelog de Mayo 2026 incluye Agent View, /goal command, Context Compression, background sessions y soporte mejorado de PowerShell para Windows. Las releases notes son la referencia de facto para estar al día con las capacidades del tool de coding agéntico de Anthropic.</div>
+      <div class="apply-box" style="margin-bottom: 14px; font-size: 0.84em;">
+        💡 <strong>Para Nacho:</strong> Seguir las releases de este repo para aprovechar cada nueva feature de Claude Code en automatizaciones de procesos — especialmente los hooks y skills que permiten extender las capacidades del agente.
+      </div>
+      <a href="https://github.com/anthropics/claude-code/releases" class="repo-link">Ver releases →</a>
+    </div>
+  </div>
+
+  <!-- CTA FINAL -->
+  <div style="text-align: center; padding: 30px 0 10px;">
+    <div style="display: inline-block; background: linear-gradient(135deg, var(--verde-oscuro), var(--verde)); color: white; padding: 24px 40px; border-radius: 20px; max-width: 600px;">
+      <div style="font-size: 2em; margin-bottom: 8px;">☕</div>
+      <div style="font-family: 'Playfair Display', serif; font-size: 1.3em; font-weight: 700; margin-bottom: 10px;">Hasta el próximo briefing, Nacho</div>
+      <div style="font-size: 0.88em; color: var(--latte); line-height: 1.6;">El mundo IA no para — pero vos tampoco.<br>Seguí automatizando, seguí mejorando procesos. 🚀</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <strong>AI Briefing Semanal</strong> para Nacho Colla
+  <span class="divider">·</span>
+  Generado automáticamente por Claude Cowork
+  <span class="divider">·</span>
+  28 de Mayo, 2026
+  <br><br>
+  <a href="https://nachocollaautomatiza-commits.github.io/Noticias-AI/" style="color: var(--latte); text-decoration: none; font-weight: 600;">🌐 Ver versión online →</a>
+</div>
+
+</body>
+</html>

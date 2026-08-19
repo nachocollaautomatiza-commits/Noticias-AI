@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Briefing – 29 de Abril 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap');
+
+  :root {
+    --green-dark: #1E3932;
+    --green-mid: #00704A;
+    --green-light: #D4E9E2;
+    --cream: #F5F0E8;
+    --latte: #D4B896;
+    --coffee: #6B4226;
+    --espresso: #3B1F10;
+    --gold: #C8962C;
+    --gold-light: #F0D9A0;
+    --white: #FFFDF8;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background-color: var(--cream);
+    font-family: 'Lato', sans-serif;
+    color: var(--espresso);
+    line-height: 1.7;
+  }
+
+  /* ── HEADER ── */
+  .hero {
+    background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-mid) 60%, #2d5a4a 100%);
+    padding: 48px 24px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; left: -60px;
+    width: 260px; height: 260px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 50%;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; right: -40px;
+    width: 320px; height: 320px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 50%;
+  }
+  .hero-logo {
+    font-size: 48px;
+    margin-bottom: 8px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    color: #fff;
+    font-size: 2.4rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+  }
+  .hero .subtitle {
+    color: var(--gold-light);
+    font-size: 1rem;
+    font-weight: 300;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .hero .date-badge {
+    display: inline-block;
+    background: rgba(200,150,44,0.25);
+    border: 1px solid var(--gold);
+    color: var(--gold-light);
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    padding: 6px 20px;
+    border-radius: 20px;
+    margin-top: 14px;
+    text-transform: uppercase;
+  }
+
+  /* ── LAYOUT ── */
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+  }
+
+  /* ── WAVE DIVIDER ── */
+  .wave-divider {
+    background: var(--green-dark);
+    margin-bottom: 0;
+  }
+  .wave-divider svg {
+    display: block;
+    width: 100%;
+  }
+
+  /* ── SECTION TITLES ── */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 48px 0 24px;
+  }
+  .section-icon {
+    width: 42px; height: 42px;
+    background: var(--green-mid);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(0,112,74,0.25);
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    color: var(--green-dark);
+    font-weight: 700;
+  }
+  .section-subtitle {
+    font-size: 0.78rem;
+    color: var(--coffee);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-top: 2px;
+  }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 28px 30px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 20px rgba(62,35,16,0.07);
+    border-left: 5px solid var(--green-mid);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(62,35,16,0.12);
+  }
+  .card.gold-accent { border-left-color: var(--gold); }
+  .card.coffee-accent { border-left-color: var(--coffee); }
+  .card.latte-accent { border-left-color: var(--latte); }
+
+  .card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 12px;
+  }
+  .card-num {
+    width: 32px; height: 32px;
+    background: var(--green-dark);
+    color: #fff;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.85rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .card-num.gold { background: var(--gold); color: var(--espresso); }
+  .card-num.coffee { background: var(--coffee); }
+
+  .card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    color: var(--green-dark);
+    line-height: 1.35;
+  }
+  .card .source-tag {
+    font-size: 0.7rem;
+    color: var(--coffee);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 3px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .card p {
+    color: #4a3020;
+    font-size: 0.93rem;
+    margin-bottom: 12px;
+  }
+
+  /* Insight / Aplicación boxes */
+  .insight-box {
+    background: var(--green-light);
+    border-radius: 14px;
+    padding: 14px 18px;
+    margin-top: 12px;
+    border-left: 3px solid var(--green-mid);
+  }
+  .insight-box .label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--green-dark);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .insight-box p {
+    font-size: 0.88rem;
+    color: var(--green-dark);
+    margin: 0;
+  }
+
+  .example-box {
+    background: var(--gold-light);
+    border-radius: 14px;
+    padding: 14px 18px;
+    margin-top: 10px;
+    border-left: 3px solid var(--gold);
+  }
+  .example-box .label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--coffee);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .example-box p {
+    font-size: 0.88rem;
+    color: var(--espresso);
+    margin: 0;
+  }
+
+  /* ── TOOLS GRID ── */
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .tool-pill {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 18px 20px;
+    box-shadow: 0 3px 14px rgba(62,35,16,0.07);
+    border-top: 4px solid var(--green-mid);
+    text-align: center;
+  }
+  .tool-pill .tool-icon { font-size: 26px; margin-bottom: 6px; }
+  .tool-pill h4 { font-family: 'Playfair Display', serif; font-size: 0.95rem; color: var(--green-dark); margin-bottom: 4px; }
+  .tool-pill p { font-size: 0.8rem; color: var(--coffee); margin: 0; }
+
+  /* ── YOUTUBE CARDS ── */
+  .yt-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 24px 28px;
+    margin-bottom: 18px;
+    box-shadow: 0 4px 20px rgba(62,35,16,0.07);
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+  }
+  .yt-badge {
+    width: 52px; height: 52px;
+    background: linear-gradient(135deg, #FF0000, #CC0000);
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(255,0,0,0.2);
+  }
+  .yt-content h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    color: var(--green-dark);
+    margin-bottom: 4px;
+  }
+  .yt-meta { font-size: 0.75rem; color: var(--coffee); margin-bottom: 8px; }
+  .yt-content p { font-size: 0.88rem; color: #4a3020; margin-bottom: 8px; }
+
+  /* ── GITHUB CARDS ── */
+  .gh-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 24px 28px;
+    margin-bottom: 18px;
+    box-shadow: 0 4px 20px rgba(62,35,16,0.07);
+    border-left: 5px solid var(--espresso);
+    position: relative;
+  }
+  .gh-stars {
+    position: absolute;
+    top: 20px; right: 24px;
+    background: var(--gold-light);
+    color: var(--coffee);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--gold);
+  }
+  .gh-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--green-dark);
+    margin-bottom: 4px;
+    padding-right: 80px;
+  }
+  .gh-card .repo-tag {
+    font-family: monospace;
+    font-size: 0.75rem;
+    color: var(--coffee);
+    margin-bottom: 12px;
+  }
+  .gh-card p { font-size: 0.88rem; color: #4a3020; margin-bottom: 10px; }
+  .safety-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: #e8f5f0;
+    border: 1px solid var(--green-mid);
+    color: var(--green-dark);
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+
+  /* ── TRENDS GRID ── */
+  .trends-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  .trend-card {
+    background: var(--white);
+    border-radius: 18px;
+    padding: 22px 24px;
+    box-shadow: 0 3px 14px rgba(62,35,16,0.07);
+    border-top: 4px solid var(--coffee);
+  }
+  .trend-card.fin { border-top-color: var(--gold); }
+  .trend-icon { font-size: 28px; margin-bottom: 10px; }
+  .trend-card h4 { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--green-dark); margin-bottom: 8px; }
+  .trend-card p { font-size: 0.85rem; color: #4a3020; }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--green-dark);
+    color: var(--green-light);
+    text-align: center;
+    padding: 32px 24px;
+    font-size: 0.82rem;
+  }
+  .footer a { color: var(--gold-light); }
+  .footer .footer-logo { font-size: 32px; margin-bottom: 8px; }
+
+  /* ── DIVIDER LINE ── */
+  .divider {
+    border: none;
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--latte), transparent);
+    margin: 8px 0 0;
+  }
+
+  /* ── TAG CHIPS ── */
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .tag {
+    background: var(--green-light);
+    color: var(--green-dark);
+    font-size: 0.7rem;
+    padding: 3px 10px;
+    border-radius: 10px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  .tag.gold { background: var(--gold-light); color: var(--coffee); }
+
+  @media (max-width: 640px) {
+    .hero h1 { font-size: 1.7rem; }
+    .yt-card { flex-direction: column; }
+    .card { padding: 20px 18px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-logo">☕</div>
+  <h1>AI Morning Briefing</h1>
+  <div class="subtitle">Tu café de inteligencia artificial · Edición Nacho</div>
+  <div class="date-badge">📅 Miércoles, 29 de Abril de 2026</div>
+</div>
+
+<!-- WAVE -->
+<div class="wave-divider">
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" height="60">
+    <path fill="#F5F0E8" d="M0,40 C360,80 1080,0 1440,40 L1440,60 L0,60 Z"/>
+  </svg>
+</div>
+
+<div class="container">
+
+  <!-- ══════════════════════════════════════════════
+       SECCIÓN 1 — NOTICIAS AI (últimas 48hs)
+  ══════════════════════════════════════════════ -->
+  <div class="section-header">
+    <div class="section-icon">📰</div>
+    <div>
+      <div class="section-title">Top 5 Noticias AI</div>
+      <div class="section-subtitle">Últimas 48 horas · Fuentes oficiales</div>
+    </div>
+  </div>
+  <hr class="divider">
+
+  <!-- Noticia 1 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-num">1</div>
+      <div>
+        <h3>GPT-5.5 llega a la API de OpenAI con capacidades "super app"</h3>
+        <div class="source-tag">🔗 openai.com · 24 Apr 2026</div>
+      </div>
+    </div>
+    <p>OpenAI lanzó GPT-5.5 y GPT-5.5 Pro en su API. El modelo está diseñado para entender la intención del usuario más rápido, integrar navegación web, análisis de datos, redacción de documentos y operación de software en un flujo continuo. OpenAI lo posiciona como el núcleo de su visión de "super app" que unifica ChatGPT, herramientas de código y el navegador.</p>
+    <div class="insight-box">
+      <div class="label">💡 Insight para tu perfil</div>
+      <p>Como analista de procesos en entidades financieras, GPT-5.5 puede actuar como co-piloto operativo: analizar un KPI caído, buscar causas en documentos internos y redactar el informe, todo sin salir del chat.</p>
+    </div>
+    <div class="example-box">
+      <div class="label">🚀 Ejemplo de uso</div>
+      <p>"Analiza este reporte de tiempos del proceso de aprobación de créditos, identifica los 3 cuellos de botella principales y redacta un memo ejecutivo con recomendaciones." → GPT-5.5 lo hace en un solo flujo.</p>
+    </div>
+    <div class="tags">
+      <span class="tag">LLM</span><span class="tag">OpenAI</span><span class="tag">Productividad</span>
+    </div>
+  </div>
+
+  <!-- Noticia 2 -->
+  <div class="card gold-accent">
+    <div class="card-header">
+      <div class="card-num gold">2</div>
+      <div>
+        <h3>Claude Opus 4.7 de Anthropic gana 12 de 14 benchmarks al mismo precio</h3>
+        <div class="source-tag">🔗 anthropic.com · 16 Apr 2026</div>
+      </div>
+    </div>
+    <p>Anthropic lanzó Claude Opus 4.7, enfocado en razonamiento complejo y codificación. Supera a su predecesor en 12 de 14 benchmarks reportados, manteniendo el precio en $5/$25 (input/output). Ideal para tareas de análisis profundo, interpretación de datos ambiguos y generación de código. Anthropic además anunció Claude Mythos 5, modelo de 10 billones de parámetros para ambientes de alto riesgo.</p>
+    <div class="insight-box">
+      <div class="label">💡 Insight para tu perfil</div>
+      <p>Opus 4.7 es tu aliado para mapear procesos BPMN complejos desde descripciones narrativas, interpretando excepciones y variaciones que otros modelos simplifican. También excelente para análisis de datos financieros con múltiples variables.</p>
+    </div>
+    <div class="example-box">
+      <div class="label">🚀 Ejemplo de uso</div>
+      <p>"Dado este narrativo del proceso de gestión de reclamos, genera el diagrama BPMN en notación textual, identifica los puntos de decisión y propone automatizaciones con n8n." → Opus 4.7 maneja toda la complejidad.</p>
+    </div>
+    <div class="tags">
+      <span class="tag">Anthropic</span><span class="tag">Razonamiento</span><span class="tag">BPMN</span>
+    </div>
+  </div>
+
+  <!-- Noticia 3 -->
+  <div class="card coffee-accent">
+    <div class="card-header">
+      <div class="card-num coffee">3</div>
+      <div>
+        <h3>DeepSeek lanza V4 Flash y V4 Pro: nuevo desafío al dominio occidental</h3>
+        <div class="source-tag">🔗 bloomberg.com · 24 Apr 2026</div>
+      </div>
+    </div>
+    <p>Un año después de sacudir Silicon Valley, DeepSeek vuelve con su familia V4. El modelo V4 Flash es ultrarrápido y económico; V4 Pro lidera benchmarks de coding y razonamiento agéntico. Ambos son de código abierto, lo que democratiza el acceso a modelos de frontera para equipos sin grandes presupuestos.</p>
+    <div class="insight-box">
+      <div class="label">💡 Insight para tu perfil</div>
+      <p>DeepSeek V4 Flash puede usarse localmente (vía Ollama) para automatizaciones internas sensibles en entidades financieras, donde la privacidad de los datos es no negociable. Sin enviar datos a la nube.</p>
+    </div>
+    <div class="example-box">
+      <div class="label">🚀 Ejemplo de uso</div>
+      <p>Correr DeepSeek V4 Flash en un servidor on-premise del banco para clasificar automáticamente reclamos de clientes sin que los datos salgan de la red interna. Costo marginal, alta privacidad.</p>
+    </div>
+    <div class="tags">
+      <span class="tag gold">Open Source</span><span class="tag">DeepSeek</span><span class="tag">Privacidad</span>
+    </div>
+  </div>
+
+  <!-- Noticia 4 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-num">4</div>
+      <div>
+        <h3>Microsoft lanza Agent Mode en Word, Excel y PowerPoint</h3>
+        <div class="source-tag">🔗 microsoft.com · Apr 2026</div>
+      </div>
+    </div>
+    <p>Microsoft integra Agent Mode en sus aplicaciones Office, permitiendo al AI ejecutar tareas de múltiples pasos de forma autónoma: formatear documentos, actualizar tablas de datos, crear presentaciones desde cero o modificar hojas de cálculo, mostrando cada paso en tiempo real con posibilidad de intervención humana.</p>
+    <div class="insight-box">
+      <div class="label">💡 Insight para tu perfil</div>
+      <p>Para un analista de procesos, esto significa poder decirle a Excel "toma este dataset de tiempos de proceso del último trimestre, genera una tabla dinámica por área, calcula los SLAs incumplidos y crea el gráfico de dispersión" sin tocar manualmente nada.</p>
+    </div>
+    <div class="example-box">
+      <div class="label">🚀 Ejemplo de uso</div>
+      <p>En Word: "Convierte este procedimiento operativo estándar en un manual de usuario con secciones colapsables, tabla de contenidos y formato corporativo del banco." → Agent Mode lo ejecuta paso a paso.</p>
+    </div>
+    <div class="tags">
+      <span class="tag">Microsoft</span><span class="tag">Office AI</span><span class="tag">Automatización</span>
+    </div>
+  </div>
+
+  <!-- Noticia 5 -->
+  <div class="card latte-accent">
+    <div class="card-header">
+      <div class="card-num">5</div>
+      <div>
+        <h3>Google Workspace Intelligence: AI contextual across Docs, Sheets y Gmail</h3>
+        <div class="source-tag">🔗 workspace.google.com · Apr 2026</div>
+      </div>
+    </div>
+    <p>Google expande Workspace con Workspace Intelligence, un sistema que conecta datos a través de todas las herramientas y ofrece asistencia contextual. El sistema entiende relaciones entre documentos, emails y hojas de cálculo para automatizar tareas cross-app sin necesidad de integración manual.</p>
+    <div class="insight-box">
+      <div class="label">💡 Insight para tu perfil</div>
+      <p>Ideal para equipos de operaciones que trabajan en múltiples documentos simultáneos. Puede consolidar actualizaciones de estado de proyectos desde distintos documentos de Google Drive y redactar automáticamente el reporte semanal de gestión.</p>
+    </div>
+    <div class="example-box">
+      <div class="label">🚀 Ejemplo de uso</div>
+      <p>"Resume todas las tareas abiertas de mis últimos 10 hilos de Gmail relacionados con el proceso de onboarding de clientes y actualiza el Sheet de seguimiento." → Workspace Intelligence lo hace en segundos.</p>
+    </div>
+    <div class="tags">
+      <span class="tag">Google</span><span class="tag">Workspace</span><span class="tag">Colaboración</span>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════
+       SECCIÓN 2 — UPDATES DE HERRAMIENTAS
+  ══════════════════════════════════════════════ -->
+  <div class="section-header">
+    <div class="section-icon">🛠️</div>
+    <div>
+      <div class="section-title">Últimas Funcionalidades de tus Herramientas</div>
+      <div class="section-subtitle">Actualizaciones de Abril 2026</div>
+    </div>
+  </div>
+  <hr class="divider" style="margin-bottom:24px">
+
+  <div class="tools-grid">
+    <div class="tool-pill">
+      <div class="tool-icon">🤖</div>
+      <h4>Claude Opus 4.7</h4>
+      <p>Nuevo: mejor razonamiento multi-paso y coding. 12/14 benchmarks ganados. Mismo precio.</p>
+    </div>
+    <div class="tool-pill" style="border-top-color: var(--gold)">
+      <div class="tool-icon">✨</div>
+      <h4>ChatGPT / GPT-5.5</h4>
+      <p>Write integrations con Box, Notion, Linear. Workspace Agents autónomos para Slack y Gmail.</p>
+    </div>
+    <div class="tool-pill" style="border-top-color: var(--coffee)">
+      <div class="tool-icon">💎</div>
+      <h4>Gemini 3.1 Flash-Lite</h4>
+      <p>2.5x más rápido, 45% mayor velocidad de output. Precio reducido. Ideal para alta frecuencia.</p>
+    </div>
+    <div class="tool-pill" style="border-top-color: var(--latte)">
+      <div class="tool-icon">⚡</div>
+      <h4>Cursor 3</h4>
+      <p>Nueva interfaz agentic de coding. Compite directamente con Claude Code y Codex.</p>
+    </div>
+    <div class="tool-pill">
+      <div class="tool-icon">🔄</div>
+      <h4>n8n (180k+ ⭐)</h4>
+      <p>Nuevo: native AI capabilities mejoradas. Agents autónomos con memoria persistente.</p>
+    </div>
+    <div class="tool-pill" style="border-top-color: var(--gold)">
+      <div class="tool-icon">🌊</div>
+      <h4>Langflow</h4>
+      <p>Nuevo API y MCP servers built-in. Cada workflow se convierte automáticamente en una herramienta.</p>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════
+       SECCIÓN 3 — TENDENCIAS EN PROCESS & PRODUCT
+  ══════════════════════════════════════════════ -->
+  <div class="section-header">
+    <div class="section-icon">📊</div>
+    <div>
+      <div class="section-title">Tendencias: Process & Product Management</div>
+      <div class="section-subtitle">Servicios financieros y operaciones · 2026</div>
+    </div>
+  </div>
+  <hr class="divider" style="margin-bottom:24px">
+
+  <div class="trends-grid">
+    <div class="trend-card">
+      <div class="trend-icon">🤖</div>
+      <h4>Agentic AI en Operaciones</h4>
+      <p>Los agentes autónomos están transformando workflows de atención al cliente, procurement y gestión de proyectos. De procesos lineales a sistemas dinámicos y contextuales. <strong>20% de mejora en eficiencia operativa</strong> reportada por bancos que implementaron agentic AI.</p>
+    </div>
+    <div class="trend-card">
+      <div class="trend-icon">🔗</div>
+      <h4>Hyperautomation: RPA + AI</h4>
+      <p>RPA sigue siendo clave para trabajo predecible. La IA extiende su alcance manejando excepciones y complejidades. El foco está en <strong>orquestar procesos end-to-end</strong>, no optimizar tareas aisladas.</p>
+    </div>
+    <div class="trend-card">
+      <div class="trend-icon">⚙️</div>
+      <h4>Low-Code / No-Code para Todos</h4>
+      <p>Plataformas no-code permiten a analistas de negocio construir workflows AI sin programar. Prompt engineering y comprensión de agentes son las nuevas habilidades del analista moderno.</p>
+    </div>
+    <div class="trend-card fin">
+      <div class="trend-icon">🏦</div>
+      <h4>AI en Servicios Financieros</h4>
+      <p><strong>65% de empresas</strong> usan activamente AI (vs 45% el año pasado). Las líderes embeben AI en risk decisioning, pricing, engagement y detección de fraude. De pilotos a producción real.</p>
+    </div>
+    <div class="trend-card fin">
+      <div class="trend-icon">📋</div>
+      <h4>Product Management con AI</h4>
+      <p>Las decisiones de AI ahora atraviesan arquitectura, estructura de costos y estrategia regulatoria. Los PMs deben rediseñar procesos core para ser <strong>human-led y AI-operated</strong>.</p>
+    </div>
+    <div class="trend-card">
+      <div class="trend-icon">🛡️</div>
+      <h4>AI Governance como Prioridad</h4>
+      <p>En 2026 la democratización de la AI agéntica es real, pero solo las organizaciones con governance sólido la convertirán en ventaja. La regulación y el control son diferenciadores competitivos.</p>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════
+       SECCIÓN 4 — YOUTUBE RECOMENDADO
+  ══════════════════════════════════════════════ -->
+  <div class="section-header">
+    <div class="section-icon">▶️</div>
+    <div>
+      <div class="section-title">3 Videos AI Recomendados</div>
+      <div class="section-subtitle">Youtubers de calidad · Selección Abril 2026</div>
+    </div>
+  </div>
+  <hr class="divider" style="margin-bottom:24px">
+
+  <!-- Video 1 -->
+  <div class="yt-card">
+    <div class="yt-badge">▶</div>
+    <div class="yt-content">
+      <h3>Matt Wolfe — "OpenAI SuperApp | Opus 4.7 | New Chrome" </h3>
+      <div class="yt-meta">@mreflow · ~925K suscriptores · FutureTools.io</div>
+      <p><strong>Resumen:</strong> Matt cubre los lanzamientos de la semana: GPT-5.5, Opus 4.7 y los nuevos agentes de workspace de OpenAI. Explica de forma accesible cómo estos modelos cambian el flujo de trabajo real, con demos prácticas. Su canal es referencia obligada para entender qué cambia y qué no en el ecosistema AI cada semana.</p>
+      <div class="insight-box">
+        <div class="label">💡 Valor para tu perfil</div>
+        <p>Matt Wolfe es ideal para mantenerte al día sin profundidad técnica innecesaria. Su formato "qué hay de nuevo + cómo lo uso" encaja perfecto con tu rol de analista que necesita adoptar herramientas rápidamente. También gestiona FutureTools.io, el mejor directorio de herramientas AI disponible.</p>
+      </div>
+      <div class="example-box">
+        <div class="label">🚀 Aplicación práctica</div>
+        <p>Seguir el canal para descubrir qué herramientas AI nuevas pueden integrarse en tus flujos de análisis de procesos. Matt frecuentemente identifica tools de automatización y productividad antes que la mayoría.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Video 2 -->
+  <div class="yt-card">
+    <div class="yt-badge" style="background: linear-gradient(135deg, #222, #444);">▶</div>
+    <div class="yt-content">
+      <h3>Fireship — "We've Finally Entered the Era of AI Agents!"</h3>
+      <div class="yt-meta">@fireship · 4M suscriptores · Actualizaciones de 100 segundos</div>
+      <p><strong>Resumen:</strong> Fireship explica en formato ultra-conciso (100 segundos a videos de 10 min) el impacto de los AI agents en el desarrollo de software y workflows de negocio. Este video particular explora cómo los agentes autónomos están reemplazando tareas repetitivas en equipos técnicos y de producto, con ejemplos de n8n, Langflow y Claude Code en acción.</p>
+      <div class="insight-box">
+        <div class="label">💡 Valor para tu perfil</div>
+        <p>Fireship te permite entender el lado técnico de las herramientas que usas (n8n, agentes, APIs) sin ser desarrollador. Su claridad conceptual es clave para tomar decisiones informadas sobre qué automatizaciones proponer en tu organización.</p>
+      </div>
+      <div class="example-box">
+        <div class="label">🚀 Aplicación práctica</div>
+        <p>Después de ver el video de AI Agents, podrás articular con mayor precisión ante la gerencia qué es un agente AI, qué puede hacer autónomamente en operaciones y cuáles son los riesgos reales de governance que deben contemplarse.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Video 3 -->
+  <div class="yt-card">
+    <div class="yt-badge" style="background: linear-gradient(135deg, #1565C0, #1976D2);">▶</div>
+    <div class="yt-content">
+      <h3>3Blue1Brown (Grant Sanderson) — "Understanding Neural Networks & LLMs"</h3>
+      <div class="yt-meta">@3blue1brown · 6.5M suscriptores · Animaciones matemáticas</div>
+      <p><strong>Resumen:</strong> Grant Sanderson usa animaciones matemáticas extraordinarias para explicar cómo funcionan realmente los LLMs y redes neuronales. Sus videos sobre transformers y attention mechanisms se han convertido en la referencia estándar para entender AI desde sus fundamentos sin necesidad de código. Altamente valorado por la comunidad académica y profesional.</p>
+      <div class="insight-box">
+        <div class="label">💡 Valor para tu perfil</div>
+        <p>Entender cómo funcionan los LLMs internamente te permite escribir mejores prompts, anticipar sus limitaciones y hablar con autoridad ante equipos técnicos. Como analista que recomienda adopción de AI, este conocimiento de base te diferencia.</p>
+      </div>
+      <div class="example-box">
+        <div class="label">🚀 Aplicación práctica</div>
+        <p>Después de estos videos, podrás explicar a la gerencia por qué un modelo "alucina" en ciertos contextos regulatorios y qué estrategias de prompt engineering o RAG pueden mitigar ese riesgo en un entorno financiero.</p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════
+       SECCIÓN 5 — REPOSITORIOS GITHUB
+  ══════════════════════════════════════════════ -->
+  <div class="section-header">
+    <div class="section-icon">🐙</div>
+    <div>
+      <div class="section-title">Repositorios GitHub Destacados</div>
+      <div class="section-subtitle">Verificados · Sin contenido malicioso · Abril 2026</div>
+    </div>
+  </div>
+  <hr class="divider" style="margin-bottom:24px">
+
+  <!-- Repo 1 -->
+  <div class="gh-card">
+    <div class="gh-stars">⭐ 180K+</div>
+    <h3>n8n — Workflow Automation con AI Nativa</h3>
+    <div class="repo-tag">github.com/n8n-io/n8n</div>
+    <div class="safety-badge">✅ Verificado · Fair-code license · Comunidad activa</div>
+    <p><strong>¿Qué es?</strong> Plataforma de automatización de workflows que combina la flexibilidad del código con la velocidad del no-code. 400+ integraciones, capacidades AI nativas, auto-hospedable. Es el estándar de facto para automatizaciones empresariales open-source en 2026.</p>
+    <div class="insight-box">
+      <div class="label">💡 Valor para tu perfil</div>
+      <p>n8n es tu herramienta principal para automatizar procesos end-to-end: desde disparadores de eventos (nuevo reclamo en sistema) hasta acciones (clasificar, notificar, actualizar KPI dashboard). Sin código, con lógica de negocio real.</p>
+    </div>
+    <div class="example-box">
+      <div class="label">🚀 Ejemplo concreto</div>
+      <p>Flujo automatizado: Nuevo formulario de reclamo → n8n clasifica por tipo (con Claude API) → actualiza Notion o Sheets → envía mail al área responsable → registra en KPI dashboard → alerta si SLA en riesgo. Todo sin programar.</p>
+    </div>
+    <div class="tags"><span class="tag">Automatización</span><span class="tag">No-Code</span><span class="tag">AI Agents</span><span class="tag gold">Recomendado</span></div>
+  </div>
+
+  <!-- Repo 2 -->
+  <div class="gh-card" style="border-left-color: var(--gold)">
+    <div class="gh-stars">⭐ 146K+</div>
+    <h3>Langflow — Constructor Visual de Agentes AI</h3>
+    <div class="repo-tag">github.com/langflow-ai/langflow</div>
+    <div class="safety-badge">✅ Verificado · Open Source · DataStax</div>
+    <p><strong>¿Qué es?</strong> Plataforma para construir y desplegar agentes AI de forma visual (drag & drop). Soporta múltiples LLMs, RAG (retrieval-augmented generation) y ahora incluye MCP servers built-in. Cada workflow se convierte automáticamente en una API o herramienta reutilizable.</p>
+    <div class="insight-box">
+      <div class="label">💡 Valor para tu perfil</div>
+      <p>Langflow permite crear un agente que "conoce" toda la documentación de procesos internos del banco (cargada como base de conocimiento) y responde preguntas de empleados sobre procedimientos, SLAs y normativas. Un asistente de procesos interno sin equipo de desarrollo.</p>
+    </div>
+    <div class="example-box">
+      <div class="label">🚀 Ejemplo concreto</div>
+      <p>Agente RAG en Langflow: Subís todos los manuales de procedimiento del banco → el agente puede responder "¿Cuál es el procedimiento para gestionar un débito no autorizado mayor a $50.000?" con las fuentes exactas.</p>
+    </div>
+    <div class="tags"><span class="tag">RAG</span><span class="tag">Agentes</span><span class="tag">Visual</span><span class="tag gold">Destacado</span></div>
+  </div>
+
+  <!-- Repo 3 -->
+  <div class="gh-card" style="border-left-color: var(--coffee)">
+    <div class="gh-stars">⭐ 280+ templates</div>
+    <h3>Awesome n8n Templates — Colección de Flujos Listos</h3>
+    <div class="repo-tag">github.com/enescingoz/awesome-n8n-templates</div>
+    <div class="safety-badge">✅ Verificado · MIT License · Comunidad curada</div>
+    <p><strong>¿Qué es?</strong> La mayor colección open-source de templates de n8n: 280+ flujos listos para usar cubriendo Gmail, Telegram, Slack, WhatsApp, Google Drive, Notion, OpenAI, RAG chatbots, automatización de emails, social media, DevOps y procesamiento de documentos.</p>
+    <div class="insight-box">
+      <div class="label">💡 Valor para tu perfil</div>
+      <p>En lugar de construir flujos desde cero, podés tomar un template de "procesamiento de documentos con AI" o "chatbot RAG" y adaptarlo a tu contexto financiero en horas. Acelera enormemente la implementación de automatizaciones.</p>
+    </div>
+    <div class="example-box">
+      <div class="label">🚀 Ejemplo concreto</div>
+      <p>Usar el template de "Email AI classification" → adaptarlo para clasificar emails de reclamos de clientes por tipo, urgencia y área → conectarlo a tu CRM o sistema de tickets. Listo en 1 día vs semanas de desarrollo.</p>
+    </div>
+    <div class="tags"><span class="tag">Templates</span><span class="tag">n8n</span><span class="tag">Procesamiento</span></div>
+  </div>
+
+  <!-- Repo 4 -->
+  <div class="gh-card">
+    <div class="gh-stars">⭐ 300K+ 🔥</div>
+    <h3>OpenClaw — El Proyecto Open-Source de Más Rápido Crecimiento en GitHub</h3>
+    <div class="repo-tag">github.com — Trending #1 Global 2026</div>
+    <div class="safety-badge">✅ Verificado · Revisado por comunidad masiva</div>
+    <p><strong>¿Qué es?</strong> OpenClaw es el proyecto de más rápido crecimiento en la historia de GitHub, pasando de 9K a 300K+ estrellas. Es una plataforma de agentes AI open-source orientada a self-hosting y privacidad de datos, con foco en automatización empresarial sin dependencia de APIs externas.</p>
+    <div class="insight-box">
+      <div class="label">💡 Valor para tu perfil</div>
+      <p>Para entidades financieras con restricciones de seguridad de datos, OpenClaw representa la posibilidad de tener capacidades AI agénticas on-premise. Sin enviar datos sensibles a la nube, cumpliendo regulaciones del BCRA o normativas locales.</p>
+    </div>
+    <div class="example-box">
+      <div class="label">🚀 Ejemplo concreto</div>
+      <p>Desplegar OpenClaw internamente como agente de análisis de riesgo crediticio: procesa documentos del cliente, cruza con base de datos interna, genera scoring explicable sin que los datos salgan del data center del banco.</p>
+    </div>
+    <div class="tags"><span class="tag">Self-hosting</span><span class="tag">Privacidad</span><span class="tag gold">Viral 2026</span></div>
+  </div>
+
+</div><!-- /container -->
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-logo">☕</div>
+  <p><strong>AI Morning Briefing</strong> — Edición de Nacho Colla</p>
+  <p style="margin-top:6px; color: var(--latte)">Generado automáticamente · Miércoles 29 de Abril 2026 · Próxima edición: Jueves 30 de Abril</p>
+  <p style="margin-top:10px; font-size:0.75rem; opacity:0.7">
+    Fuentes: <a href="https://openai.com" target="_blank">OpenAI</a> ·
+    <a href="https://anthropic.com" target="_blank">Anthropic</a> ·
+    <a href="https://bloomberg.com" target="_blank">Bloomberg</a> ·
+    <a href="https://www.marketingprofs.com" target="_blank">MarketingProfs AI Update</a> ·
+    <a href="https://llm-stats.com" target="_blank">LLM Stats</a> ·
+    <a href="https://github.com" target="_blank">GitHub Trending</a> ·
+    <a href="https://databricks.com" target="_blank">Databricks</a>
+  </p>
+</div>
+
+</body>
+</html>
